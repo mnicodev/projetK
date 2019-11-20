@@ -280,7 +280,7 @@ $config_directories = [];
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = 'uzqRpsG4ciCGAWhA19h0TfZTHPlmp48U9w6UmvHfrsD7GfjwJVaPDuthpr_HdOLP6Fe-sbeLLg';
+$settings['hash_salt'] = '9LjKfwvRbU7x_dCs4AtGdgmwyTUcTGf_blWAOouHYCQdnlWFD__guV-SXECnF27zU4pIhgAh7A';
 
 /**
  * Deployment identifier.
@@ -779,21 +779,12 @@ $settings['entity_update_backup'] = TRUE;
 # }
 $config_directories['sync'] = '../config/sync';
 
-$databases['projetK']['default'] = [
-  'database' => 'projetK',
-  'username' => 'userbdd',
-  'password' => 'userbdd',
-  'host' => 'localhost',
-  'port' => '3306',
-  'driver' => 'mysql',
-  'prefix' => '',
-];
 $databases['default']['default'] = array (
   'database' => 'projetK',
   'username' => 'userbdd',
   'password' => 'userbdd',
   'prefix' => '',
-  'host' => 'localhost',
+  'host' => '127.0.0.1',
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
