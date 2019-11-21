@@ -1,0 +1,5 @@
+services:
+    kidiklik_event.node.insert:
+        class: Drupal\kidiklik_event\EventSubscriber\NodeInsertSubscriber
+        tags:
+            - { name: 'event_subscriber' }

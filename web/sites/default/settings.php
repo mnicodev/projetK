@@ -789,3 +789,13 @@ $databases['default']['default'] = array (
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
 );
+
+
+$host=explode(".",$_SERVER["SERVER_NAME"]);
+$settings["dep"]=$host[0];
+$settings["available_content"]=[
+	"activite",
+	"reportage",
+	"agenda",
+	"article"
+];
