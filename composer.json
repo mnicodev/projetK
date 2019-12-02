@@ -28,6 +28,7 @@
         "drupal/field_group": "^1.0",
         "drupal/paragraphs": "^1.10",
         "drupal/pathauto": "^1.5",
+        "drupal/role_theme_switcher": "^1.0",
         "drush/drush": "^9.0.0",
         "vlucas/phpdotenv": "^2.4",
         "webflo/drupal-finder": "^1.0.0",
