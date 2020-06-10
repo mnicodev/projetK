@@ -799,3 +799,11 @@ $settings["available_content"]=[
 	"agenda",
 	"article"
 ];
+
+// Set’s default cache storage as Memcache and excludes database connection for cache
+$settings['cache']['default'] = 'cache.backend.memcache_storage';
+// Set’s Memcache key prefix for your site and useful in working sites with same memcache as backend.
+$settings['memcache_storage']['key_prefix'] = '';
+// Set’s Memcache storage server’s.
+$settings['memcache_storage']['memcached_servers'] =  ['127.0.0.1:11211' => 'default'];
+#$settings['memcache_storage']['debug'] = TRUE;

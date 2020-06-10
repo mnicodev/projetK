@@ -3431,6 +3431,129 @@
         }
     },
     {
+        "name": "drupal/memcache",
+        "version": "2.0.0",
+        "version_normalized": "2.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/memcache.git",
+            "reference": "8.x-2.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/memcache-8.x-2.0.zip",
+            "reference": "8.x-2.0",
+            "shasum": "78c09097c42781343f4069b4823dce7acd98a8b1"
+        },
+        "require": {
+            "drupal/core": "~8.0"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-2.x": "2.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-2.0",
+                "datestamp": "1540546681",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Fabianx",
+                "homepage": "https://www.drupal.org/user/693738"
+            },
+            {
+                "name": "Jeremy",
+                "homepage": "https://www.drupal.org/user/409"
+            },
+            {
+                "name": "bdragon",
+                "homepage": "https://www.drupal.org/user/53081"
+            },
+            {
+                "name": "catch",
+                "homepage": "https://www.drupal.org/user/35733"
+            },
+            {
+                "name": "damiankloip",
+                "homepage": "https://www.drupal.org/user/1037976"
+            },
+            {
+                "name": "jvandyk",
+                "homepage": "https://www.drupal.org/user/2375"
+            },
+            {
+                "name": "robertDouglass",
+                "homepage": "https://www.drupal.org/user/5449"
+            }
+        ],
+        "description": "High performance integration with memcache.",
+        "homepage": "http://drupal.org/project/memcache",
+        "support": {
+            "source": "https://git.drupalcode.org/project/memcache",
+            "issues": "https://www.drupal.org/project/issues/memcache"
+        }
+    },
+    {
+        "name": "drupal/memcache_storage",
+        "version": "1.0.0-beta2",
+        "version_normalized": "1.0.0.0-beta2",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/memcache_storage.git",
+            "reference": "8.x-1.0-beta2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/memcache_storage-8.x-1.0-beta2.zip",
+            "reference": "8.x-1.0-beta2",
+            "shasum": "54b8a11af00e9fb927b3f7f2f1affbd64987ea12"
+        },
+        "require": {
+            "drupal/core": "~8.0"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "branch-alias": {
+                "dev-1.x": "1.x-dev"
+            },
+            "drupal": {
+                "version": "8.x-1.0-beta2",
+                "datestamp": "1449648845",
+                "security-coverage": {
+                    "status": "not-covered",
+                    "message": "Beta releases are not covered by Drupal security advisories."
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "Spleshka",
+                "homepage": "https://www.drupal.org/user/810676"
+            }
+        ],
+        "description": "Provides integration with memcached backend for storing cached data.",
+        "homepage": "https://www.drupal.org/project/memcache_storage",
+        "support": {
+            "source": "https://git.drupalcode.org/project/memcache_storage"
+        }
+    },
+    {
         "name": "drupal/paragraphs",
         "version": "1.10.0",
         "version_normalized": "1.10.0.0",
@@ -9152,7 +9275,8 @@
         "license": [
             "GPL-2.0-or-later"
         ],
-        "description": "require-dev dependencies from drupal/core"
+        "description": "require-dev dependencies from drupal/core",
+        "abandoned": "drupal/core-dev"
     },
     {
         "name": "webflo/drupal-finder",
@@ -9403,7 +9527,8 @@
             "http",
             "psr",
             "psr-7"
-        ]
+        ],
+        "abandoned": "laminas/laminas-diactoros"
     },
     {
         "name": "zendframework/zend-escaper",
@@ -9450,7 +9575,8 @@
             "ZendFramework",
             "escaper",
             "zf"
-        ]
+        ],
+        "abandoned": "laminas/laminas-escaper"
     },
     {
         "name": "zendframework/zend-feed",
@@ -9515,7 +9641,8 @@
             "ZendFramework",
             "feed",
             "zf"
-        ]
+        ],
+        "abandoned": "laminas/laminas-feed"
     },
     {
         "name": "zendframework/zend-stdlib",
@@ -9563,6 +9690,7 @@
             "ZendFramework",
             "stdlib",
             "zf"
-        ]
+        ],
+        "abandoned": "laminas/laminas-stdlib"
     }
 ]
