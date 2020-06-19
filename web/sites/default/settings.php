@@ -792,10 +792,17 @@ $databases['default']['default'] = array (
 
 
 $host=explode(".",$_SERVER["SERVER_NAME"]);
-$settings["dep"]=$host[0];
+if((int)$host[0]) $settings["dep"]=$host[0];else $settings["dep"]=0;
+
 $settings["available_content"]=[
 	"activite",
 	"reportage",
 	"agenda",
-	"article"
+	"article",
+	"publicite",
+];
+$settings["available_form_for_dep"]=[
+	"node_activite_edit_form",
+	"node_activite_form",
+	"node_publicite_form"
 ];

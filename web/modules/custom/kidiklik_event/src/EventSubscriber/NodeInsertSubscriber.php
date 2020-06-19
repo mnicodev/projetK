@@ -16,7 +16,7 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 			$term_id=current($term->tid->getValue());
 			$type=current($entity->type->getValue())["target_id"];
 			if(in_array($type,\Drupal::service("settings")->get("available_content"))) {
-				$entity->__set('field_departement',4);
+				$entity->__set('field_departement',$term->id());
 				$entity->save();
 			}
 
