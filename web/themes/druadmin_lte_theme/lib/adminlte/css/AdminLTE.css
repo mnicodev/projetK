@@ -50,6 +50,21 @@ body {
 .layout-boxed {
   background: url('../img/boxed-bg.jpg') repeat fixed;
 }
+
+
+.toolbar-horizontal .content-wrapper {
+	margin-left: 0;
+}
+
+.toolbar-horizontal .main-header {
+	display: none;
+}
+
+input[type="date"].form-control {
+	line-height: normal!important;
+}
+
+
 /*
  * Content Wrapper - contains the main content
  * ```.right-side has been deprecated as of v2.0.0 in favor of .content-wrapper  ```
@@ -2644,6 +2659,7 @@ details {
 .table-bordered > tbody > tr > td,
 .table-bordered > tfoot > tr > td {
   border: 1px solid #f4f4f4;
+  vertical-align: middle;
 }
 .table-bordered > thead > tr > th,
 .table-bordered > thead > tr > td {
