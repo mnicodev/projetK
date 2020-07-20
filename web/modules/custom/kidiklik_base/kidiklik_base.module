@@ -58,8 +58,15 @@ function get_term_departement() {
  */
 function kidiklik_base_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 	$term_dep=get_term_departement();
+	if($form_id=="node_agenda_edit_form" || $form_id=="node_agenda_form") {
+		/* le champ est configuré par défaut en multiple valeur, on bloque à une simple valeur */
+		$form["field_adherent"]["widget"]["#multiple"]=FALSE;
+
+	}
 	/* on reformate le choix des activités pour ne choisir que des enfants */
 	if($form_id=="node_activite_edit_form" || $form_id=="node_activite_form") {
+		/* le champ est configuré par défaut en multiple valeur, on bloque à une simple valeur */
+		$form["field_adherent"]["widget"]["#multiple"]=FALSE;
 		$rub=$form["field_rubriques_activite"]["widget"]["#options"];
 		$tab=[];
 		$n="";
@@ -82,7 +89,8 @@ function kidiklik_base_form_alter(&$form, FormStateInterface $form_state, $form_
 		/* on va récupérer la liste des clients du département concerné */
 		$clients=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"client","field_departement"=>$term_dep]);
 		/* vérification si un adhérent doit être lié à un client */
-		$nid=(int)\Drupal::routeMatch()->getParameters()->get("node")->id();
+		if(\Drupal::routeMatch()->getParameters()->get("node"))
+			$nid=(int)\Drupal::routeMatch()->getParameters()->get("node")->id();
 		$entity_id=""; /* entité cliente */
 		if($nid) {
 			$database = \Drupal::database();
