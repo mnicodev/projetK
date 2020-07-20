@@ -7,6 +7,9 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\ReplaceCommand;
+use Drupal\Core\Ajax\InvokeCommand;
 
 /**
  * Implements hook_help().
@@ -65,8 +68,20 @@ function kidiklik_base_form_alter(&$form, FormStateInterface $form_state, $form_
 	}
 	/* on reformate le choix des activités pour ne choisir que des enfants */
 	if($form_id=="node_activite_edit_form" || $form_id=="node_activite_form") {
+		//kint($form);
 		/* le champ est configuré par défaut en multiple valeur, on bloque à une simple valeur */
 		$form["field_adherent"]["widget"]["#multiple"]=FALSE;
+		$form["field_adherent"]["widget"]["#ajax"]=[
+			"callback"=>"getAjaxCoordonnees",
+			"disable-refocus" => FALSE,
+			"event" => "change",
+			"wrapper" =>"edit-field-lieu-wrapper",
+			"progress"=>[
+				"type"=>"throbber",
+				"message"=>"Analyse",
+			],
+
+		];
 		$rub=$form["field_rubriques_activite"]["widget"]["#options"];
 		$tab=[];
 		$n="";
@@ -95,7 +110,7 @@ function kidiklik_base_form_alter(&$form, FormStateInterface $form_state, $form_
 		if($nid) {
 			$database = \Drupal::database();
 			$query=$database->query("select * from {node__field_adherent} where field_adherent_target_id = '".$nid."'");
-			/* un adhérent est lié un seul client, on peut récupérer le premier élément courant */
+			/* un adhérent est lié à un seul client, on peut récupérer le premier élément courant */
 			$result=current($query->fetchAll());
 			$entity_id=$result->entity_id;
 		}
@@ -125,6 +140,17 @@ function kidiklik_base_form_alter(&$form, FormStateInterface $form_state, $form_
 		$form["field_adherent"]["widget"]["#options"]=$tab;
 
 	}
+}
+
+function getAjaxCoordonnees(array &$form, FormStateInterface $form_state) {
+	//return ["markup" => "ok" ];
+	$dialogText['#attached']['library'][] = 'core/drupal.dialog.ajax';
+	  // Prepare the text for our dialogbox.
+	$dialogText['#markup'] = "You selected: $selectedText";
+	$response = new AjaxResponse();
+	 $debugOut = "ok";
+	$response->addCommand(new InvokeCommand(NULL, 'getAjaxCoordonnees', ['test']));
+	return $response;
 }
 
 /*
