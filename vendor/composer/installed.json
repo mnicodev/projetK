@@ -4195,6 +4195,45 @@
         }
     },
     {
+        "name": "drupal/kint",
+        "version": "2.1.0",
+        "version_normalized": "2.1.0.0",
+        "require": {
+            "drupal/core": "~8.0",
+            "drupal/devel": "self.version"
+        },
+        "type": "metapackage",
+        "extra": {
+            "drupal": {
+                "version": "8.x-2.1",
+                "datestamp": "1556799496",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "drupalspoons",
+                "homepage": "https://www.drupal.org/user/3647684"
+            },
+            {
+                "name": "moshe weitzman",
+                "homepage": "https://www.drupal.org/user/23"
+            }
+        ],
+        "description": "Wrapper for Kint debugging tool.",
+        "homepage": "https://www.drupal.org/project/devel",
+        "support": {
+            "source": "https://git.drupalcode.org/project/devel"
+        }
+    },
+    {
         "name": "drupal/menu_breadcrumb",
         "version": "1.13.0",
         "version_normalized": "1.13.0.0",

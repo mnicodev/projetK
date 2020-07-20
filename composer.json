@@ -33,6 +33,7 @@
         "drupal/field_group": "^1.0",
         "drupal/geolocation": "^3.2",
         "drupal/inline_entity_form": "^1.0@RC",
+        "drupal/kint": "^2.1",
         "drupal/menu_breadcrumb": "^1.13",
         "drupal/menus_attribute": "^1.1",
         "drupal/paragraphs": "^1.10",

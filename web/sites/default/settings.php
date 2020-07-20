@@ -802,6 +802,7 @@ $settings["available_content"]=[
 	"publicite",
 	"client",
 	"adherent",
+	"contact",
 ];
 $settings["available_form_for_dep"]=[
 	"node_activite_edit_form",

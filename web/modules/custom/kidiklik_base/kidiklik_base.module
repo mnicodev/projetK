@@ -35,10 +35,30 @@ function kidiklik_base_theme() {
   ];
 }
 
+function get_departement() {
+	$globalSettings=\Drupal::service("settings");
+	$dep=$globalSettings->get("dep");
+
+	return $dep;
+}
+function get_term_departement() {
+	$dep=get_departement();
+	$term_dep="";
+	if($dep)
+		$term_dep=(int)current(\Drupal::entityTypeManager()
+		->getStorage("taxonomy_term")
+		->loadByProperties(['name'=>$dep]))->id();
+
+	return $term_dep;
+}
+
+
 /**
  * modification de formulaire
  */
 function kidiklik_base_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+	$term_dep=get_term_departement();
+	/* on reformate le choix des activités pour ne choisir que des enfants */
 	if($form_id=="node_activite_edit_form" || $form_id=="node_activite_form") {
 		$rub=$form["field_rubriques_activite"]["widget"]["#options"];
 		$tab=[];
@@ -57,6 +77,45 @@ function kidiklik_base_form_alter(&$form, FormStateInterface $form_state, $form_
 		$form["field_rubriques_activite"]["widget"]["#options"]=$tab;
 		$form["field_rubriques_activite"]["widget"]["#size"]=1;
 		$form["#redirect"]="admin/activite";
+	}
+	if($form_id=="node_adherent_edit_form" || $form_id=="node_adherent_form") {
+		/* on va récupérer la liste des clients du département concerné */
+		$clients=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"client","field_departement"=>$term_dep]);
+		/* vérification si un adhérent doit être lié à un client */
+		$nid=(int)\Drupal::routeMatch()->getParameters()->get("node")->id();
+		$entity_id=""; /* entité cliente */
+		if($nid) {
+			$database = \Drupal::database();
+			$query=$database->query("select * from {node__field_adherent} where field_adherent_target_id = '".$nid."'");
+			/* un adhérent est lié un seul client, on peut récupérer le premier élément courant */
+			$result=current($query->fetchAll());
+			$entity_id=$result->entity_id;
+		}
+		$tab=[];
+		$tab[""]="Veuillez choisir un client";
+		foreach($clients as $key=>$client) {
+			$tab[$key]=$client->getTitle();
+		}
+		$form["field_client"]["widget"]["#options"]=$tab;
+		if($entity_id && !count($form["field_client"]["widget"]["#default_value"]))
+			$form["field_client"]["widget"]["#default_value"][]=(string)$entity_id;
+		//kint($form);
+
+	}
+	
+	if($form_id=="node_client_edit_form" || $form_id=="node_client_form") {
+//ksm($form);
+	}
+
+	if($form_id=="node_agenda_edit_form" || $form_id=="node_agenda_form") {
+		$adherents=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"adherent","field_departement"=>$term_dep]);
+		$tab=[];
+		$tab[""]="Veuillez choisir un client";
+		foreach($adherents as $key=>$adherent) {
+			$tab[$key]=$adherent->getTitle();
+		}
+		$form["field_adherent"]["widget"]["#options"]=$tab;
+
 	}
 }
 
