@@ -1,0 +1,34 @@
+<?php
+
+namespace Drupal\kidiklik_event\EventSubscriber;
+
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Drupal\kidiklik_event\Event\NodeInsertEvent;
+
+class NodeInsertSubscriber implements EventSubscriberInterface {
+	/* Evenement d'insertion d'un noeud */		
+	public function onNodeInsert(NodeInsertEvent $event) {
+		$dep=\Drupal::service("settings")->get("dep");
+		$entity=$event->getEntity();
+		// on recherche l'identifiant du département courant
+		$term=current(\Drupal::entityTypeManager()
+			->getStorage("taxonomy_term")
+			->loadByProperties(['name'=>$dep]));
+		if($term!==FALSE) {
+			
+			// on ajoute au neoud le département courant
+			$term_id=current($term->tid->getValue());kint(current($term_id));exit;
+			$type=current($entity->type->getValue())["target_id"];
+			if(in_array($type,\Drupal::service("settings")->get("available_content"))) {
+				$entity->__set('field_departement',$term_id);
+				$entity->save();
+			}
+
+		}
+	}
+
+	public static function getSubscribedEvents() {
+		$events[NodeInsertEvent::NODE_INSERT][]=['onNodeInsert'];
+		return $events;
+	}
+}

@@ -39,6 +39,7 @@ function kidiklik_base_theme() {
  * modification de formulaire
  */
 function kidiklik_base_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+	/* on reformate le choix des activités pour ne choisir que des enfants */
 	if($form_id=="node_activite_edit_form" || $form_id=="node_activite_form") {
 		$rub=$form["field_rubriques_activite"]["widget"]["#options"];
 		$tab=[];
@@ -55,7 +56,30 @@ function kidiklik_base_form_alter(&$form, FormStateInterface $form_state, $form_
 			}
 		}
 		$form["field_rubriques_activite"]["widget"]["#options"]=$tab;
-		$form["field_rubriques_activite"]["widget"]["#size"]=40;
+		$form["field_rubriques_activite"]["widget"]["#size"]=1;
+		$form["#redirect"]="admin/activite";
+	}
+
+	if($form_id=="node_adherent_edit_form" || $form_id=="node_adherent_form") {
+		$globalSettings=\Drupal::service("settings");
+		$dep=$globalSettings->get("dep");
+		$term_dep=(int)current(\Drupal::entityTypeManager()
+			->getStorage("taxonomy_term")
+			->loadByProperties(['name'=>$dep]))->id();
+		/* on va récupérer la liste des clients du département concerné */
+		$adherents=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"client","field_departement"=>$term_dep]);
+		$tab=[];
+		$tab[""]="Veuillez choisir un client";
+		foreach($adherents as $key=>$adherent) {
+			$tab[$key]=$adherent->getTitle();
+		}
+		$form["field_client"]["widget"]["#options"]=$tab;
+
+	}
+	
+	if($form_id=="node_agenda_edit_form" || $form_id=="node_agenda_form") {
+		kint($form);
+
 	}
 }
 
@@ -63,20 +87,27 @@ function kidiklik_base_form_alter(&$form, FormStateInterface $form_state, $form_
  * Modification de la requête sql d'une vue
  */
 function kidiklik_base_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\views\Plugin\views\query\Sql $query) {
-	if($view->id()=="content" || $view->id()=="page_contenu") {
-		/*$host=explode(".",\Drupal::request()->getHost());
-		$dep=$host[0];*/
+	if($view->id()=="taxonomy_term") {
 		$globalSettings=\Drupal::service("settings");
-		
+
+		// on récupére le code du département
 		$dep=$globalSettings->get("dep");
-		/*
-		 * On charge le terme correspondant au département
-		 */	
 		$term=current(\Drupal::entityTypeManager()
 			->getStorage("taxonomy_term")
 			->loadByProperties(['name'=>$dep]));
-		if($term!==FALSE) {
-			$term_id=current($term->tid->getValue());
+		$pid=current($query->where[0]["conditions"][0]["value"]);
+		$liste_enfant=[];
+		if(!empty($pid)) {
+			$rubrique_term_enfant=\Drupal::entityTypeManager()
+			->getStorage("taxonomy_term")
+			->loadTree("rubriques_activite",$pid,2);
+			foreach($rubrique_term_enfant as $t) {
+				$liste_enfant[]=(int)$t->tid;
+			}
+		}
+		if(count($liste_enfant)) {
+			unset($query->where[0]);
+
 			$configuration = array(
 	        	'type' => 'INNER',
 				'table' => 'taxonomy_index',
@@ -90,7 +121,60 @@ function kidiklik_base_views_query_alter(Drupal\views\ViewExecutable $view, Drup
 		        ->createInstance('standard', $configuration);
 			$rel = $query->addRelationship('taxonomy_idx', $join, 'node_field_data');
 			$query->addTable('taxonomy_index', $rel, $join, 'taxonomy_idx');
-			$query->addWhere('', 'taxonomy_idx.tid', $term_id, '=');
+			$query->addWhere('', 'taxonomy_idx.tid', $liste_enfant, 'in');
+		}
+
+	}
+	$view_display=array("page_activites","page_agenda","page_activites_tri","page_pub" ,"page_article","page_clients","page_adherent");
+	
+	if(in_array($view->current_display,$view_display)) {
+		/*$host=explode(".",\Drupal::request()->getHost());
+		$dep=$host[0];*/
+		$globalSettings=\Drupal::service("settings");
+
+		// on récupére le code du département
+		$dep=$globalSettings->get("dep");
+		/*
+		 * On charge le terme correspondant au département
+		 */	
+		$term=current(\Drupal::entityTypeManager()
+			->getStorage("taxonomy_term")
+			->loadByProperties(['name'=>$dep]));
+
+
+		$pid=current($query->where[0]["conditions"][0]["value"]);
+		$liste_enfant=[];
+		if(!empty($pid)) {
+			$rubrique_term_enfant=\Drupal::entityTypeManager()
+			->getStorage("taxonomy_term")
+			->loadTree("rubriques_activite",$pid,2);
+			foreach($rubrique_term_enfant as $t) {
+				$liste_enfant[]=(int)$t->tid;
+			}
+		}
+		if($term!==FALSE) {
+			$term_id=current($term->tid->getValue());
+			$configuration = array(
+	        	'type' => 'INNER',
+				'table' => 'node__field_departement',
+				'field' => 'entity_id',
+				'left_table' => 'node_field_data',
+				'left_field' => 'nid',
+				'operator'   => '=',
+			);
+
+
+			$join = \Drupal\views\Views::pluginManager('join')
+		        ->createInstance('standard', $configuration);
+			$rel = $query->addRelationship('field_dep', $join, 'node_field_data');
+			$query->addTable('node__field_departement', $rel, $join, 'field_dep');
+			$query->addWhere('', 'field_dep.field_departement_target_id', $term_id, '=');
+
+			if(count($liste_enfant)) {
+				$query->where[0]["conditions"][0]["value"]=[];
+				$query->where[0]["conditions"][0]["field"]="node__field_rubriques_activite.field_rubriques_activite_target_id in (".implode(",",$liste_enfant).")";
+				//$query->addWhere('', 'taxonomy_idx.tid', $term_id, '=');
+			} /*else $query->addWhere('', 'taxonomy_idx.tid', $term_id, '=');*/
 		}
 
 	}

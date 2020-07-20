@@ -1,0 +1,115 @@
+<?php
+
+/**
+ * @file
+ * Contains kidiklik_base.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_help().
+ */
+function kidiklik_base_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the kidiklik_base module.
+    case 'help.page.kidiklik_base':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Fonctionnalités de base de Kidiklik') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function kidiklik_base_theme() {
+  return [
+    'kidiklik_base' => [
+      'render element' => 'children',
+    ],
+  ];
+}
+
+/**
+ * modification de formulaire
+ */
+function kidiklik_base_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+	$globalSettings=\Drupal::service("settings");
+	$content_for_dep=$globalSettings->get("available_form_for_dep");
+	
+	if($form_id=="node_activite_edit_form" || $form_id=="node_activite_form") {
+		$rub=$form["field_rubriques_activite"]["widget"]["#options"];
+		$tab=[];
+		$n="";
+		foreach($rub as $k=>$r) {
+			if($k!="_none") {
+				$t=taxonomy_term_load($k);
+				$p=current($t->parent->getValue()[0]);
+				if(!(int)$p) {
+					$n=current($t->name->getValue()[0]);
+				} else {
+					$tab[$n][$k]=current($t->name->getValue()[0]);
+				}
+			}
+		}
+		$form["field_rubriques_activite"]["widget"]["#options"]=$tab;
+		$form["field_rubriques_activite"]["widget"]["#size"]=40;
+	} else if($form_id=="node_publicite_form") {
+		$globalSettings=\Drupal::service("settings");
+		
+		$dep=$globalSettings->get("dep");
+		
+		if($dep) $form['field_partage_departements']["widget"]["#type"]="radios";
+		//kint($form['field_partage_departements']);
+	}
+}
+
+/*
+ * Modification de la requête sql d'une vue
+ */
+function kidiklik_base_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\views\Plugin\views\query\Sql $query) {
+
+	if($view->id()=="blocs_publicites") {
+		
+			$query->where['1']["conditions"][2]["field"]="DATE_FORMAT(node__field_date_debut.field_date_debut_value, '%Y-%m-%d') <= DATE_FORMAT('".date("Y-m-dT00:00:00")."', '%Y-%m-%d')";
+			$query->where['1']["conditions"][3]["field"]="DATE_FORMAT(node__field_date_fin.field_date_fin_value, '%Y-%m-%d') >= DATE_FORMAT('".date("Y-m-dT00:00:00")."', '%Y-%m-%d')";
+			//kint($query->orderby);
+	}
+	if($view->id()=="content" || $view->id()=="page_contenu" || $view->id()=="blocs_publicites") {
+		/*$host=explode(".",\Drupal::request()->getHost());
+		$dep=$host[0];*/
+		$globalSettings=\Drupal::service("settings");
+		
+		$dep=$globalSettings->get("dep");
+		/*
+		 * On charge le terme correspondant au département
+		 */	
+		$term=current(\Drupal::entityTypeManager()
+			->getStorage("taxonomy_term")
+			->loadByProperties(['name'=>$dep]));
+		$configuration = array(
+	        	'type' => 'INNER',
+				'table' => 'taxonomy_index',
+				'field' => 'nid',
+				'left_table' => 'node_field_data',
+				'left_field' => 'nid',
+				'operator'   => '=',
+			);
+
+		$join = \Drupal\views\Views::pluginManager('join')
+		        ->createInstance('standard', $configuration);
+		$rel = $query->addRelationship('taxonomy_idx', $join, 'node_field_data');
+		$query->addTable('taxonomy_index', $rel, $join, 'taxonomy_idx');
+			
+		if($term!==FALSE) {
+			$term_id=current($term->tid->getValue());
+			$query->addWhere('', 'taxonomy_idx.tid', $term_id, '=');
+		} //else $query->addWhere('', 'taxonomy_idx.tid', 100, '=');
+
+	}
+}

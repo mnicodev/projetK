@@ -784,7 +784,7 @@ $databases['default']['default'] = array (
   'username' => 'userbdd',
   'password' => 'userbdd',
   'prefix' => '',
-  'host' => 'localhost',
+  'host' => '127.0.0.1',
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
@@ -792,18 +792,19 @@ $databases['default']['default'] = array (
 
 
 $host=explode(".",$_SERVER["SERVER_NAME"]);
-$settings["dep"]=$host[0];
+if((int)$host[0]) $settings["dep"]=$host[0];else $settings["dep"]=0;
+
 $settings["available_content"]=[
 	"activite",
 	"reportage",
 	"agenda",
-	"article"
+	"article",
+	"publicite",
+	"client",
+	"adherent",
 ];
-
-// Set’s default cache storage as Memcache and excludes database connection for cache
-$settings['cache']['default'] = 'cache.backend.memcache_storage';
-// Set’s Memcache key prefix for your site and useful in working sites with same memcache as backend.
-$settings['memcache_storage']['key_prefix'] = '';
-// Set’s Memcache storage server’s.
-$settings['memcache_storage']['memcached_servers'] =  ['127.0.0.1:11211' => 'default'];
-#$settings['memcache_storage']['debug'] = TRUE;
+$settings["available_form_for_dep"]=[
+	"node_activite_edit_form",
+	"node_activite_form",
+	"node_publicite_form"
+];

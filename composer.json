@@ -23,14 +23,27 @@
         "drupal/console": "^1.9",
         "drupal/core": "^8.7.0",
         "drupal/devel": "^2.1",
+        "drupal/draggableviews": "^1.2",
+        "drupal/druadmin_lte_theme": "^1.0",
         "drupal/drush": "^6.0@RC",
+        "drupal/easy_breadcrumb": "^1.12",
+        "drupal/entity_browser": "^2.5",
         "drupal/entity_reference_tree": "^1.8",
+        "drupal/feeds": "^3.0@alpha",
         "drupal/field_group": "^1.0",
-        "drupal/memcache": "^2.0",
-        "drupal/memcache_storage": "^1.0@beta",
+        "drupal/geolocation": "^3.2",
+        "drupal/inline_entity_form": "^1.0@RC",
+        "drupal/kint": "^2.1",
+        "drupal/menu_breadcrumb": "^1.13",
+        "drupal/menus_attribute": "^1.1",
         "drupal/paragraphs": "^1.10",
-        "drupal/pathauto": "^1.5",
-        "drupal/role_theme_switcher": "^1.0",
+        "drupal/pathauto": "^1.8",
+        "drupal/taxonomy_delete": "^1.1",
+        "drupal/taxonomy_import": "^1.0",
+        "drupal/taxonomy_menu": "^3.4",
+        "drupal/term_csv_export_import": "^3.0",
+        "drupal/views_infinite_scroll": "^1.7",
+        "drupal/weight": "^3.1",
         "drush/drush": "^9.0.0",
         "vlucas/phpdotenv": "^2.4",
         "webflo/drupal-finder": "^1.0.0",
@@ -38,7 +51,7 @@
         "zaporylie/composer-drupal-optimizations": "^1.0"
     },
     "require-dev": {
-        "webflo/drupal-core-require-dev": "^8.7.0"
+        "webflo/drupal-core-require-dev": "^8.8.0"
     },
     "conflict": {
         "drupal/drupal": "*"
