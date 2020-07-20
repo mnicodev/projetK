@@ -26,6 +26,4 @@ function kidiklik_event_help($route_name, RouteMatchInterface $route_match) {
 
 function kidiklik_event_node_insert(Drupal\Core\Entity\EntityInterface $entity) {
 	\Drupal::service('event_dispatcher')->dispatch(NodeInsertEvent::NODE_INSERT, new NodeInsertEvent($entity));
-	$response = new Symfony\Component\HttpFoundation\RedirectResponse("/admin/activites");
-	$response->send();
 }

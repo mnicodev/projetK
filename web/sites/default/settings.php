@@ -800,6 +800,8 @@ $settings["available_content"]=[
 	"agenda",
 	"article",
 	"publicite",
+	"client",
+	"adherent",
 ];
 $settings["available_form_for_dep"]=[
 	"node_activite_edit_form",

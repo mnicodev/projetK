@@ -481,6 +481,10 @@ a:focus {
 .sidebar-form input:focus {
   border-color: transparent;
 }
+.main-sidebar .sidebar {
+/*	background: url(../../../defaut.png) top left no-repeat;*/
+}
+
 .user-panel {
   position: relative;
   width: 100%;
@@ -4759,5 +4763,14 @@ table.text-center th {
 }
 
 .table-responsive {
-	overflow-x: hidden!important;
+	overflow-x: initial!important;
+}
+
+.field-group-details summary {
+	background: #3c8dbc;
+	color: #fff;
+}
+
+.paragraphs-dropdown-actions input {
+	color: #000;
 }

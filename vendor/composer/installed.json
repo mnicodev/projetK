@@ -3676,6 +3676,98 @@
         }
     },
     {
+        "name": "drupal/entity_browser",
+        "version": "2.5.0",
+        "version_normalized": "2.5.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/entity_browser.git",
+            "reference": "8.x-2.5"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/entity_browser-8.x-2.5.zip",
+            "reference": "8.x-2.5",
+            "shasum": "29456b961f0f90ff064601ab8a382446a8143774"
+        },
+        "require": {
+            "drupal/core": "^8.8 || ^9"
+        },
+        "require-dev": {
+            "drupal/embed": "~1.0",
+            "drupal/entity_embed": "1.x-dev",
+            "drupal/entity_reference_revisions": "1.x-dev",
+            "drupal/entityqueue": "1.x-dev",
+            "drupal/inline_entity_form": "1.x-dev",
+            "drupal/paragraphs": "1.x-dev",
+            "drupal/token": "~1.0"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "drupal": {
+                "version": "8.x-2.5",
+                "datestamp": "1588015429",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Janez Urevc",
+                "homepage": "https://github.com/slashrsm",
+                "role": "Maintainer"
+            },
+            {
+                "name": "Primoz Hmeljak",
+                "homepage": "https://github.com/primsi",
+                "role": "Maintainer"
+            },
+            {
+                "name": "See other contributors",
+                "homepage": "https://www.drupal.org/node/1943336/committers",
+                "role": "contributor"
+            },
+            {
+                "name": "Drupal Media Team",
+                "homepage": "https://www.drupal.org/user/3260690"
+            },
+            {
+                "name": "Primsi",
+                "homepage": "https://www.drupal.org/user/282629"
+            },
+            {
+                "name": "marcingy",
+                "homepage": "https://www.drupal.org/user/77320"
+            },
+            {
+                "name": "oknate",
+                "homepage": "https://www.drupal.org/user/471638"
+            },
+            {
+                "name": "samuel.mortenson",
+                "homepage": "https://www.drupal.org/user/2582268"
+            },
+            {
+                "name": "slashrsm",
+                "homepage": "https://www.drupal.org/user/744628"
+            }
+        ],
+        "description": "Entity browsing and selecting component.",
+        "homepage": "http://drupal.org/project/entity_browser",
+        "support": {
+            "source": "https://git.drupalcode.org/project/entity_browser",
+            "issues": "https://www.drupal.org/project/issues/entity_browser",
+            "irc": "irc://irc.freenode.org/drupal-contribute"
+        }
+    },
+    {
         "name": "drupal/entity_reference_revisions",
         "version": "1.8.0",
         "version_normalized": "1.8.0.0",
@@ -3783,6 +3875,108 @@
         }
     },
     {
+        "name": "drupal/feeds",
+        "version": "3.0.0-alpha9",
+        "version_normalized": "3.0.0.0-alpha9",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/feeds.git",
+            "reference": "8.x-3.0-alpha9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/feeds-8.x-3.0-alpha9.zip",
+            "reference": "8.x-3.0-alpha9",
+            "shasum": "47b56b3d7353d900c500e74178fbdea837199394"
+        },
+        "require": {
+            "drupal/core": "^8.8 || ^9"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "drupal": {
+                "version": "8.x-3.0-alpha9",
+                "datestamp": "1594564460",
+                "security-coverage": {
+                    "status": "not-covered",
+                    "message": "Project has not opted into security advisory coverage!"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "Dave Reid",
+                "homepage": "https://www.drupal.org/user/53892"
+            },
+            {
+                "name": "Ian Ward",
+                "homepage": "https://www.drupal.org/user/4736"
+            },
+            {
+                "name": "MegaChriz",
+                "homepage": "https://www.drupal.org/user/654114"
+            },
+            {
+                "name": "Will White",
+                "homepage": "https://www.drupal.org/user/32237"
+            },
+            {
+                "name": "alex_b",
+                "homepage": "https://www.drupal.org/user/53995"
+            },
+            {
+                "name": "e2thex",
+                "homepage": "https://www.drupal.org/user/189123"
+            },
+            {
+                "name": "febbraro",
+                "homepage": "https://www.drupal.org/user/43670"
+            },
+            {
+                "name": "franz",
+                "homepage": "https://www.drupal.org/user/581844"
+            },
+            {
+                "name": "jmiccolis",
+                "homepage": "https://www.drupal.org/user/31731"
+            },
+            {
+                "name": "kking",
+                "homepage": "https://www.drupal.org/user/24399"
+            },
+            {
+                "name": "tobby",
+                "homepage": "https://www.drupal.org/user/154797"
+            },
+            {
+                "name": "tristanoneil",
+                "homepage": "https://www.drupal.org/user/340659"
+            },
+            {
+                "name": "twistor",
+                "homepage": "https://www.drupal.org/user/473738"
+            },
+            {
+                "name": "yhahn",
+                "homepage": "https://www.drupal.org/user/264833"
+            }
+        ],
+        "description": "Aggregates RSS/Atom/RDF feeds, imports CSV files and more.",
+        "homepage": "https://www.drupal.org/project/feeds",
+        "keywords": [
+            "Drupal"
+        ],
+        "support": {
+            "source": "https://git.drupalcode.org/project/feeds",
+            "issues": "https://www.drupal.org/project/issues/feeds"
+        }
+    },
+    {
         "name": "drupal/field_group",
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
@@ -3845,6 +4039,159 @@
         "homepage": "https://www.drupal.org/project/field_group",
         "support": {
             "source": "https://git.drupalcode.org/project/field_group"
+        }
+    },
+    {
+        "name": "drupal/geolocation",
+        "version": "3.2.0",
+        "version_normalized": "3.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/geolocation.git",
+            "reference": "8.x-3.2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/geolocation-8.x-3.2.zip",
+            "reference": "8.x-3.2",
+            "shasum": "ed6b1e594dd0ad95e52681130a8bcae85d68c305"
+        },
+        "require": {
+            "drupal/core": "^8.7.7 || ^9",
+            "gasparesganga/php-shapefile": ">=3.2",
+            "sibyx/phpgpx": "^1.0"
+        },
+        "require-dev": {
+            "drupal/address": "*",
+            "drupal/geofield": "*",
+            "drupal/geolocation_demo": "*",
+            "drupal/geolocation_geometry": "*",
+            "drupal/geolocation_geometry_data": "*",
+            "drupal/geolocation_geometry_natural_earth_countries": "*",
+            "drupal/geolocation_google_maps": "*",
+            "drupal/geolocation_google_maps_demo": "*",
+            "drupal/geolocation_google_static_maps": "*",
+            "drupal/geolocation_leaflet": "*",
+            "drupal/search_api": "*",
+            "drupal/search_api_location": "*",
+            "drupal/search_api_location_views": "*"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "drupal": {
+                "version": "8.x-3.2",
+                "datestamp": "1590319155",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "derjochenmeyer",
+                "homepage": "https://www.drupal.org/u/derjochenmeyer"
+            },
+            {
+                "name": "cadamski",
+                "homepage": "https://www.drupal.org/u/cadamski"
+            }
+        ],
+        "description": "Provides a simple geolocation Drupal field type to store and display location data (lat, lng).",
+        "homepage": "https://www.drupal.org/project/geolocation",
+        "support": {
+            "source": "http://git.drupal.org/project/geolocation.git",
+            "issues": "https://www.drupal.org/project/issues/geolocation"
+        }
+    },
+    {
+        "name": "drupal/inline_entity_form",
+        "version": "1.0.0-rc6",
+        "version_normalized": "1.0.0.0-RC6",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/inline_entity_form.git",
+            "reference": "8.x-1.0-rc6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/inline_entity_form-8.x-1.0-rc6.zip",
+            "reference": "8.x-1.0-rc6",
+            "shasum": "9f7508f4cb88d5e7869c81b20b44d89bc1689fad"
+        },
+        "require": {
+            "drupal/core": "^8.7.7 || ^9"
+        },
+        "require-dev": {
+            "drupal/entity_reference_revisions": "^1.0"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "drupal": {
+                "version": "8.x-1.0-rc6",
+                "datestamp": "1589280847",
+                "security-coverage": {
+                    "status": "not-covered",
+                    "message": "RC releases are not covered by Drupal security advisories."
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "bojanz",
+                "homepage": "https://www.drupal.org/user/86106"
+            },
+            {
+                "name": "dawehner",
+                "homepage": "https://www.drupal.org/user/99340"
+            },
+            {
+                "name": "geek-merlin",
+                "homepage": "https://www.drupal.org/user/229048"
+            },
+            {
+                "name": "joachim",
+                "homepage": "https://www.drupal.org/user/107701"
+            },
+            {
+                "name": "jsacksick",
+                "homepage": "https://www.drupal.org/user/972218"
+            },
+            {
+                "name": "kaythay",
+                "homepage": "https://www.drupal.org/user/2182186"
+            },
+            {
+                "name": "oknate",
+                "homepage": "https://www.drupal.org/user/471638"
+            },
+            {
+                "name": "rszrama",
+                "homepage": "https://www.drupal.org/user/49344"
+            },
+            {
+                "name": "slashrsm",
+                "homepage": "https://www.drupal.org/user/744628"
+            },
+            {
+                "name": "webflo",
+                "homepage": "https://www.drupal.org/user/254778"
+            }
+        ],
+        "description": "Provides a widget for inline management (creation, modification, removal) of referenced entities.",
+        "homepage": "https://www.drupal.org/project/inline_entity_form",
+        "support": {
+            "source": "https://git.drupalcode.org/project/inline_entity_form"
         }
     },
     {
@@ -4124,6 +4471,110 @@
         }
     },
     {
+        "name": "drupal/taxonomy_delete",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/taxonomy_delete.git",
+            "reference": "8.x-1.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/taxonomy_delete-8.x-1.1.zip",
+            "reference": "8.x-1.1",
+            "shasum": "58ddc4ec8408de88f707430b7e5f8f6cde78c027"
+        },
+        "require": {
+            "drupal/core": "^8 || ^9"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "drupal": {
+                "version": "8.x-1.1",
+                "datestamp": "1587197781",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "imalabya",
+                "homepage": "https://www.drupal.org/user/2641255"
+            }
+        ],
+        "description": "A utility module which will delete all the taxonomy under a Vocabulary.",
+        "homepage": "https://www.drupal.org/project/taxonomy_delete",
+        "keywords": [
+            "Drupal"
+        ],
+        "support": {
+            "source": "http://cgit.drupalcode.org/taxonomy_delete",
+            "issues": "http://drupal.org/project/issues/taxonomy_delete"
+        }
+    },
+    {
+        "name": "drupal/taxonomy_import",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/taxonomy_import.git",
+            "reference": "8.x-1.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/taxonomy_import-8.x-1.0.zip",
+            "reference": "8.x-1.0",
+            "shasum": "56d1e1eaea042afabdf570d200ec841508934232"
+        },
+        "require": {
+            "drupal/core": "~8.0"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "drupal": {
+                "version": "8.x-1.0",
+                "datestamp": "1498644843",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "AswathyAjish",
+                "homepage": "https://www.drupal.org/user/2584696"
+            },
+            {
+                "name": "neethups",
+                "homepage": "https://www.drupal.org/user/3516137"
+            },
+            {
+                "name": "sajiniantony",
+                "homepage": "https://www.drupal.org/user/2603884"
+            }
+        ],
+        "description": "A module to import taxonomy using CSV or XML file to a user defined vocabulary",
+        "homepage": "https://www.drupal.org/project/taxonomy_import",
+        "support": {
+            "source": "https://git.drupalcode.org/project/taxonomy_import"
+        }
+    },
+    {
         "name": "drupal/taxonomy_menu",
         "version": "3.4.0",
         "version_normalized": "3.4.0.0",
@@ -4187,6 +4638,52 @@
         "support": {
             "source": "http://cgit.drupalcode.org/taxonomy_menu",
             "issues": "http://drupal.org/project/taxonomy_menu"
+        }
+    },
+    {
+        "name": "drupal/term_csv_export_import",
+        "version": "3.0.0-alpha1",
+        "version_normalized": "3.0.0.0-alpha1",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/term_csv_export_import.git",
+            "reference": "8.x-3.0-alpha1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/term_csv_export_import-8.x-3.0-alpha1.zip",
+            "reference": "8.x-3.0-alpha1",
+            "shasum": "b9f6ec545ec105e3bd7e2a7c2c878b00d602a9ab"
+        },
+        "require": {
+            "drupal/core": "^8"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "drupal": {
+                "version": "8.x-3.0-alpha1",
+                "datestamp": "1560539581",
+                "security-coverage": {
+                    "status": "not-covered",
+                    "message": "Project has not opted into security advisory coverage!"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "el1_1el",
+                "homepage": "https://www.drupal.org/user/1795292"
+            }
+        ],
+        "description": "Import and Export Taxonomy terms as csv.",
+        "homepage": "https://www.drupal.org/project/term_csv_export_import",
+        "support": {
+            "source": "https://git.drupalcode.org/project/term_csv_export_import"
         }
     },
     {
@@ -4722,6 +5219,56 @@
         "homepage": "https://github.com/FriendsOfPHP/Goutte",
         "keywords": [
             "scraper"
+        ]
+    },
+    {
+        "name": "gasparesganga/php-shapefile",
+        "version": "v3.3.0",
+        "version_normalized": "3.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/gasparesganga/php-shapefile.git",
+            "reference": "af9b7221ddaf36a85a37e6a23281bd53ed750c4d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/gasparesganga/php-shapefile/zipball/af9b7221ddaf36a85a37e6a23281bd53ed750c4d",
+            "reference": "af9b7221ddaf36a85a37e6a23281bd53ed750c4d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "time": "2020-05-23T09:10:21+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Shapefile\\": "src/Shapefile/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Gaspare Sganga",
+                "email": "contact@gasparesganga.com",
+                "homepage": "https://gasparesganga.com/labs/php-shapefile/",
+                "role": "Developer"
+            }
+        ],
+        "description": "PHP library to read and write ESRI Shapefiles, compatible with WKT and GeoJSON",
+        "homepage": "https://gasparesganga.com/labs/php-shapefile/",
+        "keywords": [
+            "ESRI",
+            "Shapefile",
+            "dbf",
+            "geojson",
+            "shape",
+            "shp",
+            "wkt"
         ]
     },
     {
@@ -7749,6 +8296,50 @@
         "keywords": [
             "phar"
         ]
+    },
+    {
+        "name": "sibyx/phpgpx",
+        "version": "1.0-RC5",
+        "version_normalized": "1.0.0.0-RC5",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Sibyx/phpGPX.git",
+            "reference": "0bb616dda0b6ff3e78c72167087c8ffe8b1cbf2e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Sibyx/phpGPX/zipball/0bb616dda0b6ff3e78c72167087c8ffe8b1cbf2e",
+            "reference": "0bb616dda0b6ff3e78c72167087c8ffe8b1cbf2e",
+            "shasum": ""
+        },
+        "require": {
+            "lib-libxml": "*",
+            "php": ">=5.4"
+        },
+        "require-dev": {
+            "evert/phpdoc-md": "~0.2.0",
+            "phpunit/phpunit": "^6.5"
+        },
+        "time": "2018-01-25T12:25:51+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "phpGPX\\": "src/phpGPX/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jakub Dubec",
+                "email": "jakub.dubec@gmail.com",
+                "homepage": "https://jakubdubec.me"
+            }
+        ],
+        "description": "A simple PHP library for GPX import/export"
     },
     {
         "name": "squizlabs/php_codesniffer",
