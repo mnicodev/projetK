@@ -52,3 +52,13 @@ a.tabledrag-handle .handle {
     margin-top:20px;
   }
 }
+
+
+.node-agenda-form #dates .paragraphs-subform {
+    display: flex;
+}
+.node-agenda-form #dates .paragraphs-subform .field--type-datetime {
+    flex: 1;
+    padding: 10px;
+    padding-top: 0;
+}

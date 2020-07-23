@@ -60,98 +60,10 @@ function get_term_departement() {
  * modification de formulaire
  */
 function kidiklik_base_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-	$term_dep=get_term_departement();
-	if($form_id=="node_agenda_edit_form" || $form_id=="node_agenda_form") {
-		/* le champ est configuré par défaut en multiple valeur, on bloque à une simple valeur */
-		$form["field_adherent"]["widget"]["#multiple"]=FALSE;
-
-	}
-	/* on reformate le choix des activités pour ne choisir que des enfants */
-	if($form_id=="node_activite_edit_form" || $form_id=="node_activite_form") {
-		//kint($form);
-		/* le champ est configuré par défaut en multiple valeur, on bloque à une simple valeur */
-		$form["field_adherent"]["widget"]["#multiple"]=FALSE;
-		$form["field_adherent"]["widget"]["#ajax"]=[
-			"callback"=>"getAjaxCoordonnees",
-			"disable-refocus" => FALSE,
-			"event" => "change",
-			"wrapper" =>"edit-field-lieu-wrapper",
-			"progress"=>[
-				"type"=>"throbber",
-				"message"=>"Analyse",
-			],
-
-		];
-		$rub=$form["field_rubriques_activite"]["widget"]["#options"];
-		$tab=[];
-		$n="";
-		foreach($rub as $k=>$r) {
-			if($k!="_none") {
-				$t=taxonomy_term_load($k);
-				$p=current($t->parent->getValue()[0]);
-				if(!(int)$p) {
-					$n=current($t->name->getValue()[0]);
-				} else {
-					$tab[$n][$k]=current($t->name->getValue()[0]);
-				}
-			}
-		}
-		$form["field_rubriques_activite"]["widget"]["#options"]=$tab;
-		$form["field_rubriques_activite"]["widget"]["#size"]=1;
-		$form["#redirect"]="admin/activite";
-	}
-	if($form_id=="node_adherent_edit_form" || $form_id=="node_adherent_form") {
-		/* on va récupérer la liste des clients du département concerné */
-		$clients=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"client","field_departement"=>$term_dep]);
-		/* vérification si un adhérent doit être lié à un client */
-		if(\Drupal::routeMatch()->getParameters()->get("node"))
-			$nid=(int)\Drupal::routeMatch()->getParameters()->get("node")->id();
-		$entity_id=""; /* entité cliente */
-		if($nid) {
-			$database = \Drupal::database();
-			$query=$database->query("select * from {node__field_adherent} where field_adherent_target_id = '".$nid."'");
-			/* un adhérent est lié à un seul client, on peut récupérer le premier élément courant */
-			$result=current($query->fetchAll());
-			$entity_id=$result->entity_id;
-		}
-		$tab=[];
-		$tab[""]="Veuillez choisir un client";
-		foreach($clients as $key=>$client) {
-			$tab[$key]=$client->getTitle();
-		}
-		$form["field_client"]["widget"]["#options"]=$tab;
-		if($entity_id && !count($form["field_client"]["widget"]["#default_value"]))
-			$form["field_client"]["widget"]["#default_value"][]=(string)$entity_id;
-		//kint($form);
-
-	}
 	
-	if($form_id=="node_client_edit_form" || $form_id=="node_client_form") {
-//ksm($form);
-	}
-
-	if($form_id=="node_agenda_edit_form" || $form_id=="node_agenda_form") {
-		$adherents=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"adherent","field_departement"=>$term_dep]);
-		$tab=[];
-		$tab[""]="Veuillez choisir un client";
-		foreach($adherents as $key=>$adherent) {
-			$tab[$key]=$adherent->getTitle();
-		}
-		$form["field_adherent"]["widget"]["#options"]=$tab;
-
-	}
 }
 
-function getAjaxCoordonnees(array &$form, FormStateInterface $form_state) {
-	//return ["markup" => "ok" ];
-	$dialogText['#attached']['library'][] = 'core/drupal.dialog.ajax';
-	  // Prepare the text for our dialogbox.
-	$dialogText['#markup'] = "You selected: $selectedText";
-	$response = new AjaxResponse();
-	 $debugOut = "ok";
-	$response->addCommand(new InvokeCommand(NULL, 'getAjaxCoordonnees', ['test']));
-	return $response;
-}
+
 
 /*
  * Modification de la requête sql d'une vue
