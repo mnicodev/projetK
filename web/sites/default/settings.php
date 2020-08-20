@@ -803,6 +803,13 @@ $settings["available_content"]=[
 	"client",
 	"adherent",
 	"contact",
+	"bloc_de_mise_en_avant",
+];
+$settings["available_content_for_maj"]=[
+	"activite",
+	"agenda",
+	"article",
+	"reportage",
 ];
 $settings["available_form_for_dep"]=[
 	"node_activite_edit_form",

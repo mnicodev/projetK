@@ -62,3 +62,17 @@ a.tabledrag-handle .handle {
     padding: 10px;
     padding-top: 0;
 }
+
+.js .views-edit-view .dropbutton-wrapper .dropbutton .dropbutton-action > * {
+    color: #3c8dbc!important;
+}
+
+.view-rubriques-activites {
+	display: flex;
+	flex-direction: column;
+
+}
+
+#edit-field-mise-en-avant-actions input {
+	text-transform: lowercase;
+}

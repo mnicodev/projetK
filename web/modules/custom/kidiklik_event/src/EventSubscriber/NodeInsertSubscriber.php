@@ -11,6 +11,8 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 		$dep=\Drupal::service("settings")->get("dep");
 		
 		$entity=$event->getEntity();
+		/* on récupére le type du contenu */
+		$type=current($entity->type->getValue())["target_id"];
 		/* on recherche le département dans le vocabulaire de taxonomie des département */
 		$term=current(\Drupal::entityTypeManager()
 			->getStorage("taxonomy_term")
@@ -18,7 +20,6 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 		/* il existe */
 		if($term!==FALSE) {
 			$term_id=current($term->tid->getValue());
-			$type=current($entity->type->getValue())["target_id"];
 			/* le type d'entité correspond elle aux entités ayant un champ de département */
 			if(in_array($type,\Drupal::service("settings")->get("available_content"))) {
 			    /* on affecte le département */
