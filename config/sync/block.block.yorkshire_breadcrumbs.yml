@@ -1,0 +1,22 @@
+uuid: 839aa9cc-3db9-4feb-90f3-4e3fa8f1c92b
+langcode: fr
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - yorkshire
+_core:
+  default_config_hash: mHSNJXuVcJpvdchuje4XQjK3Xkvie11-vP5oitKXQAg
+id: yorkshire_breadcrumbs
+theme: yorkshire
+region: brand
+weight: -8
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  provider: system
+  label_display: '0'
+visibility: {  }

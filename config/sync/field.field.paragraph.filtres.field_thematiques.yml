@@ -1,0 +1,21 @@
+uuid: 0191ee79-5a79-40af-90ec-28e61edfdf98
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_thematiques
+    - paragraphs.paragraphs_type.filtres
+  module:
+    - options
+id: paragraph.filtres.field_thematiques
+field_name: field_thematiques
+entity_type: paragraph
+bundle: filtres
+label: Thématiques
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,98 @@
+uuid: dd380056-b63f-4ca0-809a-4b041730bff6
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.coordonnees.field_actif
+    - field.field.paragraph.coordonnees.field_adresse
+    - field.field.paragraph.coordonnees.field_code_postal
+    - field.field.paragraph.coordonnees.field_email
+    - field.field.paragraph.coordonnees.field_nom
+    - field.field.paragraph.coordonnees.field_note
+    - field.field.paragraph.coordonnees.field_telephones
+    - field.field.paragraph.coordonnees.field_url
+    - field.field.paragraph.coordonnees.field_ville
+    - paragraphs.paragraphs_type.coordonnees
+  module:
+    - link
+id: paragraph.coordonnees.default
+targetEntityType: paragraph
+bundle: coordonnees
+mode: default
+content:
+  field_actif:
+    weight: 8
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_adresse:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_code_postal:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_email:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_nom:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_note:
+    weight: 7
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_telephones:
+    weight: 4
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_url:
+    weight: 6
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_ville:
+    weight: 3
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden:
+  created: true
+  status: true

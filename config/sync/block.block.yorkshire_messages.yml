@@ -1,0 +1,22 @@
+uuid: 0d5cf5c6-cb4e-4583-96d6-c146a6d22ae4
+langcode: fr
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - yorkshire
+_core:
+  default_config_hash: PHsMgQb4QPenv6CM3bCnBvLXd47tblwbwU8Ep8ndfhY
+id: yorkshire_messages
+theme: yorkshire
+region: brand
+weight: -7
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

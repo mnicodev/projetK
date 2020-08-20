@@ -1,0 +1,24 @@
+uuid: 3b22e28d-bee7-4217-84d3-5ed3f410f8c2
+langcode: fr
+status: true
+dependencies:
+  config:
+    - views.view.blocs_publicites
+  module:
+    - views
+  theme:
+    - bartik
+id: views_block__blocs_publicites_block_1
+theme: bartik
+region: sidebar_first
+weight: -5
+provider: null
+plugin: 'views_block:blocs_publicites-block_1'
+settings:
+  id: 'views_block:blocs_publicites-block_1'
+  label: publicités
+  provider: views
+  label_display: '0'
+  views_label: publicités
+  items_per_page: none
+visibility: {  }

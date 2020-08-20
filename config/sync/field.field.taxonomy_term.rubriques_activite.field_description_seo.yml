@@ -1,0 +1,19 @@
+uuid: a0f43845-47a1-4517-b76e-0a79eb483dd3
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_description_seo
+    - taxonomy.vocabulary.rubriques_activite
+id: taxonomy_term.rubriques_activite.field_description_seo
+field_name: field_description_seo
+entity_type: taxonomy_term
+bundle: rubriques_activite
+label: 'Description SEO'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

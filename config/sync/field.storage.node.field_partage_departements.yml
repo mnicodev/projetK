@@ -1,0 +1,20 @@
+uuid: a02ff07c-fd1f-422e-b155-755d8f90e031
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_partage_departements
+field_name: field_partage_departements
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,80 @@
+uuid: 069a7973-a192-47e9-bed3-7261b8764ae3
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.agenda.body
+    - field.field.node.agenda.field_a_partir_de
+    - field.field.node.agenda.field_activite
+    - field.field.node.agenda.field_adherent
+    - field.field.node.agenda.field_adresse
+    - field.field.node.agenda.field_code_postal
+    - field.field.node.agenda.field_coordonnees
+    - field.field.node.agenda.field_date
+    - field.field.node.agenda.field_departement
+    - field.field.node.agenda.field_email
+    - field.field.node.agenda.field_filtres
+    - field.field.node.agenda.field_google_map
+    - field.field.node.agenda.field_horaires
+    - field.field.node.agenda.field_jusque_age_de
+    - field.field.node.agenda.field_latitude
+    - field.field.node.agenda.field_lien
+    - field.field.node.agenda.field_lieu
+    - field.field.node.agenda.field_longitude
+    - field.field.node.agenda.field_mise_en_avant
+    - field.field.node.agenda.field_resume
+    - field.field.node.agenda.field_telephone
+    - field.field.node.agenda.field_type_de_reservation
+    - node.type.agenda
+  module:
+    - text
+    - user
+id: node.agenda.teaser
+targetEntityType: node
+bundle: agenda
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 1
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  field_departement:
+    type: entity_reference_label
+    weight: 2
+    region: content
+    label: visually_hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_a_partir_de: true
+  field_activite: true
+  field_adherent: true
+  field_adresse: true
+  field_code_postal: true
+  field_coordonnees: true
+  field_date: true
+  field_email: true
+  field_filtres: true
+  field_google_map: true
+  field_horaires: true
+  field_jusque_age_de: true
+  field_latitude: true
+  field_lien: true
+  field_lieu: true
+  field_longitude: true
+  field_mise_en_avant: true
+  field_resume: true
+  field_telephone: true
+  field_type_de_reservation: true
+  langcode: true

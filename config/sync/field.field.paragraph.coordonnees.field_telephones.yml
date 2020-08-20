@@ -1,0 +1,19 @@
+uuid: 18524fd0-e7f6-4ee0-9d9f-5b55f121c6a9
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_telephones
+    - paragraphs.paragraphs_type.coordonnees
+id: paragraph.coordonnees.field_telephones
+field_name: field_telephones
+entity_type: paragraph
+bundle: coordonnees
+label: Téléphone(s)
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -1,0 +1,29 @@
+uuid: c26877e6-5b91-4387-a7ac-e32b1adee6bd
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_departement
+    - taxonomy.vocabulary.departement
+    - taxonomy.vocabulary.rubriques_activite
+id: taxonomy_term.rubriques_activite.field_departement
+field_name: field_departement
+entity_type: taxonomy_term
+bundle: rubriques_activite
+label: Département
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      departement: departement
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

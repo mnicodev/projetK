@@ -1,0 +1,57 @@
+uuid: 173ca4da-0d80-4be8-9029-d7ba04d75fc7
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.user.user.field_administrateur_dep
+    - field.field.user.user.field_departement
+    - field.field.user.user.field_domain_admin
+    - field.field.user.user.user_picture
+    - image.style.thumbnail
+  module:
+    - image
+    - user
+_core:
+  default_config_hash: K-1rBM8mTIkFp9RqOC2tMRUukOQ1xbRCfSKK8dEddnA
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  account:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_administrateur_dep:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_departement:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_domain_admin:
+    type: options_buttons
+    weight: 50
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  user_picture:
+    type: image_image
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  contact: true
+  langcode: true
+  language: true
+  path: true
+  timezone: true

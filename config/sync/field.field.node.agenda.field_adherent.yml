@@ -1,0 +1,28 @@
+uuid: 0da33497-99f6-44f1-985b-4eca609ba074
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_adherent
+    - node.type.adherent
+    - node.type.agenda
+id: node.agenda.field_adherent
+field_name: field_adherent
+entity_type: node
+bundle: agenda
+label: Adhérent
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      adherent: adherent
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

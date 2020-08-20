@@ -1,0 +1,19 @@
+uuid: 5884db67-f458-406b-974c-06acb485321c
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_lien
+    - node.type.adherent
+id: node.adherent.field_lien
+field_name: field_lien
+entity_type: node
+bundle: adherent
+label: Url
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

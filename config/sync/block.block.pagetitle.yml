@@ -1,0 +1,18 @@
+uuid: 6feaaba5-d387-473e-87ce-79ce0d52e635
+langcode: fr
+status: true
+dependencies:
+  theme:
+    - yorkshire
+id: pagetitle
+theme: yorkshire
+region: content
+weight: -7
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  provider: core
+  label_display: '0'
+visibility: {  }

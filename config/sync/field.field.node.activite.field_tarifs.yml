@@ -1,0 +1,19 @@
+uuid: 8ab73cbf-8637-4036-9d77-2772aa5f8ad5
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tarifs
+    - node.type.activite
+id: node.activite.field_tarifs
+field_name: field_tarifs
+entity_type: node
+bundle: activite
+label: Tarifs
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -1,0 +1,19 @@
+uuid: b7df2e0c-63d0-4d07-a1b7-ed347bde4097
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_adresse
+    - node.type.adherent
+id: node.adherent.field_adresse
+field_name: field_adresse
+entity_type: node
+bundle: adherent
+label: Adresse
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

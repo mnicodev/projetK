@@ -1,0 +1,23 @@
+uuid: 1dad8cdb-ba47-432b-be38-f1a0deae4a2b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_actif
+    - paragraphs.paragraphs_type.coordonnees
+id: paragraph.coordonnees.field_actif
+field_name: field_actif
+entity_type: paragraph
+bundle: coordonnees
+label: Actif
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Activé
+  off_label: Désactivé
+field_type: boolean

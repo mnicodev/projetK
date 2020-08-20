@@ -1,0 +1,21 @@
+uuid: 5b5c4993-01d8-40e6-a56a-3a9abf468836
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_administrateur_dep
+  module:
+    - options
+    - user
+id: user.user.field_administrateur_dep
+field_name: field_administrateur_dep
+entity_type: user
+bundle: user
+label: 'Administrateur du département'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

@@ -1,0 +1,28 @@
+uuid: ee33da84-db6e-453d-90ad-85c4cf3ff4fd
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_adherent
+    - node.type.activite
+    - node.type.adherent
+id: node.activite.field_adherent
+field_name: field_adherent
+entity_type: node
+bundle: activite
+label: Adhérent
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      adherent: adherent
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

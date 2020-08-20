@@ -1,0 +1,30 @@
+uuid: 9d0ecdbe-7393-47de-bd7a-94c76f2b8bf9
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.date.field_date_de_debut
+    - field.field.paragraph.date.field_date_de_fin
+    - paragraphs.paragraphs_type.date
+  module:
+    - datetime
+id: paragraph.date.default
+targetEntityType: paragraph
+bundle: date
+mode: default
+content:
+  field_date_de_debut:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_date_de_fin:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+hidden:
+  created: true
+  status: true

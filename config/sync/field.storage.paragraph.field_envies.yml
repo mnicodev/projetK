@@ -1,0 +1,39 @@
+uuid: 520e6f68-05b7-4759-a73b-ab713f09f0e7
+langcode: fr
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_envies
+field_name: field_envies
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Stage
+      label: Stage
+    -
+      value: Spectacle
+      label: Spectacle
+    -
+      value: Atelier
+      label: Atelier
+    -
+      value: Balade
+      label: Balade
+    -
+      value: Visite
+      label: Visite
+    -
+      value: Loisir
+      label: Loisir
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,19 @@
+uuid: 83f894a7-9acf-4b39-8c6c-7b14cfb109a9
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_email
+    - node.type.adherent
+id: node.adherent.field_email
+field_name: field_email
+entity_type: node
+bundle: adherent
+label: E-mail
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

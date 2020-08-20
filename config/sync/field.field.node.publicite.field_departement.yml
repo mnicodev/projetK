@@ -1,0 +1,29 @@
+uuid: 4850cc53-d63e-4960-82c7-de4bcebb39ad
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_departement
+    - node.type.publicite
+    - taxonomy.vocabulary.departement
+id: node.publicite.field_departement
+field_name: field_departement
+entity_type: node
+bundle: publicite
+label: Département
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      departement: departement
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

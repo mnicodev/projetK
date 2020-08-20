@@ -1,0 +1,29 @@
+uuid: 72bd27d4-55f7-4c4b-995d-d2a074908778
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_rubriques
+    - node.type.article
+    - taxonomy.vocabulary.rubrique_article
+id: node.article.field_rubriques
+field_name: field_rubriques
+entity_type: node
+bundle: article
+label: Rubriques
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      rubrique_article: rubrique_article
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

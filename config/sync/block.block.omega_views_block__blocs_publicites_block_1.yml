@@ -1,0 +1,24 @@
+uuid: 3a8776b7-d5c5-4e07-b9f8-036346a4f158
+langcode: fr
+status: true
+dependencies:
+  config:
+    - views.view.blocs_publicites
+  module:
+    - views
+  theme:
+    - omega
+id: omega_views_block__blocs_publicites_block_1
+theme: omega
+region: sidebar_first
+weight: -5
+provider: null
+plugin: 'views_block:blocs_publicites-block_1'
+settings:
+  id: 'views_block:blocs_publicites-block_1'
+  label: publicités
+  provider: views
+  label_display: '0'
+  views_label: publicités
+  items_per_page: none
+visibility: {  }

@@ -1,0 +1,31 @@
+uuid: 5621317c-abf1-404a-87e6-f6642acede27
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.ville.field_code_postal
+    - taxonomy.vocabulary.ville
+  module:
+    - text
+id: taxonomy_term.ville.default
+targetEntityType: taxonomy_term
+bundle: ville
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_code_postal:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  langcode: true

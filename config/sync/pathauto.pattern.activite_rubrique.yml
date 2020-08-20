@@ -1,0 +1,23 @@
+uuid: 8720c0e2-f206-4cc7-afdf-02cea5255946
+langcode: fr
+status: true
+dependencies:
+  module:
+    - ctools
+    - taxonomy
+id: activite_rubrique
+label: 'Activité rubrique'
+type: 'canonical_entities:taxonomy_term'
+pattern: '/[term:parents:join-path]/[term:name]'
+selection_criteria:
+  dc100314-80c2-4f4c-ae21-9caeaf9f8233:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      rubriques_activite: rubriques_activite
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: dc100314-80c2-4f4c-ae21-9caeaf9f8233
+selection_logic: and
+weight: -5
+relationships: {  }

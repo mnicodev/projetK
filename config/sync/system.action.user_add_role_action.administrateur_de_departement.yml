@@ -1,0 +1,14 @@
+uuid: af208b44-e4dc-4e69-869c-5b3c69d2e757
+langcode: fr
+status: true
+dependencies:
+  config:
+    - user.role.administrateur_de_departement
+  module:
+    - user
+id: user_add_role_action.administrateur_de_departement
+label: 'Ajouter le rôle Administrateur de département aux utilisateurs sélectionnés'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: administrateur_de_departement

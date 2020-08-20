@@ -1,0 +1,8 @@
+uuid: a0e36724-543d-4e26-be23-f3befa878834
+langcode: fr
+status: true
+dependencies: {  }
+name: 'Rubrique article'
+vid: rubrique_article
+description: ''
+weight: 0

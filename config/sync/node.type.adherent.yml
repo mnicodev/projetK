@@ -1,0 +1,17 @@
+uuid: 727d559b-8e5f-4cfe-bf8f-4f24e809cf92
+langcode: fr
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: adhérent
+type: adherent
+description: ''
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

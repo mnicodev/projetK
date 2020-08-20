@@ -1,0 +1,29 @@
+uuid: 7c2574ae-6f4c-4dbe-a2cb-53e6d7ac49fe
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_format
+    - node.type.publicite
+    - taxonomy.vocabulary.format_publicite
+id: node.publicite.field_format
+field_name: field_format
+entity_type: node
+bundle: publicite
+label: Format
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      format_publicite: format_publicite
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

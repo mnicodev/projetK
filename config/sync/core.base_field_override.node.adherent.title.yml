@@ -1,0 +1,18 @@
+uuid: f31f9342-027a-4901-8c95-95d52f9deb81
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.adherent
+id: node.adherent.title
+field_name: title
+entity_type: node
+bundle: adherent
+label: Nom
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

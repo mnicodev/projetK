@@ -1,0 +1,48 @@
+uuid: 50458d09-8e75-4771-837d-f937f9863d2f
+langcode: fr
+status: true
+dependencies:
+  module:
+    - options
+    - user
+id: user.field_administrateur_dep
+field_name: field_administrateur_dep
+entity_type: user
+type: list_integer
+settings:
+  allowed_values:
+    -
+      value: 1
+      label: '01'
+    -
+      value: 2
+      label: '02'
+    -
+      value: 3
+      label: '03'
+    -
+      value: 4
+      label: '04'
+    -
+      value: 45
+      label: '45'
+    -
+      value: 46
+      label: '46'
+    -
+      value: 47
+      label: '47'
+    -
+      value: 48
+      label: '48'
+    -
+      value: 49
+      label: '49'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

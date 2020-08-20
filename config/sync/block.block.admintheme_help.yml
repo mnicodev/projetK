@@ -1,0 +1,22 @@
+uuid: 45fca6f6-7418-4b90-9876-47ee233436b7
+langcode: fr
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - admintheme
+_core:
+  default_config_hash: b7-G4ao41oTE03dP9OtMRi2HYSQiMj22CGIzgGLOOJA
+id: admintheme_help
+theme: admintheme
+region: highlighted
+weight: -30
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: '0'
+visibility: {  }

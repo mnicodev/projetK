@@ -1,0 +1,16 @@
+uuid: 3bdfd4ca-84f0-4e36-be12-e2a9714b23e1
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.main
+    - taxonomy.vocabulary.rubriques_activite
+id: menu_kidiklik
+label: 'Menu kidiklik'
+vocabulary: rubriques_activite
+menu: main
+expanded: false
+depth: 0
+menu_parent: 'main:'
+description_field_name: ''
+use_term_weight_order: true

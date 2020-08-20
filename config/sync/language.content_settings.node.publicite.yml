@@ -1,0 +1,11 @@
+uuid: c256ebca-a7a4-493c-821a-95f138ae5d61
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.publicite
+id: node.publicite
+target_entity_type_id: node
+target_bundle: publicite
+default_langcode: site_default
+language_alterable: false

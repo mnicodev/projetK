@@ -1,0 +1,41 @@
+uuid: 211276ac-dea7-4e85-a2af-93ca5824dd67
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.adherent.field_adresse
+    - field.field.node.adherent.field_client
+    - field.field.node.adherent.field_code_postal
+    - field.field.node.adherent.field_contact
+    - field.field.node.adherent.field_departement
+    - field.field.node.adherent.field_email
+    - field.field.node.adherent.field_lien
+    - field.field.node.adherent.field_note
+    - field.field.node.adherent.field_telephone
+    - field.field.node.adherent.field_ville
+    - node.type.adherent
+  module:
+    - user
+id: node.adherent.teaser
+targetEntityType: node
+bundle: adherent
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_adresse: true
+  field_client: true
+  field_code_postal: true
+  field_contact: true
+  field_departement: true
+  field_email: true
+  field_lien: true
+  field_note: true
+  field_telephone: true
+  field_ville: true
+  langcode: true

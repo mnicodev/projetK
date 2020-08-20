@@ -1,0 +1,19 @@
+uuid: 47b97ca4-85a8-4dc0-8885-d771dd5921ab
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_nom
+    - paragraphs.paragraphs_type.coordonnees
+id: paragraph.coordonnees.field_nom
+field_name: field_nom
+entity_type: paragraph
+bundle: coordonnees
+label: Nom
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
