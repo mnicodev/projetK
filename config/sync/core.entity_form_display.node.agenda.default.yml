@@ -85,7 +85,17 @@ third_party_settings:
     group_rubriques:
       children:
         - field_adherent
+<<<<<<< HEAD
         - group_coordonnees
+=======
+        - field_lieu
+        - field_activite
+        - field_adresse
+        - field_code_postal
+        - field_telephone
+        - field_email
+        - field_lien
+>>>>>>> d3f63310544daa7e10a1f7a57b6f8c67c5b1b47e
       parent_name: group_onglets
       weight: 23
       format_type: tab
@@ -138,6 +148,7 @@ third_party_settings:
         description: ''
         required_fields: true
       label: 'Mise en avant'
+<<<<<<< HEAD
     group_coordonnees:
       children:
         - field_lieu
@@ -161,6 +172,8 @@ third_party_settings:
         effect: none
         speed: fast
       label: Coordonnées
+=======
+>>>>>>> d3f63310544daa7e10a1f7a57b6f8c67c5b1b47e
 id: node.agenda.default
 targetEntityType: node
 bundle: agenda
@@ -183,7 +196,11 @@ content:
     type: options_select
     region: content
   field_activite:
+<<<<<<< HEAD
     weight: 38
+=======
+    weight: 29
+>>>>>>> d3f63310544daa7e10a1f7a57b6f8c67c5b1b47e
     settings:
       match_operator: CONTAINS
       size: 60
@@ -199,7 +216,11 @@ content:
     type: options_select
     region: content
   field_adresse:
+<<<<<<< HEAD
     weight: 39
+=======
+    weight: 30
+>>>>>>> d3f63310544daa7e10a1f7a57b6f8c67c5b1b47e
     settings:
       size: 60
       placeholder: ''
@@ -207,7 +228,11 @@ content:
     type: string_textfield
     region: content
   field_code_postal:
+<<<<<<< HEAD
     weight: 40
+=======
+    weight: 31
+>>>>>>> d3f63310544daa7e10a1f7a57b6f8c67c5b1b47e
     settings:
       size: 60
       placeholder: ''
@@ -245,7 +270,11 @@ content:
       match_limit: 10
     third_party_settings: {  }
   field_email:
+<<<<<<< HEAD
     weight: 42
+=======
+    weight: 33
+>>>>>>> d3f63310544daa7e10a1f7a57b6f8c67c5b1b47e
     settings:
       size: 60
       placeholder: ''
@@ -281,7 +310,11 @@ content:
     type: string_textarea
     region: content
   field_jusque_age_de:
+<<<<<<< HEAD
     weight: 45
+=======
+    weight: 37
+>>>>>>> d3f63310544daa7e10a1f7a57b6f8c67c5b1b47e
     settings: {  }
     third_party_settings: {  }
     type: options_select
@@ -295,7 +328,11 @@ content:
     type: string_textfield
     region: content
   field_lien:
+<<<<<<< HEAD
     weight: 43
+=======
+    weight: 34
+>>>>>>> d3f63310544daa7e10a1f7a57b6f8c67c5b1b47e
     settings:
       size: 60
       placeholder: ''
@@ -303,7 +340,11 @@ content:
     type: string_textfield
     region: content
   field_lieu:
+<<<<<<< HEAD
     weight: 37
+=======
+    weight: 28
+>>>>>>> d3f63310544daa7e10a1f7a57b6f8c67c5b1b47e
     settings:
       size: 60
       placeholder: ''
@@ -344,7 +385,11 @@ content:
     type: string_textarea
     region: content
   field_telephone:
+<<<<<<< HEAD
     weight: 41
+=======
+    weight: 32
+>>>>>>> d3f63310544daa7e10a1f7a57b6f8c67c5b1b47e
     settings:
       rows: 5
       placeholder: ''

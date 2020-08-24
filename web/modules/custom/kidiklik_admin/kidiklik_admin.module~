@@ -181,6 +181,7 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 		}else $form["field_ville"]["widget"]["#options"]=[];
 	}
 	if($form_id=="node_adherent_edit_form" || $form_id=="node_adherent_form") {
+		$form["#attached"]["library"][]="kidiklik_admin/kidiklik_admin.commands";
 		/* on va récupérer la liste des clients du département concerné */
 		$clients=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"client","field_departement"=>$term_dep]);
 		/* vérification si un adhérent doit être lié à un client */
