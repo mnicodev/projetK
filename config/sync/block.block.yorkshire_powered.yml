@@ -1,0 +1,22 @@
+uuid: 158a6f2a-cd02-41cf-a0fe-3aeab099d59d
+langcode: fr
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - yorkshire
+_core:
+  default_config_hash: eI0sywEI6rq2Jo2lxLTPo61iM16x-wFqAR6BPUqDyVw
+id: yorkshire_powered
+theme: yorkshire
+region: brand
+weight: -5
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }

@@ -1,0 +1,29 @@
+uuid: 6e6e9623-54e0-4c89-9fef-cc62c31be1ec
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_type_de_reservation
+    - node.type.agenda
+    - taxonomy.vocabulary.type_de_reservation
+id: node.agenda.field_type_de_reservation
+field_name: field_type_de_reservation
+entity_type: node
+bundle: agenda
+label: 'Type de réservation'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      type_de_reservation: type_de_reservation
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

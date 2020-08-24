@@ -1,0 +1,13 @@
+features:
+  node_user_picture: 1
+  comment_user_picture: 1
+  comment_user_verification: 1
+  favicon: 1
+logo:
+  use_default: 1
+favicon:
+  use_default: 1
+custom_css: 0
+disable_google_fonts: 0
+skin: blue
+menu_icons: "Administration|fa-gears\r\nHome|fa-home\r\nMy account|fa-user\r\nLog out|fa-sign-out\r\nAdd content|fa-plus"

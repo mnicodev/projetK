@@ -1,0 +1,28 @@
+uuid: 6c0ed231-92a0-4954-b830-4238c371f70b
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mise_en_avant
+    - node.type.article
+    - node.type.bloc_de_mise_en_avant
+id: node.article.field_mise_en_avant
+field_name: field_mise_en_avant
+entity_type: node
+bundle: article
+label: 'Mise en avant'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      bloc_de_mise_en_avant: bloc_de_mise_en_avant
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,31 @@
+uuid: 4a2946af-9e5e-47cc-8444-2469af1f2fed
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_filtres
+    - node.type.agenda
+    - paragraphs.paragraphs_type.filtres
+  module:
+    - entity_reference_revisions
+id: node.agenda.field_filtres
+field_name: field_filtres
+entity_type: node
+bundle: agenda
+label: Filtres
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      filtres: filtres
+    target_bundles_drag_drop:
+      filtres:
+        enabled: true
+        weight: 2
+field_type: entity_reference_revisions

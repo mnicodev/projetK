@@ -1,0 +1,8 @@
+uuid: 5c356044-0783-48b6-835c-8c823c655c82
+langcode: fr
+status: true
+dependencies: {  }
+name: Ville
+vid: ville
+description: ''
+weight: 0

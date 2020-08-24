@@ -1,0 +1,18 @@
+uuid: c8e688cb-7b2e-43aa-867c-e65cc03e1d16
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.publicite
+id: node.publicite.title
+field_name: title
+entity_type: node
+bundle: publicite
+label: 'Titre de la campagne'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

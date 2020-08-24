@@ -1,0 +1,69 @@
+uuid: f4f24003-161a-49c1-8d65-3e427d962a99
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_jusque_age_de
+field_name: field_jusque_age_de
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: '2'
+      label: '2'
+    -
+      value: '3'
+      label: '3'
+    -
+      value: '4'
+      label: '4'
+    -
+      value: '5'
+      label: '5'
+    -
+      value: '6'
+      label: '6'
+    -
+      value: '7'
+      label: '7'
+    -
+      value: '8'
+      label: '8'
+    -
+      value: '9'
+      label: '9'
+    -
+      value: '10'
+      label: '10'
+    -
+      value: '11'
+      label: '11'
+    -
+      value: '12'
+      label: '12'
+    -
+      value: '13'
+      label: '13'
+    -
+      value: '14'
+      label: '14'
+    -
+      value: '15'
+      label: '15'
+    -
+      value: '16'
+      label: '16'
+    -
+      value: 'Et plus'
+      label: 'Et plus'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

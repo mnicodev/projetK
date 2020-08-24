@@ -1,0 +1,17 @@
+uuid: db60743a-a752-4222-a241-e44fd1710dab
+langcode: fr
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Bloc de mise en avant'
+type: bloc_de_mise_en_avant
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

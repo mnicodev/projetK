@@ -1,0 +1,10 @@
+uuid: 83dba10c-b1ab-4cfd-a418-45df9151982a
+langcode: fr
+status: true
+dependencies:
+  module:
+    - node
+id: node.adherent_dans_client
+label: 'Adhérent dans client'
+targetEntityType: node
+cache: true

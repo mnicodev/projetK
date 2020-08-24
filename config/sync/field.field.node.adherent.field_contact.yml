@@ -1,0 +1,28 @@
+uuid: b6fb1d13-1099-4d17-8dd1-f7e634c259b7
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact
+    - node.type.adherent
+    - node.type.contact
+id: node.adherent.field_contact
+field_name: field_contact
+entity_type: node
+bundle: adherent
+label: Contact
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      contact: contact
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

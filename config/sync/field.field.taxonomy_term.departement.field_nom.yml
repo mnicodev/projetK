@@ -1,0 +1,19 @@
+uuid: 11201604-1ac0-438b-80c9-50c7513aafb4
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_nom
+    - taxonomy.vocabulary.departement
+id: taxonomy_term.departement.field_nom
+field_name: field_nom
+entity_type: taxonomy_term
+bundle: departement
+label: 'Nom département'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,11 @@
+uuid: e7330221-7703-448f-8bbd-be761466d88f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.type_de_reservation
+id: taxonomy_term.type_de_reservation
+target_entity_type_id: taxonomy_term
+target_bundle: type_de_reservation
+default_langcode: site_default
+language_alterable: false

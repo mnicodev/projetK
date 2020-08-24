@@ -1,0 +1,24 @@
+uuid: 794028c9-4def-4249-b939-2895a6126519
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_date_debut
+    - node.type.activite
+  module:
+    - datetime
+id: node.activite.field_date_debut
+field_name: field_date_debut
+entity_type: node
+bundle: activite
+label: 'date de début'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

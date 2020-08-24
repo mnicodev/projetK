@@ -1,0 +1,22 @@
+uuid: 5c6dcbc1-c33a-453f-9bf5-03ccb5b18533
+langcode: fr
+status: true
+dependencies:
+  theme:
+    - omega
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: omega_local_tasks
+theme: omega
+region: content
+weight: -5
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Onglets
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

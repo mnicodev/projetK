@@ -1,0 +1,18 @@
+uuid: e71db47d-b59d-45b3-89e0-743a8d2ba54f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - node.type.bloc_de_mise_en_avant
+id: node.bloc_de_mise_en_avant.title
+field_name: title
+entity_type: node
+bundle: bloc_de_mise_en_avant
+label: Titre
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

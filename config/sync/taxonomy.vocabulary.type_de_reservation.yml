@@ -1,0 +1,8 @@
+uuid: f8dcea53-ce4e-40a6-9fe7-491d82139281
+langcode: fr
+status: true
+dependencies: {  }
+name: 'Type de réservation'
+vid: type_de_reservation
+description: ''
+weight: 0

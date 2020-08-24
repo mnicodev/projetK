@@ -1,0 +1,19 @@
+uuid: 058bb21a-a43b-4cb2-9006-53f532795dc0
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_code_postal
+    - taxonomy.vocabulary.ville
+id: taxonomy_term.ville.field_code_postal
+field_name: field_code_postal
+entity_type: taxonomy_term
+bundle: ville
+label: 'Code postal'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

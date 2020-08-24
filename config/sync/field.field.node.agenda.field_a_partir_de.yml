@@ -1,0 +1,21 @@
+uuid: 59d69c69-f566-4f48-9a94-d7e15ef7c274
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_a_partir_de
+    - node.type.agenda
+  module:
+    - options
+id: node.agenda.field_a_partir_de
+field_name: field_a_partir_de
+entity_type: node
+bundle: agenda
+label: 'à partir de'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

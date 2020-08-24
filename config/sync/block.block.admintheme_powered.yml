@@ -1,0 +1,22 @@
+uuid: b31ff140-76a8-409a-9208-9a96b6ea51d8
+langcode: fr
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - admintheme
+_core:
+  default_config_hash: eI0sywEI6rq2Jo2lxLTPo61iM16x-wFqAR6BPUqDyVw
+id: admintheme_powered
+theme: admintheme
+region: admin_menu
+weight: -10
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }

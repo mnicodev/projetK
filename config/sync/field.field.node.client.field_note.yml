@@ -1,0 +1,19 @@
+uuid: df3551b8-50fc-457b-91f9-d571483c67bc
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_note
+    - node.type.client
+id: node.client.field_note
+field_name: field_note
+entity_type: node
+bundle: client
+label: Note
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

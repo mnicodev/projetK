@@ -1,0 +1,19 @@
+uuid: 97a23b1d-7b95-4dc3-97d0-e947b69dec7a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_code_postal
+    - paragraphs.paragraphs_type.coordonnees
+id: paragraph.coordonnees.field_code_postal
+field_name: field_code_postal
+entity_type: paragraph
+bundle: coordonnees
+label: 'Code postal'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

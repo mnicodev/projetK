@@ -1,0 +1,28 @@
+uuid: 0c14e07d-3c31-4ec6-805d-3a440a3a36bc
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mise_en_avant
+    - node.type.agenda
+    - node.type.bloc_de_mise_en_avant
+id: node.agenda.field_mise_en_avant
+field_name: field_mise_en_avant
+entity_type: node
+bundle: agenda
+label: 'Mise en avant'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      bloc_de_mise_en_avant: bloc_de_mise_en_avant
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

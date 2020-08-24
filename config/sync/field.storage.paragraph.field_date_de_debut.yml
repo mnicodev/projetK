@@ -1,0 +1,20 @@
+uuid: a43fd20e-5648-40f9-a654-1dbf9b2f056e
+langcode: fr
+status: true
+dependencies:
+  module:
+    - datetime
+    - paragraphs
+id: paragraph.field_date_de_debut
+field_name: field_date_de_debut
+entity_type: paragraph
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,22 @@
+uuid: e1a3bf9b-d959-43d9-9540-5d29f66fd282
+langcode: fr
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - admintheme_theme
+_core:
+  default_config_hash: HUAtgg8nG2lp6zRkrspKNk-ij4hrffLwMI8PUG3hUWw
+id: admintheme_theme_breadcrumbs
+theme: admintheme_theme
+region: ''
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  provider: system
+  label_display: '0'
+visibility: {  }

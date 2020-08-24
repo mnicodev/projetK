@@ -1,0 +1,14 @@
+uuid: 2bb25ab0-cfaf-4713-96cd-0ff5f17d0ebd
+langcode: fr
+status: true
+dependencies:
+  config:
+    - user.role.administrateur_de_departement
+  module:
+    - user
+id: user_remove_role_action.administrateur_de_departement
+label: 'Enlever le rôle Administrateur de département des utilisateurs sélectionnés'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: administrateur_de_departement

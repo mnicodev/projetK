@@ -1,0 +1,167 @@
+uuid: 15cd8c7f-382a-40c1-bb44-77ac7fdc40e4
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.node.adherent.field_adresse
+    - field.field.node.adherent.field_client
+    - field.field.node.adherent.field_code_postal
+    - field.field.node.adherent.field_contact
+    - field.field.node.adherent.field_departement
+    - field.field.node.adherent.field_email
+    - field.field.node.adherent.field_lien
+    - field.field.node.adherent.field_note
+    - field.field.node.adherent.field_telephone
+    - field.field.node.adherent.field_ville
+    - node.type.adherent
+  module:
+    - field_group
+    - inline_entity_form
+third_party_settings:
+  field_group:
+    group_onglets:
+      children:
+        - group_informations_generales
+        - group_contacts
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: Onglets
+    group_informations_generales:
+      children:
+        - title
+        - field_client
+        - field_adresse
+        - field_code_postal
+        - field_ville
+        - field_telephone
+        - field_lien
+        - field_email
+        - field_note
+      parent_name: group_onglets
+      weight: 20
+      format_type: tab
+      format_settings:
+        label: 'Informations de l''adhérent'
+        formatter: closed
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: 'Informations de l''adhérent'
+    group_contacts:
+      children:
+        - field_contact
+      parent_name: group_onglets
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Contact(s)
+id: node.adherent.default
+targetEntityType: node
+bundle: adherent
+mode: default
+content:
+  field_adresse:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_client:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_code_postal:
+    weight: 4
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_contact:
+    weight: 26
+    settings:
+      match_operator: CONTAINS
+      form_mode: default
+      revision: false
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      collapsible: false
+      collapsed: false
+      allow_new: true
+      allow_existing: false
+      allow_duplicate: false
+    third_party_settings: {  }
+    type: inline_entity_form_complex
+    region: content
+  field_email:
+    weight: 8
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_lien:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_note:
+    weight: 9
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_telephone:
+    weight: 6
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_ville:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_departement: true
+  langcode: true
+  path: true
+  promote: true
+  status: true
+  sticky: true
+  uid: true

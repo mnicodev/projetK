@@ -1,0 +1,22 @@
+uuid: 13909f0b-ec4a-4601-89bb-14f955e8c0f9
+langcode: fr
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - admintheme_theme
+_core:
+  default_config_hash: neGBu7Mx1S6DYAigd3xx-YcTMHTs4cgN5XV7oTGgduQ
+id: admintheme_theme_messages
+theme: admintheme_theme
+region: ''
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

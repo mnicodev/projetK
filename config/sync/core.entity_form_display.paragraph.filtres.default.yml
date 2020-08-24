@@ -1,0 +1,42 @@
+uuid: 21d8c2de-7945-4d8e-a4e7-2236e6f41b6f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.filtres.field_envies
+    - field.field.paragraph.filtres.field_thematiques
+    - field.field.paragraph.filtres.field_tranches_d_ages
+    - field.field.paragraph.filtres.field_vacances
+    - paragraphs.paragraphs_type.filtres
+id: paragraph.filtres.default
+targetEntityType: paragraph
+bundle: filtres
+mode: default
+content:
+  field_envies:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_thematiques:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_tranches_d_ages:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_vacances:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+hidden:
+  created: true
+  status: true

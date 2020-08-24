@@ -1,0 +1,29 @@
+uuid: 94a5d553-5dbc-4951-a95c-90a3d03306d7
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ville
+    - node.type.adherent
+    - taxonomy.vocabulary.ville
+id: node.adherent.field_ville
+field_name: field_ville
+entity_type: node
+bundle: adherent
+label: Ville
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      ville: ville
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

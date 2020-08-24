@@ -1,0 +1,21 @@
+uuid: 4510b4e0-f80d-4d2b-b3b0-1ae9179af1c3
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_a_partir_de
+    - node.type.activite
+  module:
+    - options
+id: node.activite.field_a_partir_de
+field_name: field_a_partir_de
+entity_type: node
+bundle: activite
+label: 'à partir de'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

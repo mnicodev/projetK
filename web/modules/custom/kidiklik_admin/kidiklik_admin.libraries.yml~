@@ -1,0 +1,4 @@
+kidiklik_admin:
+  version: 1.x
+  js:
+    js/scripts.js: {}

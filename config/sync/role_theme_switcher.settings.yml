@@ -1,0 +1,13 @@
+roles:
+  anonymous:
+    theme: ''
+    weight: '0'
+  authenticated:
+    theme: ''
+    weight: '0'
+  administrator:
+    theme: seven
+    weight: '0'
+  administrateur_de_departement:
+    theme: mediteran
+    weight: '0'

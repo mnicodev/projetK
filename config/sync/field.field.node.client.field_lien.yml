@@ -1,0 +1,19 @@
+uuid: f87f09b8-4bef-493a-b587-791410ae7cf8
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_lien
+    - node.type.client
+id: node.client.field_lien
+field_name: field_lien
+entity_type: node
+bundle: client
+label: Url
+description: 'http://www.exemple.com'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

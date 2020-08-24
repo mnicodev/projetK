@@ -1,0 +1,22 @@
+uuid: 85fc8003-78c5-49f0-ba7a-fd130e368fce
+langcode: fr
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - admintheme
+_core:
+  default_config_hash: d2gU9L262pIeNdqJoH351gQruu-s201QEBJAKGsRfD8
+id: admintheme_content
+theme: admintheme
+region: content
+weight: 1
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }

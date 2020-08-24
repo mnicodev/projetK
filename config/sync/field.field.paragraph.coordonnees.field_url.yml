@@ -1,0 +1,23 @@
+uuid: d1f59e49-2cec-4325-8877-f927bfc702c4
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_url
+    - paragraphs.paragraphs_type.coordonnees
+  module:
+    - link
+id: paragraph.coordonnees.field_url
+field_name: field_url
+entity_type: paragraph
+bundle: coordonnees
+label: Url
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link
