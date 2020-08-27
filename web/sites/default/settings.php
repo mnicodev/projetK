@@ -805,7 +805,7 @@ $settings["available_content"]=[
 	"contact",
 	"bloc_de_mise_en_avant",
 ];
-$settings["available_content_for_maj"]=[
+$settings["available_content_for_mea"]=[
 	"activite",
 	"agenda",
 	"article",

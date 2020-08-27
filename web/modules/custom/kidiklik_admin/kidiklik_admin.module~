@@ -111,7 +111,11 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 		$form["field_adherent"]["widget"]["#multiple"]=FALSE;
 		
 		$adherents=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"adherent","field_departement"=>$term_dep]);
-
+		$tab[""]="Veuillez choisir un adhérent";
+		foreach($adherents as $key=>$adherent) {
+			$tab[$key]=$adherent->getTitle();
+		}
+		$form["field_adherent"]["widget"]["#options"]=$tab;
 	}
 	
 	if($form_id=="node_agenda_edit_form" || $form_id=="node_agenda_form") {

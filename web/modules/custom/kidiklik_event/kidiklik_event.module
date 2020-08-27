@@ -31,12 +31,19 @@ function kidiklik_event_node_insert(Drupal\Core\Entity\EntityInterface $entity) 
 
 function kidiklik_event_node_update(Drupal\Core\Entity\EntityInterface $entity) {
 	$type=current($entity->type->getValue())["target_id"];
-	if(in_array($type,\Drupal::service("settings")->get("available_content_for_maj"))) {
+	if(in_array($type,\Drupal::service("settings")->get("available_content_for_mea"))) {
+		//kint($entity->get("field_date")->getValue());exit;
 		$path=\Drupal::service('path.alias_manager')->getAliasByPath($entity->url());
 		$blocs=$entity->get("field_mise_en_avant")->getValue();
 		foreach($blocs as $bloc) {
 			$node=\Drupal::entityTypeManager()->getStorage("node")->load($bloc["target_id"]);
 			$node->set("field_lien",$path);
+			$node->set("field_adherent",$entity->get("field_adherent")->getValue());
+			if($entity->__isset("field_image"))
+				$node->set("field_image",$entity->get("field_image")->getValue());
+			if($type=="agenda") {
+				$node->set("field_date",$entity->get("field_date")->getValue());
+			}
 			$node->validate();
 			$node->save();
 		}

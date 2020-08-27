@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * @file
+ * Contains kidiklik_event.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\kidiklik_event\Event\NodeInsertEvent;
+use Drupal\kidiklik_event\Event\NodeUpdateEvent;
+
+/**
+ * Implements hook_help().
+ */
+function kidiklik_event_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the kidiklik_event module.
+    case 'help.page.kidiklik_event':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Kidiklik Event') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+function kidiklik_event_node_insert(Drupal\Core\Entity\EntityInterface $entity) {
+	\Drupal::service('event_dispatcher')->dispatch(NodeInsertEvent::NODE_INSERT, new NodeInsertEvent($entity));
+}
+
+function kidiklik_event_node_update(Drupal\Core\Entity\EntityInterface $entity) {
+	$type=current($entity->type->getValue())["target_id"];
+	if(in_array($type,\Drupal::service("settings")->get("available_content_for_mea"))) {
+		//kint($entity->get("field_date")->getValue());exit;
+		$path=\Drupal::service('path.alias_manager')->getAliasByPath($entity->url());
+		$blocs=$entity->get("field_mise_en_avant")->getValue();
+		foreach($blocs as $bloc) {
+			$node=\Drupal::entityTypeManager()->getStorage("node")->load($bloc["target_id"]);
+			$node->set("field_lien",$path);
+			$node->set("field_adherent",$entity->get("field_adherent")->getValue());
+			$node->set("field_image",$entity->get("field_image")->getValue());
+			if($type=="agenda") {
+				$node->set("field_date",$entity->get("field_date")->getValue());
+			}
+			$node->validate();
+			$node->save();
+		}
+	}
+	//\Drupal::service('event_dispatcher')->dispatch(NodeUpdateEvent::NODE_UPDATE, new NodeUpdateEvent($entity));
+}

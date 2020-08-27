@@ -124,18 +124,20 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 		$tab=[];
 		$tab[""]="Veuillez choisir un client";
 		//$form["field_ville"]["widget"]["#options"]=$tab;
-		if($form["field_ville"]["widget"]["#default_value"]) {
+		
+		// en attente
+		/*if($form["field_ville"]["widget"]["#default_value"]) {
 				foreach($form["field_ville"]["widget"]["#options"] as $key=>&$item) {
 					
 					
 					if($key!=(int)current($form["field_ville"]["widget"]["#default_value"])) unset($form["field_ville"]["widget"]["#options"][$key]);
 				}
 				
-		}else $form["field_ville"]["widget"]["#options"]=$tab;
+		}else $form["field_ville"]["widget"]["#options"]=$tab;*/
 		
 		//$form["save_activite"]=$form["field_activite"]["widget"]["#options"];
 		$tab[""]="Veuillez choisir une activité";
-		$form["field_activite"]["widget"]["#options"]=$tab;
+		//$form["field_activite"]["widget"]["#options"]=$tab;
 		$form["field_activite"]["widget"]["#needs_validation"]=false;
 		$form["field_activite"]["widget"]["#limit_validation_errors"]=[];
 		$form["field_activite"]["#limit_validation_errors"]=[];

@@ -12,7 +12,7 @@ class NodeUpdateSubscriber implements EventSubscriberInterface {
 		exit;
 		/* on récupére le type du contenu */
 		$type=current($entity->type->getValue())["target_id"];
-		if(in_array($type,\Drupal::service("settings")->get("available_content_for_maj"))) {
+		if(in_array($type,\Drupal::service("settings")->get("available_content_for_mea"))) {
 			kint($entity->get("field_mise_en_avant")->getValue());exit;
 		//	$entity->__set("field_lien",\Drupal::service('path.alias_manager')->getAliasByPath($entity->url()));
 			//$entity->save();
