@@ -1,8 +1,0 @@
-entity_type_groups:
-  taxonomy_term:
-    rubriques_activite:
-      basic: basic
-      advanced: advanced
-    rubrique_article:
-      basic: basic
-      advanced: advanced

@@ -60,10 +60,15 @@ function get_term_departement() {
  * modification de formulaire
  */
 function kidiklik_base_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-	
+	//$build["#attached"]["http_header"][]=["X-Robots-Tag","unavailable_after: "];
 }
 
-
+/**
+ * implements hook_ENTITY-TYPE_view() for node
+ */
+/*function kidiklik_base_node_view(array &$build, EntityInterface $node, EntityViewDisplayInterface $display, $view_mode) {
+	
+}*/
 
 /*
  * Modification de la requête sql d'une vue
@@ -117,7 +122,7 @@ function kidiklik_base_views_query_alter(Drupal\views\ViewExecutable $view, Drup
 
 
 	}
-	$view_display=array("page_activites","page_agenda","page_activites_tri","page_pub" ,"page_article","page_clients","page_adherent");
+	$view_display=array("page_activites","page_agenda","page_activites_tri","page_pub" ,"page_article","page_clients","page_adherent","page_reportages","page_maj");
 	
 	if(in_array($view->current_display,$view_display)) {
 		/*$host=explode(".",\Drupal::request()->getHost());

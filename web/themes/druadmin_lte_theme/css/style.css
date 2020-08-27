@@ -52,8 +52,21 @@ a.tabledrag-handle .handle {
     margin-top:20px;
   }
 }
-
-
+#dates .paragraph-type-title {
+	display: none;
+}
+#dates .paragraphs-dropbutton-wrapper {
+	flex-basis: 100%;
+	text-align: right;
+}
+#dates table tbody h4 {
+	font-size: 14px;
+	    padding: 10px;
+        padding-left: 10px;
+    display: block;
+    text-align: left;
+    padding-left: 0;
+}
 .node-agenda-form #dates .paragraphs-subform {
     display: flex;
 }
@@ -75,4 +88,9 @@ a.tabledrag-handle .handle {
 
 #edit-field-mise-en-avant-actions input {
 	text-transform: lowercase;
+}
+
+#node-article-form #field-date-add-more-wrapper .field-add-more-submit,
+#node-article-edit-form #field-date-add-more-wrapper .field-add-more-submit {
+	display: none;
 }

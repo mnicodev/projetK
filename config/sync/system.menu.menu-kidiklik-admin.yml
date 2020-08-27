@@ -1,8 +1,0 @@
-uuid: 2ba89455-e14a-48da-acb6-84de2023b55b
-langcode: fr
-status: true
-dependencies: {  }
-id: menu-kidiklik-admin
-label: 'Menu kidiklik admin'
-description: ''
-locked: false

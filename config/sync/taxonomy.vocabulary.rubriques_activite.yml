@@ -1,8 +1,0 @@
-uuid: 87521485-97e9-4a71-9b1c-5966ee506c1e
-langcode: fr
-status: true
-dependencies: {  }
-name: 'Rubriques activité'
-vid: rubriques_activite
-description: ''
-weight: 0

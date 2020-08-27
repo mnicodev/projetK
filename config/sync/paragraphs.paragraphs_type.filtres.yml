@@ -1,9 +1,0 @@
-uuid: 0492fce2-bdd0-4640-b5ea-074b787a7417
-langcode: fr
-status: true
-dependencies: {  }
-id: filtres
-label: Filtres
-icon_uuid: null
-description: ''
-behavior_plugins: {  }

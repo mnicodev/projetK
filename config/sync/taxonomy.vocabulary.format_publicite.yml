@@ -1,8 +1,0 @@
-uuid: aaf978e3-1954-4cbc-8f78-b2e13790e40a
-langcode: fr
-status: true
-dependencies: {  }
-name: 'Format publicité'
-vid: format_publicite
-description: ''
-weight: 0

@@ -1,0 +1,96 @@
+#logo img{
+  /*max-height: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);*/
+}
+#logo .logo-lg, #logo .logo-mini{
+  position:relative;
+  height:50px;
+}
+
+.login-box .logo-lg > img {
+  max-width: 100%;
+}
+
+@media (max-width: 767px){
+
+  body.skin-black #logo,
+  body.skin-black #logo:hover,
+  body.skin-black-light #logo,
+  body.skin-black-light #logo:hover
+  {
+    background-color:#fff;
+    border-bottom: 1px solid #eee;
+  }
+
+}
+.login-page-header.logo .logo-lg {
+  display: block;
+}
+.login-page-header.logo .logo-mini {
+  display: none;
+}
+
+body .label {
+  color: #333;
+  font-size: 80%;
+}
+
+a.tabledrag-handle .handle {
+  width: 24px;
+  height: 24px;
+}
+
+.box > .box-header > h4{
+  margin:0;
+}
+
+@media (max-width: 991px){
+  .content-header > h1.page-title{
+    margin-top:20px;
+  }
+}
+#dates .paragraph-type-title {
+	display: none;
+}
+#dates .paragraphs-dropbutton-wrapper {
+	flex-basis: 100%;
+	text-align: right;
+}
+#dates table tbody h4 {
+	font-size: 16px;
+	    padding: 10px;
+        padding-left: 10px;
+    display: block;
+    text-align: left;
+    padding-left: 0;
+}
+.node-agenda-form #dates .paragraphs-subform {
+    display: flex;
+}
+.node-agenda-form #dates .paragraphs-subform .field--type-datetime {
+    flex: 1;
+    padding: 10px;
+    padding-top: 0;
+}
+
+.js .views-edit-view .dropbutton-wrapper .dropbutton .dropbutton-action > * {
+    color: #3c8dbc!important;
+}
+
+.view-rubriques-activites {
+	display: flex;
+	flex-direction: column;
+
+}
+
+#edit-field-mise-en-avant-actions input {
+	text-transform: lowercase;
+}
+
+#node-article-form #field-date-add-more-wrapper .field-add-more-submit,
+#node-article-edit-form #field-date-add-more-wrapper .field-add-more-submit {
+	display: none;
+}

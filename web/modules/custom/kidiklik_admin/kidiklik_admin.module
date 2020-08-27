@@ -47,6 +47,8 @@ function kidiklik_admin_theme() {
  */
 function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 	$term_dep=get_term_departement();
+	
+	
 	if($form_id=="node_publicite_form" || $form_id=="node_publicite_edit_form") {
 		$form["#redirect"]="admin/publicites";
 		$form["field_adherent"]["widget"]["#multiple"]=FALSE;
@@ -70,6 +72,8 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 
 	//kint($form['field_partage_departements']);	
 	}
+	
+	
 	if($form_id=="taxonomy_term_rubriques_activite_form") {
 		/* on récupére le paramètre url destination */
 		$arg=\Drupal::request()->query->get("destination");
@@ -103,11 +107,44 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 
 	}
 
-	if($form_id=="node_bloc_mise_en_avant_edit_form" || $form_id=="node_bloc_mise_en_avant_form") {
-
-
+	if($form_id=="node_bloc_de_mise_en_avant_edit_form" || $form_id=="node_bloc_de_mise_en_avant_form") {
+		$form["field_adherent"]["widget"]["#multiple"]=FALSE;
+		
+		$adherents=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"adherent","field_departement"=>$term_dep]);
+		$tab[""]="Veuillez choisir un adhérent";
+		foreach($adherents as $key=>$adherent) {
+			$tab[$key]=$adherent->getTitle();
+		}
+		$form["field_adherent"]["widget"]["#options"]=$tab;
 	}
+	
 	if($form_id=="node_agenda_edit_form" || $form_id=="node_agenda_form") {
+		$adherents=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"adherent","field_departement"=>$term_dep]);
+		
+		$tab=[];
+		$tab[""]="Veuillez choisir un client";
+		//$form["field_ville"]["widget"]["#options"]=$tab;
+		if($form["field_ville"]["widget"]["#default_value"]) {
+				foreach($form["field_ville"]["widget"]["#options"] as $key=>&$item) {
+					
+					
+					if($key!=(int)current($form["field_ville"]["widget"]["#default_value"])) unset($form["field_ville"]["widget"]["#options"][$key]);
+				}
+				
+		}else $form["field_ville"]["widget"]["#options"]=$tab;
+		
+		//$form["save_activite"]=$form["field_activite"]["widget"]["#options"];
+		$tab[""]="Veuillez choisir une activité";
+		$form["field_activite"]["widget"]["#options"]=$tab;
+		$form["field_activite"]["widget"]["#needs_validation"]=false;
+		$form["field_activite"]["widget"]["#limit_validation_errors"]=[];
+		$form["field_activite"]["#limit_validation_errors"]=[];
+		//	kint($form["field_ville"]["widget"]);
+		foreach($adherents as $key=>$adherent) {
+			$tab[$key]=$adherent->getTitle();
+		}
+		$form["field_adherent"]["widget"]["#options"]=$tab;
+		
 		/* le champ est configuré par défaut en multiple valeur, on bloque à une simple valeur */
 		$form["field_adherent"]["widget"]["#multiple"]=FALSE;
 		$form["field_adherent"]["widget"]["#ajax"]=[
@@ -121,48 +158,16 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 			],
 
 		];
+		
+		
 		$form["#attached"]["library"][]="kidiklik_admin/kidiklik_admin.commands";
+		$form["#submit"][]="kidiklik_admin_form_submit";
+		$form["#validate"][]="kidiklik_admin_form_validate";
 		//kint($form);
 
 	}
-	/* on reformate le choix des activités pour ne choisir que des enfants */
-	if($form_id=="node_activite_edit_form" || $form_id=="node_activite_form") {
-		$form["#attached"]["library"][]="kidiklik_admin/kidiklik_admin.commands";
-		//kint($form_state->getValue("field_adherent"));
-		/* le champ est configuré par défaut en multiple valeur, on bloque à une simple valeur */
-		$form["field_adherent"]["widget"]["#multiple"]=FALSE;
-		$form["field_adherent"]["widget"]["#ajax"]=[
-			"callback"=>"getAjaxCoordonnees",
-			"disable-refocus" => FALSE,
-			"event" => "change",
-			"wrapper" =>"coordonnees-adherent",
-			"progress"=>[
-				"type"=>"throbber",
-				"message"=>"Analyse",
-			],
-
-		];
-
-		/* formattage de la balise select avec affichage par catégorie */
-		$rub=$form["field_rubriques_activite"]["widget"]["#options"];
-		$tab=[];
-		$n="";
-		foreach($rub as $k=>$r) {
-			if($k!="_none") {
-				$t=taxonomy_term_load($k);
-				$p=current($t->parent->getValue()[0]);
-				if(!(int)$p) {
-					$n=current($t->name->getValue()[0]);
-				} else {
-					if(current($t->get("field_departement")->getValue())["target_id"]==$term_dep)
-						$tab[$n][$k]=current($t->name->getValue()[0]);
-				}
-			}
-		}
-		$form["field_rubriques_activite"]["widget"]["#options"]=$tab;
-		$form["field_rubriques_activite"]["widget"]["#size"]=1;
-		$form["#redirect"]="admin/activite";
-		
+	
+	if($form_id=="node_article_edit_form" || $form_id=="node_article_form" || $form_id=="node_reportage_edit_form" || $form_id=="node_reportage_form") {
 		$adherents=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"adherent","field_departement"=>$term_dep]);
 		$tab=[];
 		$tab[""]="Veuillez choisir un client";
@@ -171,15 +176,72 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 		}
 		$form["field_adherent"]["widget"]["#options"]=$tab;
 		
-		if($form["field_ville"]["widget"]["#default_value"]) {
-			foreach($form["field_ville"]["widget"]["#options"] as $key=>&$item) {
-				
-				
-				if($key!=(int)current($form["field_ville"]["widget"]["#default_value"])) unset($form["field_ville"]["widget"]["#options"][$key]);
-			}
-			
-		}else $form["field_ville"]["widget"]["#options"]=[];
+		/* le champ est configuré par défaut en multiple valeur, on bloque à une simple valeur */
+		$form["field_adherent"]["widget"]["#multiple"]=FALSE;
 	}
+	
+	
+	/* on reformate le choix des activités pour ne choisir que des enfants */
+	if($form_id=="node_activite_edit_form" || $form_id=="node_activite_form") {
+		$form["#attached"]["library"][]="kidiklik_admin/kidiklik_admin.commands";
+		//kint($form);
+		/* le champ est configuré par défaut en multiple valeur, on bloque à une simple valeur */
+		$form["field_adherent"]["widget"]["#multiple"]=FALSE;
+		$form["field_adherent"]["widget"]["#ajax"]=[
+			"callback"=>"getAjaxCoordonnees",
+			"disable-refocus" => FALSE,
+			"event" => "change",
+			"wrapper" =>"coordonnees-adherent",
+			"progress"=>[
+				"type"=>"throbber",
+				"message"=>"Analyse",
+			],
+
+		];
+//kint($form);
+		/* formattage de la balise select avec affichage par catégorie */
+		if(\Drupal::currentUser()->id()!=1) {
+			$rub=$form["field_rubriques_activite"]["widget"]["#options"];
+			$tab=[];
+			$n="";
+			foreach($rub as $k=>$r) {
+				if($k!="_none") {
+					$t=taxonomy_term_load($k);
+					$p=current($t->parent->getValue()[0]);
+					if(!(int)$p) {
+						$n=current($t->name->getValue()[0]);
+					} else {
+						if(current($t->get("field_departement")->getValue())["target_id"]==$term_dep)
+							$tab[$n][$k]=current($t->name->getValue()[0]);
+					}
+				}
+			}
+			$form["field_rubriques_activite"]["widget"]["#options"]=$tab;
+		
+			$form["field_rubriques_activite"]["widget"]["#size"]=1;
+			$form["#redirect"]="admin/activites";
+			
+			$adherents=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"adherent","field_departement"=>$term_dep]);
+			$tab=[];
+			$tab[""]="Veuillez choisir un client";
+			foreach($adherents as $key=>$adherent) {
+				$tab[$key]=$adherent->getTitle();
+			}
+			$form["field_adherent"]["widget"]["#options"]=$tab;
+			
+			if($form["field_ville"]["widget"]["#default_value"]) {
+				foreach($form["field_ville"]["widget"]["#options"] as $key=>&$item) {
+					
+					
+					if($key!=(int)current($form["field_ville"]["widget"]["#default_value"])) unset($form["field_ville"]["widget"]["#options"][$key]);
+				}
+				
+			}/*else $form["field_ville"]["widget"]["#options"]=[];*/
+		}
+	}
+	
+	
+	
 	if($form_id=="node_adherent_edit_form" || $form_id=="node_adherent_form") {
 		$form["#attached"]["library"][]="kidiklik_admin/kidiklik_admin.commands";
 		/* on va récupérer la liste des clients du département concerné */
@@ -224,25 +286,54 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 				if($key!=(int)current($form["field_ville"]["widget"]["#default_value"])) unset($form["field_ville"]["widget"]["#options"][$key]);
 			}
 			
-		}else $form["field_ville"]["widget"]["#options"]=[];
+		}//else $form["field_ville"]["widget"]["#options"]=[];
 	//	kint($form["field_ville"]);
 
 	}
 	
 	if($form_id=="node_client_edit_form" || $form_id=="node_client_form") {
-//ksm($form);
+		$form["#attached"]["library"][]="kidiklik_admin/kidiklik_admin.commands";
+		/* on met en place la fonctionnalité AJAX */
+		$form["field_code_postal"]["widget"][0]["value"]["#ajax"]=[
+			"callback"=>"getAjaxVille",
+			"disable-refocus" => TRUE,
+			"event" => "blur",
+			
+			"wrapper" =>"edit-field-ville-wrapper",
+			
+			"progress"=>[
+				"type"=>"throbber",
+				"message"=>NULL,
+			],
+
+		];
+		if($form["field_ville"]["widget"]["#default_value"]) {
+			foreach($form["field_ville"]["widget"]["#options"] as $key=>&$item) {
+				
+				
+				if($key!=(int)current($form["field_ville"]["widget"]["#default_value"])) unset($form["field_ville"]["widget"]["#options"][$key]);
+			}
+			
+		}else $form["field_ville"]["widget"]["#options"]=[];
+
 	}
 
-	if($form_id=="node_agenda_edit_form" || $form_id=="node_agenda_form") {
-		$adherents=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"adherent","field_departement"=>$term_dep]);
-		$tab=[];
-		$tab[""]="Veuillez choisir un client";
-		foreach($adherents as $key=>$adherent) {
-			$tab[$key]=$adherent->getTitle();
-		}
-		$form["field_adherent"]["widget"]["#options"]=$tab;
 
-	}
+}
+
+function kidiklik_admin_form_submit(&$form, FormStateInterface $form_state) {
+	//$form["field_activite"]["widget"]["#options"]=$form["save_activite"];
+	//kint($form_state);kint($form);	kint($form["field_activite"]);exit;
+	$form["field_activite"]["#needs_validation"]=false;
+	$form["field_activite"]["widget"]["#needs_validation"]=false;
+	$form["field_activite"]["widget"]["#limit_validation_errors"]=[];
+	$form["field_activite"]["#validated"]=true;
+	
+}
+
+function kidiklik_admin_form_validate($form, FormStateInterface $form_state) {
+	
+	//kint($form["field_activite"]);
 }
 
 function getAjaxVille(array &$form, FormStateInterface $form_state) {
@@ -250,7 +341,7 @@ function getAjaxVille(array &$form, FormStateInterface $form_state) {
 	/* je cherche le term possédant le code postal saisi */
 	$query=\Drupal::entityQuery('taxonomy_term');
 	$query->condition("field_code_postal",$cp); 
-	$ville_id=$query->execute();
+	//$ville_id=$query->execute();
 	//return $form["field_code_postal"];
 	/* on charge tous les termes correspondant à la ville */
 	$villes=Term::loadMultiple($query->execute());//current(\Drupal::entityTypeManager()->getStorage("taxonomy_term")->loadByProperties(["vid"=>"ville","tid"=>$ville_id]));
@@ -283,34 +374,66 @@ function getAjaxCoordonnees(array &$form, FormStateInterface $form_state) {
 	$response = new AjaxResponse();
 	$select_id=current($form_state->getValue("field_adherent"));
 	$adherent=current(\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"adherent","nid"=>$select_id]));
+	/* recherche des activites en fonction de l'adhérent */ 
+	$activites=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"activite","field_adherent"=>$select_id]);
 	if(is_object($adherent)) {
+		
 		/* cette methode fonctionne mais ne semble pas permettre de choisir plus d'une sélection */ 
-		/*$form["field_adresse"]["widget"][0]["value"]["#value"]=current($adherent->get("field_adresse")->getValue());
+		$form["field_adresse"]["widget"][0]["value"]["#value"]=current($adherent->get("field_adresse")->getValue());
 		$form["field_code_postal"]["widget"][0]["value"]["#value"]=current($adherent->get("field_code_postal")->getValue());
 		$form["field_telephone"]["widget"][0]["value"]["#value"]=current($adherent->get("field_telephone")->getValue())["value"];
 		$form["field_email"]["widget"][0]["value"]["#value"]=current($adherent->get("field_email")->getValue());
 		$form["field_lien"]["widget"][0]["value"]["#value"]=current($adherent->get("field_lien")->getValue());
+		$tab[]="Veuillez choisir une activité";
+		foreach($activites as $activite) {
+			
+			$tab[$activite->id()]=$activite->getTitle();
+		}
+		$form["field_activite"]["widget"]["#options"]=$tab;
+		//$form["field_ville"]["widget"][0]["value"]["#value"]=$ville->id();
+		//$form["coordonnee"][]=$form["field_adherent"];
+		$form["coordonnee"]=[
+			"#type"=>"div",
+			"#prefix"=>"<div id='coordonnees-adherent'>",
+		];
 		$form["coordonnee"][]=$form["field_adresse"];
 		$form["coordonnee"][]=$form["field_code_postal"];
 		$form["coordonnee"][]=$form["field_telephone"];
 		$form["coordonnee"][]=$form["field_email"];
 		$form["coordonnee"][]=$form["field_lien"];
-		return $form["coordonnee"];*/
+		$form["coordonnee"][]=$form["field_lieu"];
+		$form["coordonnee"][]=$form["field_activite"];
+		
+		
+		$renderer= \Drupal::service("renderer");
+		$renderedField=$renderer->render($form["coordonnee"]);
+		
+		$response->addCommand(new ReplaceCommand('#coordonnees-adherent', $renderedField));
+		return $response; 
+		//$form["coordonnee"][]=$form["field_ville"];
+		return $form["coordonnee"];
 		
 		/* methode avec un appel JS */
+		$ville=current(\Drupal::entityTypeManager()->getStorage("taxonomy_term")->loadByProperties(["vid"=>"ville","tid"=>current($adherent->get("field_ville")->getValue())["target_id"]]));
 		$test["adresse"]=current($adherent->get("field_adresse")->getValue());
 		$test["code_postal"]=current($adherent->get("field_code_postal")->getValue());
 		$test["telephone"]=current($adherent->get("field_telephone")->getValue());
 		$test["email"]=current($adherent->get("field_email")->getValue());
-		$test["ville"]=current($adherent->get("field_ville")->getValue());
+		$test["ville"]=["id"=>$ville->id(),"name"=>$ville->getName()];//["id"=>current($adherent->get("field_ville")->getValue());
 		$test["lien"]=current($adherent->get("field_lien")->getValue());
+		
+		/* on boucle */
+		foreach($activites as $activite) {
+			$test["activites"][]=["id"=>$activite->id(),"name"=>$activite->getTitle()];
+		}
+		
 	}
 	//return [];
 	
-	kint_require();
+//	kint_require();
 
 	// $debugOut = @Kint::dump($test);	
-	
+	//kint($test);
 	$response->addCommand(new InvokeCommand(NULL, 'getAjaxCoordonnees', [$test]));
 	return $response;
 }
