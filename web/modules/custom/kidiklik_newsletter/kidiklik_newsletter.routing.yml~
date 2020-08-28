@@ -1,0 +1,7 @@
+kidiklik_newsletter.default_form:
+  path: '/admin/newsletters'
+  defaults:
+    _form: '\Drupal\kidiklik_newsletter\Form\DefaultForm'
+    _title: 'Newsletter'
+  requirements:
+    _permission: 'administer content'

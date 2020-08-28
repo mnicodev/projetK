@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains kidiklik_newsletter.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function kidiklik_newsletter_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the kidiklik_newsletter module.
+    case 'help.page.kidiklik_newsletter':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Module permettant la création d&#039;&#039;une newsletter par la méthode kidiklik') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function kidiklik_newsletter_theme() {
+  return [
+    'kidiklik_newsletter' => [
+      'render element' => 'children',
+    ],
+  ];
+}

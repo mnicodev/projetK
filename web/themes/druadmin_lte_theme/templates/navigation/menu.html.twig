@@ -35,7 +35,7 @@
         <li>
       {% endif %}
           <a href="{{ item.url }}">
-            <i class="fa {% if item.icon %}{{ item.icon }}{% else %}fa-circle-o{% endif %}"></i>
+            <i class="fa {% if item.description %}{{ item.description }}{% else %}fa-circle-o{% endif %}"></i>
             <span>{{ item.title }}</span>
             {% if item.below %}
               <i class="fa fa-angle-left pull-right"></i>

@@ -122,7 +122,7 @@ function kidiklik_base_views_query_alter(Drupal\views\ViewExecutable $view, Drup
 
 
 	}
-	$view_display=array("page_activites","page_agenda","page_activites_tri","page_pub" ,"page_article","page_clients","page_adherent","page_reportages","page_maj");
+	$view_display=array("diaporama","page_activites","page_agenda","page_activites_tri","page_pub" ,"page_article","page_clients","page_adherent","page_reportages","page_maj");
 	
 	if(in_array($view->current_display,$view_display)) {
 		/*$host=explode(".",\Drupal::request()->getHost());

@@ -94,3 +94,12 @@ a.tabledrag-handle .handle {
 #node-article-edit-form #field-date-add-more-wrapper .field-add-more-submit {
 	display: none;
 }
+/*
+ul.sidebar-menu a span svg {
+	margin-right: 5px;
+}
+
+ul.sidebar-menu a svg.fa-angle-left {
+	width: 8px;
+}
+*/
