@@ -48,6 +48,16 @@ function kidiklik_admin_theme() {
 function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 	$term_dep=get_term_departement();
 	
+	if($form_id=="node_newsletter_form" || $form_id=="node_newsletter_edit_form") {
+		$images_entete=\Drupal::entityTypeManager()->getStorage("taxonomy_term")->loadByProperties(["vid"=>"entetes_newsletter","field_departement"=>$term_dep]);
+		//kint($image_entete);
+		$tab[]="Choisir une entête";
+		foreach($images_entete as $key=>$item) {
+			$tab[$key]=$item->getName();
+		}
+		$form["field_image_d_entete"]["widget"]["#options"]=$tab;
+		//kint($form);
+	}
 	
 	if($form_id=="node_publicite_form" || $form_id=="node_publicite_edit_form") {
 		$form["#redirect"]="admin/publicites";
@@ -101,10 +111,15 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 		//$form["relations"]["parent"]["#multiple"]=FALSE;
 		$form["relations"]["parent"]["#options"]=$liste;
 		$form["relations"]["parent"]["#default_value"]=$tab[3];
-
+		$form["relations"]["parent"]["#multiple"]=false;
 
 		//kint($form);
 
+
+	}
+	
+	if($form_id=="taxonomy_term_entetes_newsletter_form") {
+		$form["field_departement"]["widget"][0]["target_id"]["#default_value"]=taxonomy_term_load($term_dep);
 	}
 
 	if($form_id=="node_bloc_de_mise_en_avant_edit_form" || $form_id=="node_bloc_de_mise_en_avant_form") {
@@ -397,6 +412,7 @@ function getAjaxCoordonnees(array &$form, FormStateInterface $form_state) {
 		$form["coordonnee"]=[
 			"#type"=>"div",
 			"#prefix"=>"<div id='coordonnees-adherent'>",
+			"#suffix"=>"</div>",
 		];
 		$form["coordonnee"][]=$form["field_adresse"];
 		$form["coordonnee"][]=$form["field_code_postal"];

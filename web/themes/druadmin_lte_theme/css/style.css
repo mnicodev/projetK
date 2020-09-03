@@ -59,7 +59,8 @@ a.tabledrag-handle .handle {
 	flex-basis: 100%;
 	text-align: right;
 }
-#dates table tbody h4 {
+#dates table tbody h4,
+#edit-field-date-envoi-wrapper h4 {
 	font-size: 14px;
 	    padding: 10px;
         padding-left: 10px;
@@ -94,7 +95,7 @@ a.tabledrag-handle .handle {
 #node-article-edit-form #field-date-add-more-wrapper .field-add-more-submit {
 	display: none;
 }
-/*
+
 ul.sidebar-menu a span svg {
 	margin-right: 5px;
 }
@@ -102,4 +103,16 @@ ul.sidebar-menu a span svg {
 ul.sidebar-menu a svg.fa-angle-left {
 	width: 8px;
 }
-*/
+
+.views-ui-view-name h3 {
+			    font-size: 18px;
+}
+.field--name-field-paragraphes {
+	margin-bottom: 20px;
+}
+.field--name-field-paragraphes .dropbutton--multiple li input {
+	margin: 0;
+	background: #fff;
+	color: #000;
+	border: none;
+}

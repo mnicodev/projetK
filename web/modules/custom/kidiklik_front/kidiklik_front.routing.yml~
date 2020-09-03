@@ -1,0 +1,24 @@
+
+kidiklik_front.page_controller_content:
+  path: '/kidiklik.html'
+  defaults:
+    _controller: '\Drupal\kidiklik_front\Controller\PageController::kidiklik'
+    _title: 'Qui est kidiklik ?'
+  requirements:
+    _permission: 'access content'
+
+kidiklik_front.page_controller_content:
+  path: '/kidiklik-recrute.html'
+  defaults:
+    _controller: '\Drupal\kidiklik_front\Controller\PageController::recrute'
+    _title: 'Kidiklik recrute'
+  requirements:
+    _permission: 'access content'
+
+kidiklik_front.page_controller_content:
+  path: '/devenir-annonceur.html'
+  defaults:
+    _controller: '\Drupal\kidiklik_front\Controller\PageController::annonceur'
+    _title: 'Devenir annonceur'
+  requirements:
+    _permission: 'access content'
