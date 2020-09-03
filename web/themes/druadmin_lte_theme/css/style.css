@@ -60,7 +60,9 @@ a.tabledrag-handle .handle {
 	text-align: right;
 }
 #dates table tbody h4,
-#edit-field-date-envoi-wrapper h4 {
+#edit-field-date-envoi-wrapper h4,
+#edit-field-date-debut-wrapper h4, 
+#edit-field-date-fin-wrapper h4 {
 	font-size: 14px;
 	    padding: 10px;
         padding-left: 10px;
@@ -115,4 +117,8 @@ ul.sidebar-menu a svg.fa-angle-left {
 	background: #fff;
 	color: #000;
 	border: none;
+}
+
+#taxonomy-term-rubriques-activite-form #edit-field-departement-wrapper {
+	display: none;
 }

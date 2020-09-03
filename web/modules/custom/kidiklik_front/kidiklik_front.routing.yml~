@@ -22,3 +22,11 @@ kidiklik_front.page_controller_content:
     _title: 'Devenir annonceur'
   requirements:
     _permission: 'access content'
+
+kidiklik_front.page_controller_content:
+  path: '/fan-de-kidiklik.html'
+  defaults:
+    _controller: '\Drupal\kidiklik_front\Controller\PageController::fan'
+    _title: 'Fan de kidiklik'
+  requirements:
+    _permission: 'access content'

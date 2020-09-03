@@ -8,6 +8,30 @@ use Drupal\Core\Controller\ControllerBase;
  * Class PageController.
  */
 class PageController extends ControllerBase {
+	
+
+	
+	
+	/**
+	 * return render node
+	 */
+	public function getContent($page) {
+		kint($page);
+		if($page) {
+			$term_dep=\Drupal::entityTypeManager()->getStorage("taxonomy_term")->load(get_term_departement());
+	  	
+		  	$node=\Drupal::entityTypeManager()
+		  			->getStorage("node")
+		  			->load(current($term_dep->get("field_".$page)->getValue())["target_id"]);
+		  	kint($node);
+		  	$view=node_view($node,'full');
+		  	$output=drupal_render($view);
+		} else $output="";
+		exit;
+		return $output;
+		
+		
+	}
 
   /**
    * Content.
@@ -17,15 +41,10 @@ class PageController extends ControllerBase {
    */
   public function kidiklik() {
   	
-  	$term_dep=get_term_departement();
-  	kint(current(\Drupal::entityTypeManager()->getStorage("taxonomy_term")->load($term_dep)));
-  	$node=\Drupal::entityTypeManager()
-  			->getStorage("node")
-  			->load(current(\Drupal::entityTypeManager()->getStorage("taxonomy_term")->load($term_dep))["target_id"]);
-  	kint($node);
+  	
     return [
       '#type' => 'markup',
-      '#markup' => $this->t('Implement method: content')
+      '#markup' => $this->getContent("qui_est_kidiklik")
     ];
   }
   
@@ -38,7 +57,7 @@ class PageController extends ControllerBase {
   public function recrute() {
     return [
       '#type' => 'markup',
-      '#markup' => $this->t(' recrute Implement method: content')
+      '#markup' => $this->getContent("kidiklik_recrute")
     ];
   }
 
@@ -51,7 +70,7 @@ class PageController extends ControllerBase {
   public function annonceur() {
     return [
       '#type' => 'markup',
-      '#markup' => $this->t('annonceur Implement method: content')
+      '#markup' => $this->getContent("devenir_annonceur")
     ];
   }
   
@@ -64,7 +83,7 @@ class PageController extends ControllerBase {
   public function fan() {
     return [
       '#type' => 'markup',
-      '#markup' => $this->t('fan Implement method: content')
+      '#markup' => $this->getContent("fan_de_kidiklik")
     ];
   }
 }

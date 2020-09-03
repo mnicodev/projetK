@@ -41,6 +41,12 @@ function kidiklik_admin_theme() {
 
 
 
+function kidiklik_admin_preprocess_page_title(&$variables) {
+
+	if(\Drupal::routeMatch()->getParameters()->get("taxonomy_term") && current(\Drupal::routeMatch()->getParameters()->get("taxonomy_term")->get("vid")->getValue())["target_id"]=="departement")
+		$variables["title"]="Modification du contenu des pages";
+}
+
 
 /**
  * modification de formulaire
@@ -83,8 +89,21 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 	//kint($form['field_partage_departements']);	
 	}
 	
+	if($form_id=="taxonomy_term_departement_form") {
+		$user=\Drupal::entityTypeManager()->getStorage("user")->load(\Drupal::currentUser()->id());
+		/* pour l'édition des pages de contenu, on enléve certains champs, non dispensable pour les admin dep */
+		if($user->hasRole("administrateur_de_departement")) {
+			unset($form["relations"]);
+			unset($form["name"]);
+			unset($form["field_nom"]);
+			unset($form["status"]);
+			unset($form["description"]);
+		//kint($form);
+		}
+	}
 	
 	if($form_id=="taxonomy_term_rubriques_activite_form") {
+		
 		/* on récupére le paramètre url destination */
 		$arg=\Drupal::request()->query->get("destination");
 		/* puis l'id de la catégorie mère */
@@ -93,7 +112,7 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 		if(!empty($cat_mere)) 
 			$form["cat_mere"]=[
 				"#type"=>"html_tag",
-				"#tag" => "H1",
+				"#tag" => "H3",
 				"#value" => "Rubrique ".$cat_mere->getName(),
 				"#weight" => 0,
 			];
