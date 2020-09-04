@@ -91,6 +91,7 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 	
 	if($form_id=="taxonomy_term_departement_form") {
 		$user=\Drupal::entityTypeManager()->getStorage("user")->load(\Drupal::currentUser()->id());
+		/* pour l'édition des pages de contenu, on enléve certains champs, non dispensable pour les admin dep */
 		if($user->hasRole("administrateur_de_departement")) {
 			unset($form["relations"]);
 			unset($form["name"]);

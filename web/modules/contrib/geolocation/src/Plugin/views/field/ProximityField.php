@@ -99,6 +99,7 @@ class ProximityField extends NumericField implements ContainerFactoryPluginInter
    *   Center value.
    */
   protected function getCenter() {
+ // kint($this->options["center"]['fixed_value']);exit;
     return $this->locationManager->getLocation($this->options['center'], $this);
   }
 

@@ -171,7 +171,7 @@ function kidiklik_base_views_query_alter(Drupal\views\ViewExecutable $view, Drup
 				$query->where[0]["conditions"][0]["field"]="node__field_rubriques_activite.field_rubriques_activite_target_id in (".implode(",",$liste_enfant).")";
 				//$query->addWhere('', 'taxonomy_idx.tid', $term_id, '=');
 			} /*else $query->addWhere('', 'taxonomy_idx.tid', $term_id, '=');*/
-			kint($query->where);
+			//kint($query->where);
 		}
 
 	}

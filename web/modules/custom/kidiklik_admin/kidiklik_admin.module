@@ -42,8 +42,10 @@ function kidiklik_admin_theme() {
 
 
 function kidiklik_admin_preprocess_page_title(&$variables) {
+	$user=\Drupal::entityTypeManager()->getStorage("user")->load(\Drupal::currentUser()->id());
+		
 
-	if(\Drupal::routeMatch()->getParameters()->get("taxonomy_term") && current(\Drupal::routeMatch()->getParameters()->get("taxonomy_term")->get("vid")->getValue())["target_id"]=="departement")
+	if($user->hasRole("administrateur_de_departement") && \Drupal::routeMatch()->getParameters()->get("taxonomy_term") && current(\Drupal::routeMatch()->getParameters()->get("taxonomy_term")->get("vid")->getValue())["target_id"]=="departement")
 		$variables["title"]="Modification du contenu des pages";
 }
 
