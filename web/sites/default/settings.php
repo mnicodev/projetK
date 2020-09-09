@@ -780,16 +780,6 @@ if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 }
 $config_directories['sync'] = '../config/sync';
 
-$databases['default']['default'] = array (
-  'database' => 'projetK',
-  'username' => 'userbdd',
-  'password' => 'userbdd',
-  'prefix' => '',
-  'host' => '127.0.0.1',
-  'port' => '3306',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-  'driver' => 'mysql',
-);
 
 
 $host=explode(".",$_SERVER["SERVER_NAME"]);
