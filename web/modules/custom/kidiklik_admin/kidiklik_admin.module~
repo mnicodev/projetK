@@ -42,9 +42,14 @@ function kidiklik_admin_theme() {
 
 
 function kidiklik_admin_preprocess_page_title(&$variables) {
+	$user=\Drupal::entityTypeManager()->getStorage("user")->load(\Drupal::currentUser()->id());
+		
 
-	if(\Drupal::routeMatch()->getParameters()->get("taxonomy_term") && current(\Drupal::routeMatch()->getParameters()->get("taxonomy_term")->get("vid")->getValue())["target_id"]=="departement")
+	if($user->hasRole("administrateur_de_departement") && \Drupal::routeMatch()->getParameters()->get("taxonomy_term") && current(\Drupal::routeMatch()->getParameters()->get("taxonomy_term")->get("vid")->getValue())["target_id"]=="departement")
 		$variables["title"]="Modification du contenu des pages";
+}
+
+function kidiklik_admin_entity_operation_alter(array &$operations, \Drupal\Core\Entity\EntityInterface $entity) {
 }
 
 
@@ -53,6 +58,22 @@ function kidiklik_admin_preprocess_page_title(&$variables) {
  */
 function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 	$term_dep=get_term_departement();
+	
+	/*foreach(\Drupal::service("settings")->get("available_content") as $item) {
+		if($form_id=="node_".$item."_form" || $form_id=="node_".$item."_edit_form") {
+			$form["#redirect"]="admin/reportages";
+		}
+	}*/
+	
+	if($form_id=="views_form_content_page_activites") {
+		
+	}
+	
+	if($form_id=="node_partenaire_form" || $form_id=="node_partenaire_edit_form") {
+		
+			$form["#redirect"]="/admin/partenaires";
+			
+	}
 	
 	if($form_id=="node_newsletter_form" || $form_id=="node_newsletter_edit_form") {
 		$images_entete=\Drupal::entityTypeManager()->getStorage("taxonomy_term")->loadByProperties(["vid"=>"entetes_newsletter","field_departement"=>$term_dep]);
@@ -66,7 +87,7 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 	}
 	
 	if($form_id=="node_publicite_form" || $form_id=="node_publicite_edit_form") {
-		$form["#redirect"]="admin/publicites";
+		$form["#redirect"]="/admin/publicites";
 		$form["field_adherent"]["widget"]["#multiple"]=FALSE;
 		$adherents=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"adherent","field_departement"=>$term_dep]);
 		$tab=[];
@@ -214,6 +235,8 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 		
 		/* le champ est configuré par défaut en multiple valeur, on bloque à une simple valeur */
 		$form["field_adherent"]["widget"]["#multiple"]=FALSE;
+		if($form_id=="node_article_edit_form" || $form_id=="node_article_form")	$form["#redirect"]="/admin/articles";
+		else $form["#redirect"]="/admin/reportages";
 	}
 	
 	
@@ -255,7 +278,7 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 			$form["field_rubriques_activite"]["widget"]["#options"]=$tab;
 		
 			$form["field_rubriques_activite"]["widget"]["#size"]=1;
-			$form["#redirect"]="admin/activites";
+			$form["#redirect"]="/admin/activites";
 			
 			$adherents=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"adherent","field_departement"=>$term_dep]);
 			$tab=[];

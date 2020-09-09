@@ -30,3 +30,11 @@ kidiklik_front.page_controller_content_fan:
     _title: 'Fan de kidiklik'
   requirements:
     _permission: 'access content'
+
+kidiklik_front.partenaires_controller_getContent:
+  path: '/_nos-partenaires.html'
+  defaults:
+    _controller: '\Drupal\kidiklik_front\Controller\PartenairesController::getContent'
+    _title: 'Nos partenaires'
+  requirements:
+    _permission: 'access content'

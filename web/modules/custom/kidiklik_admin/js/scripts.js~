@@ -17,6 +17,12 @@ $(function(){
 		 }
 		 
 	}
+	
+	$(".views-field-operations").find(".dropbutton").find(".delete").find("a").each(function () {
+		$(this).addClass("use-ajax");
+		$(this).attr("data-dialog-options","{&quot;width&quot;:400}");
+		$(this).attr("data-dialog-type","modal");
+	})
 
 	$.fn.getAjaxCoordonnees = function(argument) {
 		
@@ -57,8 +63,8 @@ $(function(){
 				for(activite in argument.activites) {
 					o=document.createElement("option");
 					console.log(activite)
-					$(o).val(activite.id);
-					$(o).text(activite.name);
+					$(o).val( argument.activites[activite].id);
+					$(o).text(argument.activites[activite].name);
 					$("#edit-field-activite").append(o)
 					
 				}

@@ -30,7 +30,7 @@ class DefaultForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state,NodeInterface $node=NULL) {
   		/* on récupére les blocs de mise en avant de type newsletter lié à la newsletter */
   		//kint(current($node->get("field_entete")->getValue())["value"]);
-  		
+
   		$mise_en_avant=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"bloc_de_mise_en_avant","field_newsletter"=>$node->id()]);
   		$tab_mae=[];
   		$tab_mae[]="Choisissez un contenu ...";
@@ -203,6 +203,7 @@ class DefaultForm extends FormBase {
       // @TODO: Validate fields.
     }*/
     //kint(\Drupal::request()->request->get("titre_bloc"));exit;
+    
     if(\Drupal::request()->request->get("titre_bloc")) {
     	$node=\Drupal::entityTypeManager()->getStorage("node")->load(\Drupal::routeMatch()->getParameters()->get("node")->id());
     	
@@ -212,7 +213,7 @@ class DefaultForm extends FormBase {
     	//$tb=\Drupal::request()->request->get("pid");
     	foreach($tb as $item) {
     		$paragraph=\Drupal\paragraphs\Entity\Paragraph::load($item["target_id"]);
-    		//kint($item);
+    		//kint($paragraph);
     		if($paragraph) $paragraph->delete();
     	
     	}

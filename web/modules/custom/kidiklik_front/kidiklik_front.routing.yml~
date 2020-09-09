@@ -1,5 +1,5 @@
 
-kidiklik_front.page_controller_content:
+kidiklik_front.page_controller_content_kidiklik:
   path: '/kidiklik.html'
   defaults:
     _controller: '\Drupal\kidiklik_front\Controller\PageController::kidiklik'
@@ -7,7 +7,7 @@ kidiklik_front.page_controller_content:
   requirements:
     _permission: 'access content'
 
-kidiklik_front.page_controller_content:
+kidiklik_front.page_controller_content_recrute:
   path: '/kidiklik-recrute.html'
   defaults:
     _controller: '\Drupal\kidiklik_front\Controller\PageController::recrute'
@@ -15,7 +15,7 @@ kidiklik_front.page_controller_content:
   requirements:
     _permission: 'access content'
 
-kidiklik_front.page_controller_content:
+kidiklik_front.page_controller_content_annonceur:
   path: '/devenir-annonceur.html'
   defaults:
     _controller: '\Drupal\kidiklik_front\Controller\PageController::annonceur'
@@ -23,10 +23,18 @@ kidiklik_front.page_controller_content:
   requirements:
     _permission: 'access content'
 
-kidiklik_front.page_controller_content:
+kidiklik_front.page_controller_content_fan:
   path: '/fan-de-kidiklik.html'
   defaults:
     _controller: '\Drupal\kidiklik_front\Controller\PageController::fan'
     _title: 'Fan de kidiklik'
+  requirements:
+    _permission: 'access content'
+
+kidiklik_front.partenaires_controller_getContent:
+  path: '/nos-partenaires.html'
+  defaults:
+    _controller: '\Drupal\kidiklik_front\Controller\PartenairesController::getContent'
+    _title: 'Nos partenaires'
   requirements:
     _permission: 'access content'

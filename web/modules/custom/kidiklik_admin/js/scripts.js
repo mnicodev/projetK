@@ -17,6 +17,8 @@ $(function(){
 		 }
 		 
 	}
+	
+	
 
 	$.fn.getAjaxCoordonnees = function(argument) {
 		

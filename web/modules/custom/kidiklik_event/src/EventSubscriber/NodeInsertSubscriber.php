@@ -4,6 +4,9 @@ namespace Drupal\kidiklik_event\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Drupal\kidiklik_event\Event\NodeInsertEvent;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\HttpResponse;
+
 
 class NodeInsertSubscriber implements EventSubscriberInterface {
 	public function onNodeInsert(NodeInsertEvent $event) {
@@ -28,6 +31,24 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 			}
 
 		}
+		
+		if($type=="message_contact") {
+			$entity->__set("field_date_envoi",date("Y-m-d"));
+			$entity->save();
+			$mailManager = \Drupal::service('plugin.manager.mail');
+			 $module = ‘kidiklik_event’;
+			 $key = 'create_message';
+			 $to = current($term->get("field_e_mail")->getValue())["value"];
+			 $params['message'] = $entity->get("field_votre_question")->value;
+			 $params['node_title'] = $entity->label();
+			 $langcode = "fr";
+			 $send = true;
+			//kint($entity->get("field_votre_question")->value);exit;
+			 $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+			 if($result['result'] !== true) 	drupal_set_message("Un probléme d'envoi est survenu.","error");
+			 else	drupal_set_message("Votre message a bien été envoyé");
+		}
+		
 	}
 
 	public static function getSubscribedEvents() {

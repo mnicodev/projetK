@@ -8,3 +8,8 @@ services:
         class: Drupal\kidiklik_event\EventSubscriber\UserSubscriber
         tags:
             - { name: 'event_subscriber' }
+
+    kidiklik_event.init:
+        class: Drupal\kidiklik_event\EventSubscriber\InitSubscriber
+        tags:
+            - { name: 'event_subscriber' }

@@ -718,13 +718,14 @@ $settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
  *
  * For example:
  * @code
- * $settings['trusted_host_patterns'] = [
- *   '^example\.com$',
- *   '^.+\.example\.com$',
- *   '^example\.org$',
- *   '^.+\.example\.org$',
- * ];
- * @endcode
+ */
+  $settings['trusted_host_patterns'] = [
+    '^kidiklik\.dvm$',
+    '^kidiklik\.fr$',
+    '^.+\.kidiklik\.fr$',
+    '^.+\.kidiklik\.dvm$',
+  ];
+ /* @endcode
  * will allow the site to run off of all variants of example.com and
  * example.org, with all subdomains included.
  */
@@ -806,6 +807,8 @@ $settings["available_content"]=[
 	"bloc_de_mise_en_avant",
 	"newsletter",
 	"page",
+	"partenaire",
+	"message_contact",
 ];
 $settings["available_content_for_mea"]=[
 	"activite",

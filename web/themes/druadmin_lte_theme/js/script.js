@@ -1,12 +1,29 @@
 $ = jQuery;
 
 $(function(){
+	$(".sidebar-toggle").click(function () {
+		/*console.log($(".sidebar-menu").find("li.prem").find("i.fa-circle-o").length)
+		if($(".sidebar-menu").find("li.prem").find("i.fa-circle-o").length) 
+			$(".sidebar-menu").find("li.prem").find("i.fa-circle-o").remove();
+		else 
+			$(".sidebar-menu").find("li.prem").append("<i class='fa fa-circle-o'></i>");*/
+	})
 	
+	$(".sidebar-menu").find("li").each(function () {
+		icone=$(this).find("a").find("span").find("i").attr("class");
+		/*if($(this).find("a").find("i").hasClass("fa-circle-o"))
+			$(this).find("a").find("i.fa-circle-o").attr("class",icone);*/
+	})
 
 	$('ol.breadcrumb li').each(function(index, value){
 		if( $.trim($(value).html()).length == 0 )
 			$(value).remove();
 	});
 
+    /*$(".views-field-operations").find(".dropbutton").find(".delete").find("a").each(function () {
+		$(this).addClass("use-ajax");
+		$(this).attr("data-dialog-options","{&quot;width&quot;:400}");
+		$(this).attr("data-dialog-type","modal");
+	})*/
 	
 })
