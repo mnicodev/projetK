@@ -24,7 +24,7 @@ class PageController extends ControllerBase {
 		  	$node=\Drupal::entityTypeManager()
 		  			->getStorage("node")
 		  			->load(current($term_dep->get("field_".$page)->getValue())["target_id"]);
-		  	//kint($node);
+		  	
 		  	if(is_object($node)) {
 		  		$view=node_view($node,'full');
 		  		$output=drupal_render($view);

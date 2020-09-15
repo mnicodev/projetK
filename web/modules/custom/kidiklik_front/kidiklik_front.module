@@ -69,6 +69,7 @@ function kidiklik_front_validate_contact_form($form, FormStateInterface $form_st
 }
 
 
+
 /*
  * Modification de la requête sql d'une vue
  */

@@ -34,7 +34,7 @@
       {% else %}
         <li>
       {% endif %}
-          <a href="{{ item.url }}">
+          <a href="{{ item.url }}{% if item.parent %}?parent={{ item.parent }}{% endif %}">
             <i class="fa {% if item.icon %}{{ item.icon }}{% else %}fa-circle-o{% endif %}"></i>
             <span>{{ item.title|striptags }}</span>
             {% if item.below %}

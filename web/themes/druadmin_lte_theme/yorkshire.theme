@@ -45,17 +45,22 @@ function yorkshire_preprocess_menu(&$variables) {
       $icons[$icon_setting[$i][0]] = $icon_setting[$i][1];
     }
   }
+  //$session=\Drupal::request()->getSession();
+		  	
+		  	
   foreach ($variables['items'] as $id => $item){
   	
     $title = (string)$item['title'];
 	$url="";
     if($item["below"]) {
+		
     	//$url=$item["url"]->toString();
     
     	foreach($item["below"] as $k=>$below) {
     
     		if($route==$below["url"]->toString()) {
     			$variables['items'][$id]["below"][$k]["active"]=1;
+    			$variables['items'][$id]["below"][$k]["parent"]=$id+1;
     			$variables['items'][$id]['active']=1;
     
     		}
