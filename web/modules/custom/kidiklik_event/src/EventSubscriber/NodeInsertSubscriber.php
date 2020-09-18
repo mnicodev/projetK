@@ -49,6 +49,17 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 			 else	drupal_set_message("Votre message a bien été envoyé");
 		}
 		
+		if($type=="activite" || $type=="agenda" || $type=="article") {
+			
+			$adherent=\Drupal::entityTypeManager()
+				->getStorage("node")
+				->load(current($entity->get("field_adherent")->getValue())["target_id"]);
+			$adherent->__set("field_activites",$entity);
+			$adherent->save();
+			
+			
+		}
+		
 	}
 
 	public static function getSubscribedEvents() {

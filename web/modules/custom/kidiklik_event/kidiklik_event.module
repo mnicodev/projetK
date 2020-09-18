@@ -48,5 +48,8 @@ function kidiklik_event_node_update(Drupal\Core\Entity\EntityInterface $entity) 
 			$node->save();
 		}
 	}
+	if($type=="agenda") {
+		//kint($entity);exit;
+	}
 	//\Drupal::service('event_dispatcher')->dispatch(NodeUpdateEvent::NODE_UPDATE, new NodeUpdateEvent($entity));
 }

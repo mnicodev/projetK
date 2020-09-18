@@ -7,6 +7,10 @@ $(function(){
 	})
 	$(".node--type-activite").find("#edit-field-date-wrapper").find(".paragraphs-dropbutton-wrapper").remove();
 	
+	if($(".dropbutton-widget").length) {
+		
+	}
+	
 	$.fn.getAjaxVille = function(argument) {
 		 console.log(argument);
 		 $("#edit-field-ville").html("")
