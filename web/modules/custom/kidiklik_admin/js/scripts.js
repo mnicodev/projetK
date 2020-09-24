@@ -11,6 +11,37 @@ $(function(){
 		
 	}
 	
+	/* fonctionnalités adhérent */
+	if($("#node-adherent-edit-form").length) {
+		
+		
+		
+		$(".action-filtre").find("input").click(function(e) {
+			e.preventDefault();
+			adherent_id=$(this).attr("data-adherent-id");
+			type=$(this).attr("data-type");
+			url=$(this).attr("data-url");
+			
+			date_deb=$(this).parent().parent().find(".date-deb").find("input").val();
+			date_fin=$(this).parent().parent().find(".date-fin").find("input").val();
+			
+			
+			$.ajax({
+				url: "/admin/adherent/contenu/"+type+"/"+adherent_id+"?date_deb="+date_deb+"&date_fin="+date_fin+"&url"+url,
+				
+				success: function(result) {
+					console.log(result);
+					$("#"+type+"_liste").html(result);
+				}
+			});
+			
+		});
+	}
+	
+	/* fin */
+	
+	
+	
 	$.fn.getAjaxVille = function(argument) {
 		 console.log(argument);
 		 $("#edit-field-ville").html("")
@@ -21,6 +52,8 @@ $(function(){
 		 }
 		 
 	}
+	
+	
 	
 	
 

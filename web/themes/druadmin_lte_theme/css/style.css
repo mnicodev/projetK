@@ -13,6 +13,26 @@
 .login-box .logo-lg > img {
   max-width: 100%;
 }
+.view-content-adherent caption {
+	color: #000;
+	font-size: 18px;
+}
+a.status, a.status:hover  {
+	width: 20px;
+	height: 20px;
+	color: transparent;
+	text-indent: -9999px;
+	display: block;
+}
+ 
+a.publie {
+	background: red;
+}
+a.depublie {
+
+
+	background: green;
+}
 
 @media (max-width: 767px){
 

@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\HttpResponse;
 
 class NodeInsertSubscriber implements EventSubscriberInterface {
 	public function onNodeInsert(NodeInsertEvent $event) {
+		global $_POST;
 	    /* on récupére le département de la config */
 		$dep=\Drupal::service("settings")->get("dep");
 		
@@ -49,7 +50,7 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 			 else	drupal_set_message("Votre message a bien été envoyé");
 		}
 		
-		if($type=="activite" || $type=="agenda" || $type=="article") {
+		if($type=="publicite" || $type=="activite" || $type=="agenda" || $type=="article" || $type=="reportage" || $type=="reportage" || $type=="bloc_de_mise_en_avant") {
 			
 			$adherent=\Drupal::entityTypeManager()
 				->getStorage("node")
@@ -58,6 +59,11 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 			$adherent->save();
 			
 			
+		}
+		
+		if($type=="agenda") {
+			kint($_POST);
+			kint(\Drupal::request());exit;
 		}
 		
 	}

@@ -22,6 +22,8 @@
         "drupal-composer/drupal-scaffold": "^2.5",
         "drupal/backup_migrate": "^4.1",
         "drupal/better_exposed_filters": "^5.0@beta",
+        "drupal/block_field": "^1.0@RC",
+        "drupal/ckwordcount": "^1.1",
         "drupal/condition_field": "^2.0",
         "drupal/conditional_fields": "^1.0@alpha",
         "drupal/console": "^1.9",

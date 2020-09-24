@@ -140,7 +140,7 @@ function kidiklik_base_views_query_alter(Drupal\views\ViewExecutable $view, Drup
 			->getStorage("taxonomy_term")
 			->loadByProperties(['name'=>$dep]));
 
-		$pid=current($query->where[0]["conditions"][0]["value"]);
+		if(isset($query->where[0])) $pid=current($query->where[0]["conditions"][0]["value"]);
 		$liste_enfant=[];
 		if(!empty($pid)) {
 			$rubrique_term_enfant=\Drupal::entityTypeManager()

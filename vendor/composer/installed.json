@@ -2645,6 +2645,38 @@
         ]
     },
     {
+        "name": "drupal-ckeditor-libraries-group/notification",
+        "version": "4.14.1",
+        "version_normalized": "4.14.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/drupal-ckeditor-libraries-group/notification.git",
+            "reference": "ceb255dc591a2197428765f28265cf05560fc6b5"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/drupal-ckeditor-libraries-group/notification/zipball/ceb255dc591a2197428765f28265cf05560fc6b5",
+            "reference": "ceb255dc591a2197428765f28265cf05560fc6b5",
+            "shasum": ""
+        },
+        "time": "2020-06-16T10:05:52+00:00",
+        "type": "drupal-library",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-2.0-or-later",
+            "LGPL-2.1-or-later",
+            "MPL-1.1"
+        ],
+        "description": "CKEditor 4 notification plugin",
+        "homepage": "https://ckeditor.com/cke4/addon/notification",
+        "keywords": [
+            "CKEditor",
+            "notification",
+            "plugin"
+        ]
+    },
+    {
         "name": "drupal-composer/drupal-scaffold",
         "version": "2.6.1",
         "version_normalized": "2.6.1.0",
@@ -2688,7 +2720,8 @@
         "license": [
             "GPL-2.0-or-later"
         ],
-        "description": "Composer Plugin for updating the Drupal scaffold files when using drupal/core"
+        "description": "Composer Plugin for updating the Drupal scaffold files when using drupal/core",
+        "abandoned": "drupal / core-composer-scaffold"
     },
     {
         "name": "drupal/backup_migrate",
@@ -2821,6 +2854,129 @@
         "support": {
             "source": "https://git.drupalcode.org/project/better_exposed_filters",
             "issues": "https://www.drupal.org/project/issues/better_exposed_filters"
+        }
+    },
+    {
+        "name": "drupal/block_field",
+        "version": "1.0.0-rc1",
+        "version_normalized": "1.0.0.0-RC1",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/block_field.git",
+            "reference": "8.x-1.0-rc1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/block_field-8.x-1.0-rc1.zip",
+            "reference": "8.x-1.0-rc1",
+            "shasum": "a366cb012ece9987404168a4570c79f701e7819a"
+        },
+        "require": {
+            "drupal/core": "^8.7.7 || ^9"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "drupal": {
+                "version": "8.x-1.0-rc1",
+                "datestamp": "1588279781",
+                "security-coverage": {
+                    "status": "not-covered",
+                    "message": "RC releases are not covered by Drupal security advisories."
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "Berdir",
+                "homepage": "https://www.drupal.org/user/214652"
+            },
+            {
+                "name": "acbramley",
+                "homepage": "https://www.drupal.org/user/1036766"
+            },
+            {
+                "name": "fenstrat",
+                "homepage": "https://www.drupal.org/user/362649"
+            },
+            {
+                "name": "jrockowitz",
+                "homepage": "https://www.drupal.org/user/371407"
+            },
+            {
+                "name": "michaellander",
+                "homepage": "https://www.drupal.org/user/636494"
+            }
+        ],
+        "description": "Provides a field that allows a content entity to create and configure custom block instances.",
+        "homepage": "https://www.drupal.org/project/block_field",
+        "support": {
+            "source": "https://git.drupalcode.org/project/block_field"
+        }
+    },
+    {
+        "name": "drupal/ckwordcount",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/ckwordcount.git",
+            "reference": "8.x-1.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/ckwordcount-8.x-1.1.zip",
+            "reference": "8.x-1.1",
+            "shasum": "4219b26c4750131bea905ab7793ab9b0600b268f"
+        },
+        "require": {
+            "drupal/core": "^8 || ^9",
+            "drupal/notification": "^1.0",
+            "w8tcha/ckeditor-wordcount-plugin": "^1.17"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "drupal": {
+                "version": "8.x-1.1",
+                "datestamp": "1593802864",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Kevin Quillen (kevinquillen)",
+                "homepage": "https://www.drupal.org/u/kevinquillen",
+                "role": "Maintainer"
+            },
+            {
+                "name": "kevinquillen",
+                "homepage": "https://www.drupal.org/user/317279"
+            },
+            {
+                "name": "szloredan",
+                "homepage": "https://www.drupal.org/user/3531611"
+            }
+        ],
+        "description": "Adds the ability to count words and/or characters to CKEditor.",
+        "homepage": "http://drupal.org/project/ckwordcount",
+        "keywords": [
+            "Drupal"
+        ],
+        "support": {
+            "source": "http://cgit.drupalcode.org/ckwordcount",
+            "issues": "http://drupal.org/project/issues/ckwordcount"
         }
     },
     {
@@ -5690,6 +5846,66 @@
             "source": "https://git.drupalcode.org/project/metatag",
             "issues": "https://www.drupal.org/project/issues/metatag",
             "docs": "https://www.drupal.org/docs/8/modules/metatag"
+        }
+    },
+    {
+        "name": "drupal/notification",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/notification.git",
+            "reference": "8.x-1.1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/notification-8.x-1.1.zip",
+            "reference": "8.x-1.1",
+            "shasum": "b245432ad8d29f1992ed8f887b8b2042941bb18e"
+        },
+        "require": {
+            "drupal-ckeditor-libraries-group/notification": "^4.5.11",
+            "drupal/core": "^8 || ^9"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "drupal": {
+                "version": "8.x-1.1",
+                "datestamp": "1593799207",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Kevin Quillen (kevinquillen)",
+                "homepage": "https://www.drupal.org/u/kevinquillen",
+                "role": "Maintainer"
+            },
+            {
+                "name": "kevinquillen",
+                "homepage": "https://www.drupal.org/user/317279"
+            },
+            {
+                "name": "szloredan",
+                "homepage": "https://www.drupal.org/user/3531611"
+            }
+        ],
+        "description": "Adds the Notification plugin to CKEditor.",
+        "homepage": "http://drupal.org/project/notification",
+        "keywords": [
+            "Drupal"
+        ],
+        "support": {
+            "source": "http://cgit.drupalcode.org/notification",
+            "issues": "http://drupal.org/project/issues/notification"
         }
     },
     {
@@ -12620,6 +12836,46 @@
             "dotenv",
             "env",
             "environment"
+        ]
+    },
+    {
+        "name": "w8tcha/ckeditor-wordcount-plugin",
+        "version": "v1.17.6",
+        "version_normalized": "1.17.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/w8tcha/CKEditor-WordCount-Plugin.git",
+            "reference": "f23cd04b20b11e112027be4024a2d6f585fd3c53"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/w8tcha/CKEditor-WordCount-Plugin/zipball/f23cd04b20b11e112027be4024a2d6f585fd3c53",
+            "reference": "f23cd04b20b11e112027be4024a2d6f585fd3c53",
+            "shasum": ""
+        },
+        "time": "2019-05-30T05:47:04+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "w8tcha",
+                "homepage": "https://github.com/w8tcha"
+            }
+        ],
+        "description": "WordCount Plugin for CKEditor Editor",
+        "homepage": "http://w8tcha.github.com/CKEditor-WordCount-Plugin/",
+        "keywords": [
+            "CKEditor",
+            "editor",
+            "html",
+            "javascript",
+            "richtext",
+            "text",
+            "wysiwyg"
         ]
     },
     {
