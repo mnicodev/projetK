@@ -17,7 +17,7 @@ kidiklik_admin.content_controller_action:
 
 
 kidiklik_admin.adherent.page_controller:
-  path: '/_admin/adherent/{adherent_id}'
+  path: '/admin/adherent/{adherent_id}'
   defaults:
     _controller: '\Drupal\kidiklik_admin\Controller\AdherentController::page'
   requirements:

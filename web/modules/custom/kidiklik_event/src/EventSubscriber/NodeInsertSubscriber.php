@@ -50,7 +50,7 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 			 else	drupal_set_message("Votre message a bien été envoyé");
 		}
 		
-		if($type=="publicite" || $type=="activite" || $type=="agenda" || $type=="article" || $type=="reportage" || $type=="reportage" || $type=="bloc_de_mise_en_avant") {
+		if($type=="publicite" || $type=="activite" || $type=="agenda" || $type=="article" || $type=="reportage" || $type=="reportage" /*|| $type=="bloc_de_mise_en_avant"*/) {
 			
 			$adherent=\Drupal::entityTypeManager()
 				->getStorage("node")
@@ -61,9 +61,25 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 			
 		}
 		
-		if($type=="agenda") {
-			kint($_POST);
-			kint(\Drupal::request());exit;
+		if($type=="client" || $type=="adherent" || $type=="activite"|| $type=="agenda") {
+			$ville=\Drupal::entityTypeManager()
+			->getStorage("taxonomy_term")
+			->load($entity->get("field_ville_save")->value);
+			$entity->__set("field_ville",$ville);
+			$entity->save();
+		}
+		
+		if($type=="bloc_de_mise_en_avant") {
+			
+			$adherent=\Drupal::entityTypeManager()
+				->getStorage("node")
+				->load(current($entity->get("field_adherent_cache")->getValue())["value"]);
+			//kint($entity);kint($adherent);exit;
+			$adherent->__set("field_activites",$entity);
+			$adherent->save();
+			
+			$entity->__set("field_adherent",$adherent);
+			$entity->save();
 		}
 		
 	}

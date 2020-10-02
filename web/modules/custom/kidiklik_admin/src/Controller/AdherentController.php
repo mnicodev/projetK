@@ -47,15 +47,31 @@ class AdherentController extends ControllerBase {
    * @Return response
    */
   public function page($adherent_id) {
+	  $adherent=Node::load($adherent_id);
 	 /* $response=new Response();
 	  $response->setContent("Détails de l'adhérent ");*/
-	  $v=Views::getView("content_adherent");
-	  $v->setDisplay("contenus_adherent");
-	 // $v->setArguments([$adherent_id]);
+	  $bloc="";
+	  $form["date_deb"]=[
+		"#type"=>"select",
+		"#title"=>"Date début",
+		"#options"=>["test"],
+		
+	  ];
+	  
+		
+		$form="<div id='field-date-deb-wrapper'>
+			<input type='date' name='date-debut'>
+		</div>";
+	/*  $v=Views::getView("content_adherent");
+	  $v->setDisplay("activites");
+	
 	  $v->execute();
 	  $bloc=drupal_render($v->render());
+	  $bloc=str_replace("[current-page:url]",\Drupal::request()->getPathInfo()."?destination=/admin/adherents&adherent_id=".$adherent_id,$bloc);*/
+	  
 	  return [
-		"#markup"=>"Détails de l'adhérent ".$bloc,
+		"#theme"=>"adherent_content",
+		"#adherent"=>$adherent->getTitle(),
 	  ];
   }
 

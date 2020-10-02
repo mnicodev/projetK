@@ -39,11 +39,68 @@ $(function(){
 	}
 	
 	/* fin */
+	if($("#edit-field-activite-wrapper").length)
+		$("#edit-field-activite-wrapper").find("select").change(function() {
+			$("#edit-field-activite-save-wrapper").find("input").val($(this).val());
+		});
+	if($("#edit-field-activite").length)
+		$("#edit-field-activite").change(function() {
+			$("#edit-field-activite-save-wrapper").find("input").val($(this).val());
+		});
+	
+	if($("#edit-field-ville").length)
+		$("#edit-field-ville").find("select").change(function() {
+			$("#edit-field-ville-save-wrapper").find("input").val($(this).val());
+		});
+
+	Drupal.behaviors.activites_agenda = {
+		attach: function (context, settings) {
+			/*$("#edit-field-mise-en-avant-wrapper").find("input").click(function(e) {
+				alert("ok");
+				e.preventDefault();
+				if(!$("#edit-field-adherent-wrapper").find("select").val()) alert("Veuillez sélectionner un adhérent");
+			});*/
+			if($("#edit-field-ville").length)
+				$("#edit-field-ville").find("select").change(function() {
+					$("#edit-field-ville-save-wrapper").find("input").val($(this).val());
+				});
+		
+			$("#bloc-ville").find("select").change(function() {
+				$("#edit-field-ville-save-wrapper").find("input").val($(this).val());
+			});
+			
+			$("#activites").change(function() {
+				console.log($(this).val());
+				$("#edit-field-activite-save-wrapper").find("input").val($(this).val());
+			});
+			
+			$(".field--name-field-type").find("select").change(function() {
+				
+				$(".field--name-field-newsletter").hide();
+				if($(this).val()==2) $(".field--name-field-newsletter").show();
+				else $(".field--name-field-newsletter").find("select").val("");
+			});
+			
+			if($(".field--name-field-newsletter").find("select").val()=="_none")
+				$(".field--name-field-newsletter").hide();
+				
+			if($("#edit-field-adherent-wrapper").find("select").val()) {
+				$(".field--name-field-adherent-cache").find("input").val($("#edit-field-adherent-wrapper").find("select").val());
+			} 
+			
+			$("#edit-field-adherent-wrapper").find("select").change(function() {
+				$(".field--name-field-adherent-cache").find("input").val($(this).val());
+				
+			});
+		}
+	}
 	
 	
 	
 	$.fn.getAjaxVille = function(argument) {
 		 console.log(argument);
+		 //ville=document.createElement("select");
+		 
 		 $("#edit-field-ville").html("")
 		 $("#edit-field-ville").append("<option value=''></option>");
 //$("#edit-field-ville-wrapper").html(argument);
@@ -53,7 +110,20 @@ $(function(){
 		 
 	}
 	
-	
+	$.fn.getAjaxVille2 = function(argument) {
+		 console.log(argument);
+		 $("#bloc-ville").removeClass("form-select");
+		 ville=document.createElement("select");
+		 $(ville).attr("class","form-select form-control");	 
+		 $(ville).append("<option value=''></option>");
+
+		 for(item in argument) {
+		 	$(ville).append("<option value='"+argument[item].key+"'>"+argument[item].val+"</option>");
+		 }
+		 
+		 $("#bloc-ville").append(ville);
+		 
+	}
 	
 	
 
