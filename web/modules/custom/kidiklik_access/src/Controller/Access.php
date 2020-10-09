@@ -12,9 +12,10 @@ class Access {
    *
    * @param \Drupal\Core\Session\AccountInterface $account
    */
-  public function newsletterAccess(AccountInterface $account) {
+  public function adminAccess(AccountInterface $account) {
   	$user=User::load($account->id());
   	
+  	if($user->id()==1) return AccessResult::allowed();
     if ($user->hasRole("administrateur_de_departement") || $user->hasRole("administrator") ) {
       return AccessResult::allowed();
     }

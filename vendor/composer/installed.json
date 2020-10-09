@@ -2857,6 +2857,59 @@
         }
     },
     {
+        "name": "drupal/blocache",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/blocache.git",
+            "reference": "8.x-1.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/blocache-8.x-1.0.zip",
+            "reference": "8.x-1.0",
+            "shasum": "693ea59e4c546d24299fa272049a46153c763f2d"
+        },
+        "require": {
+            "drupal/core": "^8"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "drupal": {
+                "version": "8.x-1.0",
+                "datestamp": "1581364527",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Douglas da Rosa Pilar",
+                "homepage": "https://www.drupal.org/u/douglasrpilar",
+                "role": "Maintainer"
+            },
+            {
+                "name": "MMDA",
+                "homepage": "https://www.mmda.com.br",
+                "role": "Co-maintainer"
+            }
+        ],
+        "description": "Allows users to individually configure the cache of each block.",
+        "homepage": "https://www.drupal.org/project/blocache",
+        "support": {
+            "source": "https://git.drupalcode.org/project/blocache",
+            "issues": "https://drupal.org/project/issues/blocache"
+        }
+    },
+    {
         "name": "drupal/block_field",
         "version": "1.0.0-rc1",
         "version_normalized": "1.0.0.0-RC1",
@@ -2916,6 +2969,52 @@
         "homepage": "https://www.drupal.org/project/block_field",
         "support": {
             "source": "https://git.drupalcode.org/project/block_field"
+        }
+    },
+    {
+        "name": "drupal/cache_control_override",
+        "version": "1.0.0-alpha2",
+        "version_normalized": "1.0.0.0-alpha2",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/cache_control_override.git",
+            "reference": "8.x-1.0-alpha2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/cache_control_override-8.x-1.0-alpha2.zip",
+            "reference": "8.x-1.0-alpha2",
+            "shasum": "24f97b80eb3d335256eabd2e5e71886526a2385a"
+        },
+        "require": {
+            "drupal/core": "^8 || ^9"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "drupal": {
+                "version": "8.x-1.0-alpha2",
+                "datestamp": "1597733165",
+                "security-coverage": {
+                    "status": "not-covered",
+                    "message": "Project has not opted into security advisory coverage!"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "asgorobets",
+                "homepage": "https://www.drupal.org/user/1399950"
+            }
+        ],
+        "description": "Override page Cache-Control header based on bubbled cacheability metadata.",
+        "homepage": "https://www.drupal.org/project/cache_control_override",
+        "support": {
+            "source": "https://git.drupalcode.org/project/cache_control_override"
         }
     },
     {
@@ -6614,6 +6713,52 @@
         "support": {
             "source": "https://git.drupalcode.org/project/viewfield",
             "issues": "https://www.drupal.org/project/issues/viewfield"
+        }
+    },
+    {
+        "name": "drupal/views_custom_cache_tag",
+        "version": "1.2.0",
+        "version_normalized": "1.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/views_custom_cache_tag.git",
+            "reference": "8.x-1.2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/views_custom_cache_tag-8.x-1.2.zip",
+            "reference": "8.x-1.2",
+            "shasum": "65f4bd588909ba43885f2c09056fda971f64a71b"
+        },
+        "require": {
+            "drupal/core": "^8.7.7 || ^9"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "drupal": {
+                "version": "8.x-1.2",
+                "datestamp": "1579956784",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "Berdir",
+                "homepage": "https://www.drupal.org/user/214652"
+            }
+        ],
+        "description": "Add views custom cache tag.",
+        "homepage": "https://www.drupal.org/project/views_custom_cache_tag",
+        "support": {
+            "source": "https://git.drupalcode.org/project/views_custom_cache_tag"
         }
     },
     {

@@ -192,3 +192,25 @@ ul.sidebar-menu a svg.fa-angle-left {
     padding: 5px;
     margin: 0;
 }
+.adherent-contents {
+	padding: 20px;
+	border: 1px solid lightgray;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	
+}
+.adherent-contents:hover {
+	border: 1px solid #3c8dbc;
+}
+.adherent-contents th.views-field-title {
+	width: 100%;
+}
+.adherent-contents th {
+	white-space: nowrap;
+}
+.filtre-content-adherent {
+	margin-bottom: 30px;
+}
+.filtre-content-adherent  {
+	padding: 40px;
+}

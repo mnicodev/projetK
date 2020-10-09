@@ -35,6 +35,9 @@ function kidiklik_front_theme() {
   ];
 }
 
+
+
+
 function kidiklik_front_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 	if($form_id=="webform_submission_contact_add_form") {
 		
@@ -90,4 +93,7 @@ function kidiklik_front_views_query_alter(Drupal\views\ViewExecutable $view, Dru
 	if($view->current_display=="recherche_activites") {
 
 	}
+
 }
+
+

@@ -5,7 +5,7 @@ kidiklik_admin.content_controller_redirect:
     _controller: '\Drupal\kidiklik_admin\Controller\ContentController::pages'
     _title: 'Edition du contenu des pages'
   requirements:
-    _custom_access: '\Drupal\kidiklik_access\Controller\Access::newsletterAccess'
+    _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
 
 
 kidiklik_admin.content_controller_action:
@@ -13,7 +13,7 @@ kidiklik_admin.content_controller_action:
   defaults:
     _controller: '\Drupal\kidiklik_admin\Controller\ContentController::action'
   requirements:
-    _custom_access: '\Drupal\kidiklik_access\Controller\Access::newsletterAccess'
+    _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
 
 
 kidiklik_admin.adherent.page_controller:
@@ -21,5 +21,5 @@ kidiklik_admin.adherent.page_controller:
   defaults:
     _controller: '\Drupal\kidiklik_admin\Controller\AdherentController::page'
   requirements:
-    _custom_access: '\Drupal\kidiklik_access\Controller\Access::newsletterAccess'
+    _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
 

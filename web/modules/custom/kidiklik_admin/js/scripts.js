@@ -1,4 +1,4 @@
-
+var href="";
 
 $(function(){
 	$("#edit-field-ville").find("option").each(function () {
@@ -8,6 +8,20 @@ $(function(){
 	$(".node--type-activite").find("#edit-field-date-wrapper").find(".paragraphs-dropbutton-wrapper").remove();
 	
 	if($(".dropbutton-widget").length) {
+		
+	}
+	
+	
+	if($("#node-newsletter-edit-form").length) {
+		$(".horizontal-tabs-list").find("li a").click(function(e) {
+			e.preventDefault();
+			if(href=="") href=$("#node-newsletter-edit-form").attr("action");
+			
+			$("#node-newsletter-edit-form").attr("action",href+$(this).attr("href"));
+		});
+		
+		//$("#node-newsletter-edit-form").attr("action",location.href)
+		
 		
 	}
 	
@@ -55,11 +69,112 @@ $(function(){
 
 	Drupal.behaviors.activites_agenda = {
 		attach: function (context, settings) {
-			/*$("#edit-field-mise-en-avant-wrapper").find("input").click(function(e) {
-				alert("ok");
-				e.preventDefault();
-				if(!$("#edit-field-adherent-wrapper").find("select").val()) alert("Veuillez sélectionner un adhérent");
-			});*/
+			/* 
+			 * on insert le titre et résumé dans un bloc de mise en vant
+			 */
+			$("#edit-group-mise-en-avant").find(".field--name-title").find("input").val($("#edit-title-wrapper").find("input").val());
+			$("#edit-group-mise-en-avant").find(".field--name-field-resume").find("textarea").val($("#edit-field-resume-wrapper").find("textarea").val());
+			
+			/* cas où on ajoute un adhérent depuis le formulaire client */
+			if($("#adherent-client").length && $("#node-client-edit-form").length) {
+				/* si on est en mode édition, une ville a déjà été enregistrée, donc save ville existe 
+				 * comme on ne peut (pas trouvé pour le moment) modifier le formulaire dans un contenu imbriqué 
+				 * on traite en JS 
+				 **/
+				if($("#adherent-client").find(".field--name-field-ville-save").length) {
+					ville_id=$("#adherent-client").find(".field--name-field-ville-save input").val();
+					cp=$("#adherent-client").find(".field--name-field-code-postal input").val();
+					$.ajax({
+						url:  "/admin/getville/"+ville_id,
+						success: function(result) {
+							console.log(result);
+							$(".form-ville").remove();
+							output_html=document.createElement("div");
+							$(output_html).addClass("js-form-item form-item form-ville");
+							$(output_html).attr("id","edit-field-ville");
+							output_html_label=document.createElement("label");
+							$(output_html_label).text("Ville");
+							output_html_select=document.createElement("select");
+							$(output_html_select).addClass("form-select form-control");
+							$(output_html_select).append("<option>Choisssez une ville ... </option>");
+							for(item in result) {
+								
+								$(output_html_select).append("<option selected='selected' value='"+result[item].tid+"'>"+result[item].name+"</option>");
+							}
+							
+							$(output_html).append(output_html_label);
+							$(output_html).append(output_html_select);
+							$("#adherent-client").find(".field--name-field-code-postal").append(output_html);
+						},
+					});
+				}
+				
+				$("#adherent-client").find(".field--name-field-code-postal").find("input").focusout(function() {
+					$.ajax({
+						url: "/admin/getvilles/"+$(this).val(),
+						success: function(result) {
+							$(".form-ville").remove();
+							output_html=document.createElement("div");
+							$(output_html).addClass("js-form-item form-item form-ville");
+							$(output_html).attr("id","edit-field-ville");
+							output_html_label=document.createElement("label");
+							$(output_html_label).text("Ville");
+							output_html_select=document.createElement("select");
+							$(output_html_select).addClass("form-select form-control");
+							$(output_html_select).append("<option>Choisssez une ville ... </option>");
+							for(item in result) {
+								
+								$(output_html_select).append("<option value='"+result[item].tid+"'>"+result[item].name+"</option>");
+							}
+							
+							$(output_html).append(output_html_label);
+							$(output_html).append(output_html_select);
+							$("#adherent-client").find(".field--name-field-code-postal").append(output_html);
+							
+							/* on ajoute l'action jQuery */
+							$("#adherent-client").find("#edit-field-ville").find("select").change(function() {
+								console.log($(this).val());
+								$("#adherent-client").find(".field--name-field-ville-save").find("input").val($(this).val());
+							});
+							
+						},
+						
+					});
+					
+				});
+			}
+			
+			/** !!! L'appel ajax méthode form api ne fonctionne plus après un premier appel ajax !!! ? */
+			/* on passe à la méthode JS */
+			if($(".field--name-field-code-postal").length) {
+				
+				$(".field--name-field-code-postal").focusout(function() {
+					console.log($(this).find("input").val());
+					$.ajax({
+						url: "/admin/getvilles/"+$(this).find("input").val(),
+						success: function(result) {
+							console.log(result);
+							$("#edit-field-ville select option").each(function() {
+								$(this).remove();
+							});
+							$("#edit-field-ville select").append("<option>Choisssez une ville ... </option>");
+							for(item in result) {
+								
+								$("#edit-field-ville select").append("<option value='"+result[item].tid+"'>"+result[item].name+"</option>");
+							}
+							
+							$("#edit-field-ville").find("select").change(function() {
+								$(".field--name-field-ville-save").find("input").val($(this).val());
+							});
+							
+						},
+						
+					});
+				});
+				
+			}
+
+
 			if($("#edit-field-ville").length)
 				$("#edit-field-ville").find("select").change(function() {
 					$("#edit-field-ville-save-wrapper").find("input").val($(this).val());
@@ -129,7 +244,7 @@ $(function(){
 
 	$.fn.getAjaxCoordonnees = function(argument) {
 		
-		    console.log(argument);
+	
 		$("#edit-field-adresse-wrapper").find("input").val("");
 		$("#edit-field-telephone-wrapper").find("textarea").val("");
 		$("#edit-field-email-wrapper").find("input").val("");

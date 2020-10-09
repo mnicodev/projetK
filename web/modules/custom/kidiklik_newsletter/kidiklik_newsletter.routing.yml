@@ -4,7 +4,7 @@ kidiklik_newsletter.default_form:
     _form: '\Drupal\kidiklik_newsletter\Form\DefaultForm'
     _title: "Contenu de la newsletter"
   requirements:
-    _custom_access: '\Drupal\kidiklik_access\Controller\Access::newsletterAccess'
+    _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
 
 kidiklik_newsletter.blocs_datas_controller_get:
   path: '/admin/newsletter/blocs-datas/{nid}'
@@ -12,4 +12,4 @@ kidiklik_newsletter.blocs_datas_controller_get:
     _controller: '\Drupal\kidiklik_newsletter\Controller\BlocsDatasController::get'
     _title: 'Blocs datas'
   requirements:
-    _custom_access: '\Drupal\kidiklik_access\Controller\Access::newsletterAccess'
+    _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'

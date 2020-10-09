@@ -75,11 +75,28 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 				->getStorage("node")
 				->load(current($entity->get("field_adherent_cache")->getValue())["value"]);
 			//kint($entity);kint($adherent);exit;
-			$adherent->__set("field_activites",$entity);
-			$adherent->save();
+			if(!empty($adherent)) {
+				$adherent->__set("field_activites",$entity);
+				$adherent->save();
+				
+				$entity->__set("field_adherent",$adherent);
+				$entity->save();
+			}
 			
-			$entity->__set("field_adherent",$adherent);
-			$entity->save();
+			/**
+			 *  On ne prend plus en compte le champ bloc mise en avant
+			 * les bloc de newsletter seront indépendants et marqué par le champs newsletter du bloc
+			 */
+			/*$newsletter=\Drupal::entityTypeManager()
+				->getStorage("node")
+				->load(current($entity->get("field_newsletter")->getValue())["target_id"]);
+				
+			if(!empty($newsletter)) {
+			
+				$newsletter->get("field_bloc_de_mise_en_avant")->appendItem($entity);
+				$newsletter->validate();
+				$newsletter->save();
+			}*/
 		}
 		
 	}
