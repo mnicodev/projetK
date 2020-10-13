@@ -723,6 +723,7 @@ $settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
     '^kidiklik\.dvm$',
     '^kidiklik\.fr$',
     '^.+\.kidiklik\.fr$',
+    '^.+\.kidiklik\.dev\.webstep\.fr$',
     '^.+\.kidiklik\.dvm$',
   ];
  /* @endcode
