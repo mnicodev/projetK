@@ -33,7 +33,16 @@ function kidiklik_newsletter_help($route_name, RouteMatchInterface $route_match)
 function kidiklik_newsletter_theme() {
   return [
     'kidiklik_newsletter' => [
-      'render element' => 'children',
+      "variables" => [
+			"entete" => null,
+			"blocs" => null,
+		]
+    ],
+    'kidiklik_newsletter_for_mailjet' => [
+		"variables" => [
+			"entete" => null,
+			"blocs" => null,
+		]
     ],
   ];
 }
@@ -73,4 +82,19 @@ function kidiklik_newsletter_ajax_callback(array &$form, FormStateInterface $for
   $debugOut = @Kint::dump($form_state);
   $response->addCommand(new ReplaceCommand('#debug-out', $debugOut ));
   return $response;
+}
+
+
+function kidiklik_newsletter_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\views\Plugin\views\query\QueryPluginBase $query) {
+	if($view->current_display=="newsletter_json_pub") {
+		$dep_id=get_term_departement();
+		//$query->where[1]["conditions"]
+		//ksm($query->where[1]["conditions"]);
+		//$query->where[0]["conditions"][1]["field"]="node__field_partage_departements.field_partage_departements_target_id = :node__field_partage_departements_field_partage_departements_target_id";
+		$query->where[0]["conditions"][1]["value"]=[':node__field_partage_departements_field_partage_departements_target_id'=>(int)$dep_id];
+		
+		/*$query->where[0]["conditions"][1]["field"]="node__field_partage_departements.field_partage_departements_target_id = '".$dep_id."'";
+		$query->where[0]["conditions"][1]["value"]=[];*/
+	}
+	
 }

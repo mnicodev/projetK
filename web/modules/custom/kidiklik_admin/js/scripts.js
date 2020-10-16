@@ -25,6 +25,18 @@ $(function(){
 		
 	}
 	
+	/* gestion des pubs pour le dep */
+	if($("#gestion_dep").length) {
+		
+		$("#edit-field-partage-departements--wrapper").find("input").each(function() {
+			$(this).attr("type","radio");
+		});
+		$("#edit-field-partage-departements--wrapper").find("input").click(function() {
+			$("#edit-field-partage-departements--wrapper").find("input").prop("checked",false);
+			$(this).prop("checked","checked");
+		});
+	}
+	
 	/* fonctionnalités adhérent */
 	if($("#node-adherent-edit-form").length) {
 		

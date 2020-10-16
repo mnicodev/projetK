@@ -98,7 +98,9 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 		}
 		$form["field_image_d_entete"]["widget"]["#options"]=$tab;
 		
-	}
+		
+		
+	} /* fin newslertter */
 	
 	if($form_id=="node_publicite_form" || $form_id=="node_publicite_edit_form") {
 		unset($form["field_date"]["widget"]["add_more"]);
@@ -120,9 +122,24 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 //				kint($nom_departement->get("field_nom")->getValue());
 
 			}
-			//kint($item->__toString());
-
-
+		if(!in_array("administrator",\Drupal::currentUser()->getRoles())) {
+			unset($form['field_tous_les_sites']);
+			unset($form['field_national']);
+			//$form['field_partage_departements']["widget"]["#type"]="radios";
+			$form['field_partage_departements']["widget"]["#multiple"]=false;
+			$form["admin"]=[
+				"#type"=>"html_tag",
+				"#tag"=>"input",
+				"#attributes"=>[
+					"id"=>"gestion_dep",
+					"type"=>"hidden"
+				],
+			];
+			array_pop($form["field_format"]["widget"]["#options"]);
+		} else $form["#submit"][]="kidiklik_admin_form_submit";
+		
+		$form["#attached"]["library"][]="kidiklik_admin/kidiklik_admin.commands";
+		
 	} /* fin pub */
 	
 	if($form_id=="taxonomy_term_departement_form") {
@@ -318,8 +335,7 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 		
 		
 		$form["#attached"]["library"][]="kidiklik_admin/kidiklik_admin.commands";
-		$form["#submit"][]="kidiklik_admin_agenda_form_submit";
-		$form["#validate"][]="kidiklik_admin_agenda_form_validate";
+		
 		
 
 	} /* fin form agenda */
@@ -595,12 +611,12 @@ function _bloc_mise_en_avant_form_validate(&$form, FormStateInterface $form_stat
 
 	
 }
-function kidiklik_admin_agenda_form_submit(&$form, FormStateInterface $form_state) {
+function kidiklik_admin_form_submit(&$form, FormStateInterface $form_state) {
 
-	
+	 $form_state->setRedirect('system.admin_content');
 }
 
-function kidiklik_admin_agenda_form_validate($form, FormStateInterface $form_state) {
+function kidiklik_admin_form_validate($form, FormStateInterface $form_state) {
 
 }
 
