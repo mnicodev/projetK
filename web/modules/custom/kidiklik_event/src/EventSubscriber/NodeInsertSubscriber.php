@@ -55,8 +55,11 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 			$adherent=\Drupal::entityTypeManager()
 				->getStorage("node")
 				->load(current($entity->get("field_adherent")->getValue())["target_id"]);
-			$adherent->__set("field_activites",$entity);
-			$adherent->save();
+			if(!empty($adherent)) {
+				$adherent->__set("field_activites",$entity);
+				$adherent->save();
+			}
+			
 			
 			
 		}

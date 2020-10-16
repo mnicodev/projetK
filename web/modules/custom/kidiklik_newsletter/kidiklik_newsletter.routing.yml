@@ -13,3 +13,12 @@ kidiklik_newsletter.blocs_datas_controller_get:
     _title: 'Blocs datas'
   requirements:
     _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
+
+
+kidiklik_newsletter.newsletter_for_mailjet:
+  path: '/newsletter/{nid}/{titre}'
+  defaults:
+    _controller: '\Drupal\kidiklik_newsletter\Controller\NewsletterController::newsletterForMailjet'
+    _title: 'Newsletter'
+  requirements:
+    _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
