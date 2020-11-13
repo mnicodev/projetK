@@ -1,7 +1,7 @@
 $ = jQuery;
 
 $(function(){
-	
+
 	if($("#node-message-contact-form").length) {
 		$("#edit-submit").val("Envoyer");
 		

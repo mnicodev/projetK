@@ -801,6 +801,7 @@ $settings["available_content"]=[
 	"page",
 	"partenaire",
 	"message_contact",
+	"jeu_concours",
 ];
 $settings["available_content_for_mea"]=[
 	"activite",

@@ -96,11 +96,23 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 		foreach($images_entete as $key=>$item) {
 			$tab[$key]=$item->getName();
 		}
+		
 		$form["field_image_d_entete"]["widget"]["#options"]=$tab;
 		
 		
 		
 	} /* fin newslertter */
+	
+	if($form_id=="node_jeu_concours_form" || $form_id=="node_jeu_concours_edit_form") {
+	    $adherents=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"adherent","field_departement"=>$term_dep]);
+		$tab=[];
+		$tab["_none"]="Veuillez choisir un client";
+		foreach($adherents as $key=>$adherent) {
+			$tab[$key]=$adherent->getTitle();
+		}
+		$form["field_adherent"]["widget"]["#multiple"]=FALSE;
+		$form["field_adherent"]["widget"]["#options"]=$tab;
+	}
 	
 	if($form_id=="node_publicite_form" || $form_id=="node_publicite_edit_form") {
 		unset($form["field_date"]["widget"]["add_more"]);
@@ -114,19 +126,13 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 		}
 		$form["field_adherent"]["widget"]["#options"]=$tab;
 
-		foreach($form['field_partage_departements']['widget']['#options'] as $key=>$item)
-			if(!(int)$item->__toString()) unset($form['field_partage_departements']['widget']['#options'][$key]);
-			else {
-				$nom_departement=\Drupal::entityTypeManager()->getStorage("taxonomy_term")->load($key);
-				$form['field_partage_departements']['widget']['#options'][$key]=current($nom_departement->get("field_nom")->getValue())["value"]." (".$nom_departement->getName().")";;
-//				kint($nom_departement->get("field_nom")->getValue());
-
-			}
 		if(!in_array("administrator",\Drupal::currentUser()->getRoles())) {
+			unset($form["#group_children"]["group_partage"]);
 			unset($form['field_tous_les_sites']);
 			unset($form['field_national']);
+			unset($form["field_partage_departements"]);
 			//$form['field_partage_departements']["widget"]["#type"]="radios";
-			$form['field_partage_departements']["widget"]["#multiple"]=false;
+			/*$form['field_partage_departements']["widget"]["#multiple"]=false;
 			$form["admin"]=[
 				"#type"=>"html_tag",
 				"#tag"=>"input",
@@ -135,8 +141,20 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 					"type"=>"hidden"
 				],
 			];
-			array_pop($form["field_format"]["widget"]["#options"]);
-		} else $form["#submit"][]="kidiklik_admin_form_submit";
+			array_pop($form["field_format"]["widget"]["#options"]);*/
+
+		} else {
+			unset($form['field_national']);
+			$form["#submit"][]="kidiklik_admin_form_submit";
+			foreach($form['field_partage_departements']['widget']['#options'] as $key=>$item) {
+				//if(!(int)$item->__toString()) unset($form['field_partage_departements']['widget']['#options'][$key]);
+				//else {
+				//
+					$nom_departement=\Drupal::entityTypeManager()->getStorage("taxonomy_term")->load($key);
+					$form['field_partage_departements']['widget']['#options'][$key]=$nom_departement->get("field_nom")->value." (".$nom_departement->getName().")".($nom_departement->get("field_region")->value?" - <i>".$nom_departement->get("field_region")->value."</i>":"");
+				//}
+			}
+		}
 		
 		$form["#attached"]["library"][]="kidiklik_admin/kidiklik_admin.commands";
 		

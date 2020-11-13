@@ -55,7 +55,34 @@ function kidiklik_newsletter_theme() {
  * Add debug output container and Ajax callback.
  */
 function kidiklik_newsletter_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-	
+	preg_match("/views_form_liste_bloc_donnees_newsletter_page_1_(\d*)/",$form["form_id"]["#value"],$rs);
+	if(!empty($rs)) {
+		$form["actions"][]=[
+			"submit"=> [
+				"#type"=>"html_tag",
+				"#tag" => "a",
+				"#value"=>"Retour à la liste",
+				"#attributes" => [
+					"class"=>"btn btn-primary",
+					"href"=>"/admin/newsletters",
+
+				],
+			],
+		];
+		$form["actions"][]=[
+			"submit"=> [
+				"#type"=>"html_tag",
+				"#tag" => "a",
+				"#value"=>"Editer la newsletter",
+				"#attributes" => [
+					"class"=>"btn btn-warning",
+					"href"=>"/node/".$rs[1]."/edit?destination=/admin/newsletter/".$rs[1]."&nid=".$rs[1],
+
+				],
+			],
+		];
+
+	}
   if ($form_id == 'newsletter_form') {
     // Add empty container to the form. it gets filled with
     // the Kint output from our Ajax event callback.
