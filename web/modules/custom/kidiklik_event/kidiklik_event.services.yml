@@ -13,3 +13,8 @@ services:
         class: Drupal\kidiklik_event\EventSubscriber\InitSubscriber
         tags:
             - { name: 'event_subscriber' }
+
+    kidiklik_event.node.view:
+        class: Drupal\kidiklik_event\EventSubscriber\NodeViewSubscriber
+        tags:
+            - { name: 'event_subscriber' }

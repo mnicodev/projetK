@@ -25,9 +25,13 @@ function kidiklik_event_help($route_name, RouteMatchInterface $route_match) {
   }
 }
 
+function kidiklik_event_node_view($node,$view_node,$alngcode) {
+  
+}
+
 function kidiklik_event_node_insert(Drupal\Core\Entity\EntityInterface $entity) {
 	\Drupal::service('event_dispatcher')->dispatch(NodeInsertEvent::NODE_INSERT, new NodeInsertEvent($entity));
-	
+
 }
 
 /**
@@ -43,13 +47,13 @@ function kidiklik_event_node_presave(Drupal\node\NodeInterface $node) {
 			->load($node->get("field_activite_save")->value);
 
 		$node->set("field_activite",$activite);
-		
+
 		$ville=\Drupal::entityTypeManager()
 			->getStorage("taxonomy_term")
 			->load($node->get("field_ville_save")->value);
 		$node->set("field_ville",$ville);
 			// kint($ville);exit;
-			
+
 	}
 	if($type=="activite" || $type=="client" || $type=="adherent"|| $type=="agenda") {
 		$ville=\Drupal::entityTypeManager()
@@ -57,7 +61,7 @@ function kidiklik_event_node_presave(Drupal\node\NodeInterface $node) {
 			->load($node->get("field_ville_save")->value);
 		$node->set("field_ville",$ville);
 	}
-	
+
 	if($type=="bloc_de_mise_en_avant") {
 		$adherent=\Drupal::entityTypeManager()
 				->getStorage("node")
@@ -67,7 +71,7 @@ function kidiklik_event_node_presave(Drupal\node\NodeInterface $node) {
 			//$adherent->save();
 			$node->set("field_adherent",$adherent);
 		}
-		
+
 		/**
 		 *  On ne prend plus en compte le champ bloc mise en avant
 		 * les bloc de newsletter seront indépendants et marqué par le champs newsletter du bloc
@@ -75,17 +79,17 @@ function kidiklik_event_node_presave(Drupal\node\NodeInterface $node) {
 		/*$newsletter=\Drupal::entityTypeManager()
 				->getStorage("node")
 				->load(current($node->get("field_newsletter")->getValue())["target_id"]);
-			
+
 		if(!empty($newsletter)) {
-			
+
 			$newsletter->get("field_bloc_de_mise_en_avant")->appendItem($node);
-			
+
 		}*/
-		
-		
+
+
 	}
-	
-	
+
+
 }
 
 
@@ -93,7 +97,7 @@ function kidiklik_event_node_update(Drupal\Core\Entity\EntityInterface $entity) 
 	//45kint($entity);exit;
 	$type=current($entity->type->getValue())["target_id"];
 	if(in_array($type,\Drupal::service("settings")->get("available_content_for_mea"))) {
-		
+
 		$path=\Drupal::service('path.alias_manager')->getAliasByPath($entity->url());
 		$blocs=$entity->get("field_mise_en_avant")->getValue();
 		foreach($blocs as $bloc) {
@@ -112,17 +116,17 @@ function kidiklik_event_node_update(Drupal\Core\Entity\EntityInterface $entity) 
 
 
 	if($type=="publicite" || $type=="activite" || $type=="agenda" || $type=="article" || $type=="reportage" /*|| $type=="bloc_de_mise_en_avant"*/) {
-			
+
 		$adherent=\Drupal::entityTypeManager()
 			->getStorage("node")
 			->load(current($entity->get("field_adherent")->getValue())["target_id"]);
 		if(!empty($adherent)) {
 			$adherent->__set("field_activites",$entity);
-			$adherent->save();	
+			$adherent->save();
 		}
-		
+
 	}
-	
-	
+
+
 	//\Drupal::service('event_dispatcher')->dispatch(NodeUpdateEvent::NODE_UPDATE, new NodeUpdateEvent($entity));
 }

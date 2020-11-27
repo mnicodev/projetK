@@ -42,6 +42,7 @@ class ComposerStaticInite44c823dbe1e2f75d05a8b041a3090f2
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '952683d815ff0a7bf322b93c0be7e4e4' => __DIR__ . '/..' . '/chi-teck/drupal-code-generator/src/bootstrap.php',
         '5a12a5271c58108e0aa33355e6ac54ea' => __DIR__ . '/..' . '/drupal/console-core/src/functions.php',
+        'c65d09b6820da036953a371c8c73a9b1' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/polyfills.php',
         'd511210698f02d87ca48e3972f64323e' => __DIR__ . '/../..' . '/load.environment.php',
     );
 
@@ -161,6 +162,10 @@ class ComposerStaticInite44c823dbe1e2f75d05a8b041a3090f2
             'Grasmash\\YamlExpander\\' => 22,
             'Grasmash\\Expander\\' => 18,
             'Goutte\\' => 7,
+        ),
+        'F' => 
+        array (
+            'Facebook\\' => 9,
         ),
         'E' => 
         array (
@@ -506,6 +511,10 @@ class ComposerStaticInite44c823dbe1e2f75d05a8b041a3090f2
         'Goutte\\' => 
         array (
             0 => __DIR__ . '/..' . '/fabpot/goutte/Goutte',
+        ),
+        'Facebook\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook',
         ),
         'Egulias\\EmailValidator\\' => 
         array (

@@ -13,7 +13,7 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 		global $_POST;
 	    /* on récupére le département de la config */
 		$dep=\Drupal::service("settings")->get("dep");
-		
+
 		$entity=$event->getEntity();
 		/* on récupére le type du contenu */
 		$type=current($entity->type->getValue())["target_id"];
@@ -32,7 +32,7 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 			}
 
 		}
-		
+
 		if($type=="message_contact") {
 			$entity->__set("field_date_envoi",date("Y-m-d"));
 			$entity->save();
@@ -49,9 +49,9 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 			 if($result['result'] !== true) 	drupal_set_message("Un probléme d'envoi est survenu.","error");
 			 else	drupal_set_message("Votre message a bien été envoyé");
 		}
-		
+
 		if($type=="publicite" || $type=="activite" || $type=="agenda" || $type=="article" || $type=="reportage" || $type=="reportage" /*|| $type=="bloc_de_mise_en_avant"*/) {
-			
+
 			$adherent=\Drupal::entityTypeManager()
 				->getStorage("node")
 				->load(current($entity->get("field_adherent")->getValue())["target_id"]);
@@ -59,11 +59,14 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 				$adherent->__set("field_activites",$entity);
 				$adherent->save();
 			}
-			
-			
-			
+
+			/* test de la période d'un pub */
+			if($type=="publicite") {
+				//kint($entity->get("field_date"));exit;
+			}
+
 		}
-		
+
 		if($type=="client" || $type=="adherent" || $type=="activite"|| $type=="agenda") {
 			$ville=\Drupal::entityTypeManager()
 			->getStorage("taxonomy_term")
@@ -71,9 +74,9 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 			$entity->__set("field_ville",$ville);
 			$entity->save();
 		}
-		
+
 		if($type=="bloc_de_mise_en_avant") {
-			
+
 			$adherent=\Drupal::entityTypeManager()
 				->getStorage("node")
 				->load(current($entity->get("field_adherent_cache")->getValue())["value"]);
@@ -81,11 +84,11 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 			if(!empty($adherent)) {
 				$adherent->__set("field_activites",$entity);
 				$adherent->save();
-				
+
 				$entity->__set("field_adherent",$adherent);
 				$entity->save();
 			}
-			
+
 			/**
 			 *  On ne prend plus en compte le champ bloc mise en avant
 			 * les bloc de newsletter seront indépendants et marqué par le champs newsletter du bloc
@@ -93,15 +96,15 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 			/*$newsletter=\Drupal::entityTypeManager()
 				->getStorage("node")
 				->load(current($entity->get("field_newsletter")->getValue())["target_id"]);
-				
+
 			if(!empty($newsletter)) {
-			
+
 				$newsletter->get("field_bloc_de_mise_en_avant")->appendItem($entity);
 				$newsletter->validate();
 				$newsletter->save();
 			}*/
 		}
-		
+
 	}
 
 	public static function getSubscribedEvents() {

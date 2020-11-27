@@ -23,3 +23,16 @@ kidiklik_admin.adherent.page_controller:
   requirements:
     _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
 
+kidiklik_admin.jeu_concours.gagnants:
+    path: '/admin/jeux-concours/getGagnants/{nid}'
+    defaults:
+        _controller: '\Drupal\kidiklik_admin\Controller\JeuxConcoursController::getGagnants'
+    requirements:
+        _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
+
+kidiklik_admin.compteur.publicite:
+    path: '/admin/publicites/compteur'
+    defaults: 
+        _controller: '\Drupal\kidiklik_admin\Controller\CompteurPubliciteController::content'
+    requirements:
+        _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'

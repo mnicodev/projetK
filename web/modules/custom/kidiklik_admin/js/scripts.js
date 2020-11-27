@@ -1,33 +1,34 @@
 var href="";
 
 $(function(){
+	
 	$("#edit-field-ville").find("option").each(function () {
-		
+
 	//	if($(this).attr("selected")!="selected") $(this).prop("disabled",true)
 	})
 	$(".node--type-activite").find("#edit-field-date-wrapper").find(".paragraphs-dropbutton-wrapper").remove();
-	
+
 	if($(".dropbutton-widget").length) {
-		
+
 	}
-	
-	
+
+
 	if($("#node-newsletter-edit-form").length) {
 		$(".horizontal-tabs-list").find("li a").click(function(e) {
 			e.preventDefault();
 			if(href=="") href=$("#node-newsletter-edit-form").attr("action");
-			
+
 			$("#node-newsletter-edit-form").attr("action",href+$(this).attr("href"));
 		});
-		
+
 		//$("#node-newsletter-edit-form").attr("action",location.href)
-		
-		
+
+
 	}
-	
+
 	/* gestion des pubs pour le dep */
 	if($("#gestion_dep").length) {
-		
+
 		$("#edit-field-partage-departements--wrapper").find("input").each(function() {
 			$(this).attr("type","radio");
 		});
@@ -36,34 +37,34 @@ $(function(){
 			$(this).prop("checked","checked");
 		});
 	}
-	
+
 	/* fonctionnalités adhérent */
 	if($("#node-adherent-edit-form").length) {
-		
-		
-		
+
+
+
 		$(".action-filtre").find("input").click(function(e) {
 			e.preventDefault();
 			adherent_id=$(this).attr("data-adherent-id");
 			type=$(this).attr("data-type");
 			url=$(this).attr("data-url");
-			
+
 			date_deb=$(this).parent().parent().find(".date-deb").find("input").val();
 			date_fin=$(this).parent().parent().find(".date-fin").find("input").val();
-			
-			
+
+
 			$.ajax({
 				url: "/admin/adherent/contenu/"+type+"/"+adherent_id+"?date_deb="+date_deb+"&date_fin="+date_fin+"&url"+url,
-				
+
 				success: function(result) {
 					console.log(result);
 					$("#"+type+"_liste").html(result);
 				}
 			});
-			
+
 		});
 	}
-	
+
 	/* fin */
 	if($("#edit-field-activite-wrapper").length)
 		$("#edit-field-activite-wrapper").find("select").change(function() {
@@ -73,7 +74,7 @@ $(function(){
 		$("#edit-field-activite").change(function() {
 			$("#edit-field-activite-save-wrapper").find("input").val($(this).val());
 		});
-	
+
 	if($("#edit-field-ville").length)
 		$("#edit-field-ville").find("select").change(function() {
 			$("#edit-field-ville-save-wrapper").find("input").val($(this).val());
@@ -81,17 +82,17 @@ $(function(){
 
 	Drupal.behaviors.activites_agenda = {
 		attach: function (context, settings) {
-			/* 
+			/*
 			 * on insert le titre et résumé dans un bloc de mise en vant
 			 */
 			$("#edit-group-mise-en-avant").find(".field--name-title").find("input").val($("#edit-title-wrapper").find("input").val());
 			$("#edit-group-mise-en-avant").find(".field--name-field-resume").find("textarea").val($("#edit-field-resume-wrapper").find("textarea").val());
-			
+
 			/* cas où on ajoute un adhérent depuis le formulaire client */
 			if($("#adherent-client").length && $("#node-client-edit-form").length) {
-				/* si on est en mode édition, une ville a déjà été enregistrée, donc save ville existe 
-				 * comme on ne peut (pas trouvé pour le moment) modifier le formulaire dans un contenu imbriqué 
-				 * on traite en JS 
+				/* si on est en mode édition, une ville a déjà été enregistrée, donc save ville existe
+				 * comme on ne peut (pas trouvé pour le moment) modifier le formulaire dans un contenu imbriqué
+				 * on traite en JS
 				 **/
 				if($("#adherent-client").find(".field--name-field-ville-save").length) {
 					ville_id=$("#adherent-client").find(".field--name-field-ville-save input").val();
@@ -110,17 +111,17 @@ $(function(){
 							$(output_html_select).addClass("form-select form-control");
 							$(output_html_select).append("<option>Choisssez une ville ... </option>");
 							for(item in result) {
-								
+
 								$(output_html_select).append("<option selected='selected' value='"+result[item].tid+"'>"+result[item].name+"</option>");
 							}
-							
+
 							$(output_html).append(output_html_label);
 							$(output_html).append(output_html_select);
 							$("#adherent-client").find(".field--name-field-code-postal").append(output_html);
 						},
 					});
 				}
-				
+
 				$("#adherent-client").find(".field--name-field-code-postal").find("input").focusout(function() {
 					$.ajax({
 						url: "/admin/getvilles/"+$(this).val(),
@@ -135,31 +136,31 @@ $(function(){
 							$(output_html_select).addClass("form-select form-control");
 							$(output_html_select).append("<option>Choisssez une ville ... </option>");
 							for(item in result) {
-								
+
 								$(output_html_select).append("<option value='"+result[item].tid+"'>"+result[item].name+"</option>");
 							}
-							
+
 							$(output_html).append(output_html_label);
 							$(output_html).append(output_html_select);
 							$("#adherent-client").find(".field--name-field-code-postal").append(output_html);
-							
+
 							/* on ajoute l'action jQuery */
 							$("#adherent-client").find("#edit-field-ville").find("select").change(function() {
 								console.log($(this).val());
 								$("#adherent-client").find(".field--name-field-ville-save").find("input").val($(this).val());
 							});
-							
+
 						},
-						
+
 					});
-					
+
 				});
 			}
-			
+
 			/** !!! L'appel ajax méthode form api ne fonctionne plus après un premier appel ajax !!! ? */
 			/* on passe à la méthode JS */
 			if($(".field--name-field-code-postal").length) {
-				
+
 				$(".field--name-field-code-postal").focusout(function() {
 					console.log($(this).find("input").val());
 					$.ajax({
@@ -171,19 +172,19 @@ $(function(){
 							});
 							$("#edit-field-ville select").append("<option>Choisssez une ville ... </option>");
 							for(item in result) {
-								
+
 								$("#edit-field-ville select").append("<option value='"+result[item].tid+"'>"+result[item].name+"</option>");
 							}
-							
+
 							$("#edit-field-ville").find("select").change(function() {
 								$(".field--name-field-ville-save").find("input").val($(this).val());
 							});
-							
+
 						},
-						
+
 					});
 				});
-				
+
 			}
 
 
@@ -191,72 +192,72 @@ $(function(){
 				$("#edit-field-ville").find("select").change(function() {
 					$("#edit-field-ville-save-wrapper").find("input").val($(this).val());
 				});
-		
+
 			$("#bloc-ville").find("select").change(function() {
 				$("#edit-field-ville-save-wrapper").find("input").val($(this).val());
 			});
-			
+
 			$("#activites").change(function() {
 				console.log($(this).val());
 				$("#edit-field-activite-save-wrapper").find("input").val($(this).val());
 			});
-			
+
 			$(".field--name-field-type").find("select").change(function() {
-				
+
 				$(".field--name-field-newsletter").hide();
 				if($(this).val()==2) $(".field--name-field-newsletter").show();
 				else $(".field--name-field-newsletter").find("select").val("");
 			});
-			
+
 			if($(".field--name-field-newsletter").find("select").val()=="_none")
 				$(".field--name-field-newsletter").hide();
-				
+
 			if($("#edit-field-adherent-wrapper").find("select").val()) {
 				$(".field--name-field-adherent-cache").find("input").val($("#edit-field-adherent-wrapper").find("select").val());
-			} 
-			
+			}
+
 			$("#edit-field-adherent-wrapper").find("select").change(function() {
 				$(".field--name-field-adherent-cache").find("input").val($(this).val());
-				
+
 			});
 		}
 	}
-	
-	
-	
+
+
+
 	$.fn.getAjaxVille = function(argument) {
 		 console.log(argument);
 		 //ville=document.createElement("select");
-		 
+
 		 $("#edit-field-ville").html("")
 		 $("#edit-field-ville").append("<option value=''></option>");
 //$("#edit-field-ville-wrapper").html(argument);
 		 for(item in argument) {
 		 	$("#edit-field-ville").append("<option value='"+argument[item].key+"'>"+argument[item].val+"</option>");
 		 }
-		 
+
 	}
-	
+
 	$.fn.getAjaxVille2 = function(argument) {
 		 console.log(argument);
 		 $("#bloc-ville").removeClass("form-select");
 		 ville=document.createElement("select");
-		 $(ville).attr("class","form-select form-control");	 
+		 $(ville).attr("class","form-select form-control");
 		 $(ville).append("<option value=''></option>");
 
 		 for(item in argument) {
 		 	$(ville).append("<option value='"+argument[item].key+"'>"+argument[item].val+"</option>");
 		 }
-		 
+
 		 $("#bloc-ville").append(ville);
-		 
+
 	}
-	
-	
+
+
 
 	$.fn.getAjaxCoordonnees = function(argument) {
-		
-	
+
+
 		$("#edit-field-adresse-wrapper").find("input").val("");
 		$("#edit-field-telephone-wrapper").find("textarea").val("");
 		$("#edit-field-email-wrapper").find("input").val("");
@@ -270,10 +271,10 @@ $(function(){
 			if(argument.lien) $("#edit-field-lien-wrapper").find("input").val(argument.lien.value);
 			if(argument.ville) {
 				console.log(argument.ville.target_id+"-"+$(this).val());
-				
+
 				//$("#edit-field-ville option").prop("disabled","false");
 				$("#edit-field-ville").find("option").each(function () {
-					
+
 					$(this).text(argument.ville.name);
 					$(this).val(argument.ville.id);
 					$(this).attr("selected","selected");
@@ -282,7 +283,7 @@ $(function(){
 					$(this).removeAttr("selected");
 					if($(this).val()!=argument.ville.id) {
 						$(this).prop("disabled",true);
-						
+
 					} else {
 						$(this).attr("selected","selected");
 					}*/
@@ -296,10 +297,10 @@ $(function(){
 					$(o).val( argument.activites[activite].id);
 					$(o).text(argument.activites[activite].name);
 					$("#edit-field-activite").append(o)
-					
+
 				}
 			}
 		}
-		
+
 	};
 })

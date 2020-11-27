@@ -25,7 +25,7 @@ class UserSubscriber implements EventSubscriberInterface {
 				//exit;
 				//$event->setResponse(new RedirectResponse("http://".$dep->getName().'.kidiklik.dvm'));
 			}
-	
+
 		}
   }
 
@@ -38,4 +38,3 @@ class UserSubscriber implements EventSubscriberInterface {
   }
 
 }
-

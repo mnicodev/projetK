@@ -1,6 +1,28 @@
 $ = jQuery;
 
 $(function(){
+	if($(".form-textarea-wrapper").length) {
+		counter=document.createElement("div");
+		limit=150;
+		$(counter).html("Nombre de caractères restants : <span id='counter'></span>");
+		$(".form-textarea-wrapper").append(counter);
+		$(".form-textarea-wrapper").find("textarea").keyup(function(event) {
+			text=$(this).val();
+			console.log(text.length)
+			$("#counter").text(limit-text.length);
+
+
+		});
+	}
+	$(window).scroll(function() {
+		if($(window).scrollTop()>100) {
+			$(".sidebar-menu").addClass("affix");
+			$(".sidebar-menu").css("top","0px");
+		} else {
+
+			$(".sidebar-menu").removeClass("affix");
+		}
+	});
 	$(".sidebar-toggle").click(function () {
 		/*console.log($(".sidebar-menu").find("li.prem").find("i.fa-circle-o").length)
 		if($(".sidebar-menu").find("li.prem").find("i.fa-circle-o").length) 
