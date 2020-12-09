@@ -1,0 +1,19 @@
+<h1>Liste des publicités par période</h1>
+<br>
+<table class="views-table views-view-table cols-10 sticky-enabled table table-bordered  responsive">
+{% for key,line in pub %}
+<tr>
+<td colspan='4' style="background: lightgrey">du {{ key|replace({"_":" au "}) }}</td>
+</tr>
+
+    {% for item in line %}
+    <tr>
+    <td>{{ item.title }}</td>
+    <td>{{ item.format }}</td>
+    <td>{{ item.date_deb }}</td>
+    <td>{{ item.date_fin }}</td>
+    </tr>
+    {% endfor %}
+
+{% endfor %}
+</table>
