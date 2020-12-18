@@ -24,3 +24,14 @@
 	white-space: nowrap;
 }
 
+
+.periode-tab .periode {
+	background: #4B83CF;
+	color: #fff;
+	cursor: pointer;
+	
+}
+
+.periode-tab .line {
+	background: #eee;
+}

@@ -1,7 +1,7 @@
 var href="";
 
 $(function(){
-	
+	//alert("ok");
 	$("#edit-field-ville").find("option").each(function () {
 
 	//	if($(this).attr("selected")!="selected") $(this).prop("disabled",true)

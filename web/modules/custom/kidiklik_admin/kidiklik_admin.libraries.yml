@@ -9,3 +9,15 @@ kidiklik_admin.commands:
     js/scripts.js: {}
   dependencies:
     - core/drupal.ajax
+
+kidiklik_admin.script_pub:
+  version: 1.x
+  css:
+    theme:
+      css/style.css: {}
+      
+  js:
+    js/script_pub.js: {}
+    
+  dependencies:
+    - core/jquery

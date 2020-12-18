@@ -36,3 +36,11 @@ kidiklik_admin.compteur.publicite:
         _controller: '\Drupal\kidiklik_admin\Controller\CompteurPubliciteController::content'
     requirements:
         _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
+
+kidiklik_admin.periode_controller_content:
+  path: '/admin/publicites/periode'
+  defaults:
+    _controller: '\Drupal\kidiklik_admin\Controller\PeriodeController::content'
+    _title: 'Pub par période'
+  requirements:
+    _permission: 'access content'
