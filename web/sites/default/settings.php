@@ -721,8 +721,10 @@ $settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
  */
   $settings['trusted_host_patterns'] = [
     '^kidiklik\.dvm$',
+    '^kidiklik\.docker$',
     '^kidiklik\.fr$',
     '^.+\.kidiklik\.fr$',
+    '^.+\.kidiklik\.docker$',
     '^.+\.kidiklik\.dev\.webstep\.fr$',
     'kidiklik\.dev\.webstep\.fr$',
     '^.+\.kidiklik\.dvm$',

@@ -2,10 +2,10 @@
 
 $databases['default']['default'] = array (
   'database' => 'projetK',
-  'username' => 'userbdd',
-  'password' => 'userbdd',
+  'username' => 'root',
+  'password' => '1234',
   'prefix' => '',
-  'host' => '127.0.0.1',
+  'host' => '172.18.0.2',
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
