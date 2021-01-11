@@ -1,0 +1,49 @@
+<?php
+
+
+namespace Drupal\kidiklik_event\EventSubscriber;
+
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\HttpResponse;
+use Drupal\Core\Routing\TrustedRedirectResponse;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class InitSubscriber implements EventSubscriberInterface {
+
+  public function checkRedirect(GetResponseEvent $event) {
+  		$request = $event->getRequest();
+ 
+	  
+	  	$dep_status=current(\Drupal::entityTypeManager()
+			->getStorage("taxonomy_term")
+			->loadByProperties(['name'=>get_departement()]))
+			->get("status")
+			->getValue();
+		$tab=explode(".",\Drupal::request()->getHost());
+		array_shift($tab);
+		$url="http://www.".implode(".",$tab)."/";
+	
+	
+		if(!(int)current($dep_status)["value"]) {
+			
+			//header("location: ".$url);
+			//$event->setResponse(new TrustedRedirectResponse($url));
+		}
+	
+		if($request->attributes->get("node_type")->get("originalId")=="message_contact") {
+			//$event->setResponse(new RedirectResponse("/contact.html",301));
+			//	kint($request->attributes->get("node_type")->get("originalId"));
+		}
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getSubscribedEvents() {
+    $events[KernelEvents::REQUEST][] = array('checkRedirect');
+    return $events;
+  }
+
+}

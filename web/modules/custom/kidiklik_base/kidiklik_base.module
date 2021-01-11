@@ -7,6 +7,9 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\ReplaceCommand;
+use Drupal\Core\Ajax\InvokeCommand;
 
 /**
  * Implements hook_help().
@@ -35,58 +38,44 @@ function kidiklik_base_theme() {
   ];
 }
 
+
+
+function get_departement() {
+	$globalSettings=\Drupal::service("settings");
+	$dep=$globalSettings->get("dep");
+
+	return $dep;
+}
+function get_term_departement() {
+	$dep=get_departement();
+	$term_dep="";
+
+		$term_dep=(int)current(\Drupal::entityTypeManager()
+		->getStorage("taxonomy_term")
+		->loadByProperties(['name'=>$dep]))->id();
+
+	return $term_dep;
+}
+
+
 /**
  * modification de formulaire
  */
 function kidiklik_base_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-	/* on reformate le choix des activités pour ne choisir que des enfants */
-	if($form_id=="node_activite_edit_form" || $form_id=="node_activite_form") {
-		$rub=$form["field_rubriques_activite"]["widget"]["#options"];
-		$tab=[];
-		$n="";
-		foreach($rub as $k=>$r) {
-			if($k!="_none") {
-				$t=taxonomy_term_load($k);
-				$p=current($t->parent->getValue()[0]);
-				if(!(int)$p) {
-					$n=current($t->name->getValue()[0]);
-				} else {
-					$tab[$n][$k]=current($t->name->getValue()[0]);
-				}
-			}
-		}
-		$form["field_rubriques_activite"]["widget"]["#options"]=$tab;
-		$form["field_rubriques_activite"]["widget"]["#size"]=1;
-		$form["#redirect"]="admin/activite";
-	}
-
-	if($form_id=="node_adherent_edit_form" || $form_id=="node_adherent_form") {
-		$globalSettings=\Drupal::service("settings");
-		$dep=$globalSettings->get("dep");
-		$term_dep=(int)current(\Drupal::entityTypeManager()
-			->getStorage("taxonomy_term")
-			->loadByProperties(['name'=>$dep]))->id();
-		/* on va récupérer la liste des clients du département concerné */
-		$adherents=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"client","field_departement"=>$term_dep]);
-		$tab=[];
-		$tab[""]="Veuillez choisir un client";
-		foreach($adherents as $key=>$adherent) {
-			$tab[$key]=$adherent->getTitle();
-		}
-		$form["field_client"]["widget"]["#options"]=$tab;
-
-	}
-	
-	if($form_id=="node_agenda_edit_form" || $form_id=="node_agenda_form") {
-		kint($form);
-
-	}
+	//$build["#attached"]["http_header"][]=["X-Robots-Tag","unavailable_after: "];
 }
+
+/**
+ * implements hook_ENTITY-TYPE_view() for node
+ */
+/*function kidiklik_base_node_view(array &$build, EntityInterface $node, EntityViewDisplayInterface $display, $view_mode) {
+
+}*/
 
 /*
  * Modification de la requête sql d'une vue
  */
-function kidiklik_base_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\views\Plugin\views\query\Sql $query) {
+function kidiklik_base_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\views\Plugin\views\query\QueryPluginBase $query) {
 	if($view->id()=="taxonomy_term") {
 		$globalSettings=\Drupal::service("settings");
 
@@ -125,8 +114,20 @@ function kidiklik_base_views_query_alter(Drupal\views\ViewExecutable $view, Drup
 		}
 
 	}
-	$view_display=array("page_activites","page_agenda","page_activites_tri","page_pub" ,"page_article","page_clients","page_adherent");
-	
+
+	/* gestion des rubriques des activités */
+	if($view->current_display=="page_rubriques_enfants" || $view->current_display=="entetes_newsletter") {
+		$dep_id=get_term_departement();
+		$query->where[0]["conditions"][0]["value"][':taxonomy_term__field_departement_field_departement_target_id']=$dep_id;
+	//	ksm($query->where[0]["conditions"][0]);
+	//	ksm($dep_id);
+
+
+	}
+
+	/* C'est de l'admin !!!! */
+	$view_display=array("bloc_compteur_pub","test_pub","dashboard_all_content","dashboard_publicite","dashboard_reportage","dashboard_activite","dashboard_agenda","dashboard_article","pane_tc_new","page_contenu","nos_partenaires","page_partenaires","page_messages","page_newsletters","diaporama","page_activites","page_agenda","page_activites_tri","page_pub" ,"page_article","page_clients","page_adherent","page_reportages","page_maj");
+
 	if(in_array($view->current_display,$view_display)) {
 		/*$host=explode(".",\Drupal::request()->getHost());
 		$dep=$host[0];*/
@@ -136,13 +137,12 @@ function kidiklik_base_views_query_alter(Drupal\views\ViewExecutable $view, Drup
 		$dep=$globalSettings->get("dep");
 		/*
 		 * On charge le terme correspondant au département
-		 */	
+		 */
 		$term=current(\Drupal::entityTypeManager()
 			->getStorage("taxonomy_term")
 			->loadByProperties(['name'=>$dep]));
 
-
-		$pid=current($query->where[0]["conditions"][0]["value"]);
+		if(isset($query->where[0])) $pid=current($query->where[0]["conditions"][0]["value"]);
 		$liste_enfant=[];
 		if(!empty($pid)) {
 			$rubrique_term_enfant=\Drupal::entityTypeManager()
@@ -175,6 +175,7 @@ function kidiklik_base_views_query_alter(Drupal\views\ViewExecutable $view, Drup
 				$query->where[0]["conditions"][0]["field"]="node__field_rubriques_activite.field_rubriques_activite_target_id in (".implode(",",$liste_enfant).")";
 				//$query->addWhere('', 'taxonomy_idx.tid', $term_id, '=');
 			} /*else $query->addWhere('', 'taxonomy_idx.tid', $term_id, '=');*/
+			//kint($query->where);
 		}
 
 	}

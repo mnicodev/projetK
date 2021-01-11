@@ -35,6 +35,8 @@ function yorkshire_preprocess_block(&$variables) {
 }
 
 function yorkshire_preprocess_menu(&$variables) {
+	$route=\Drupal::request()->getPathInfo();
+	
   $icon_setting = explode("\n",theme_get_setting('menu_icons'));
   $icons = [];
   for($i = 0; $i < sizeof($icon_setting); $i++){
@@ -43,12 +45,40 @@ function yorkshire_preprocess_menu(&$variables) {
       $icons[$icon_setting[$i][0]] = $icon_setting[$i][1];
     }
   }
+  //$session=\Drupal::request()->getSession();
+		  	
+		  	
   foreach ($variables['items'] as $id => $item){
+  	
     $title = (string)$item['title'];
-    if(array_key_exists($title,$icons) && $icons[$title]){
-      $variables['items'][$id]['icon'] = $icons[$title];
+	$url="";
+    if($item["below"]) {
+		
+    	//$url=$item["url"]->toString();
+    
+    	foreach($item["below"] as $k=>$below) {
+    
+    		if($route==$below["url"]->toString()) {
+    			$variables['items'][$id]["below"][$k]["active"]=1;
+    			$variables['items'][$id]["below"][$k]["parent"]=$id+1;
+    			$variables['items'][$id]['active']=1;
+    
+    		}
+    		//kint($below["url"]->toString());
+    	}
+    }
+    
+    $rs=null;
+    preg_match("/<i class=\"[a-z]* (.*)\" .*>/",$title,$rs);
+    
+    //if(array_key_exists($title,$icons) && $icons[$title]){
+    if($rs) {
+      $variables['items'][$id]['icon'] = $rs[1];//$icons[$title];
+      
     }
   }
+  //kint($variables["items"]);
+  
 }
 
 function yorkshire_form_system_theme_settings_alter(&$form, $form_state) {

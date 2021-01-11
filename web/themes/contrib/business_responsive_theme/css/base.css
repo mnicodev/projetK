@@ -208,3 +208,23 @@ ul.tabs {
 .tabs a:hover {
   background-color: #f5f5f5;
 }
+
+@media(min-width: 768px) {
+.paragraph--type--structure-en-colonnes .flex-row div:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+    
+}
+.paragraph--type--structure-en-colonnes .flex-row div:nth-child(2) div {
+    display: initial;
+    padding: 10px;
+    flex: 1;
+}
+.paragraph--type--structure-en-colonnes .flex-row div:nth-child(2) div div {
+    padding: 0;
+}
+}
+
+img {
+    height: auto;
+}

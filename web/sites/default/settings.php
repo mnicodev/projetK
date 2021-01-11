@@ -718,13 +718,18 @@ $settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
  *
  * For example:
  * @code
- * $settings['trusted_host_patterns'] = [
- *   '^example\.com$',
- *   '^.+\.example\.com$',
- *   '^example\.org$',
- *   '^.+\.example\.org$',
- * ];
- * @endcode
+ */
+  $settings['trusted_host_patterns'] = [
+    '^kidiklik\.dvm$',
+    '^kidiklik\.docker$',
+    '^kidiklik\.fr$',
+    '^.+\.kidiklik\.fr$',
+    '^.+\.kidiklik\.docker$',
+    '^.+\.kidiklik\.dev\.webstep\.fr$',
+    'kidiklik\.dev\.webstep\.fr$',
+    '^.+\.kidiklik\.dvm$',
+  ];
+ /* @endcode
  * will allow the site to run off of all variants of example.com and
  * example.org, with all subdomains included.
  */
@@ -774,26 +779,16 @@ $settings['entity_update_backup'] = TRUE;
  * Keep this code block at the end of this file to take full effect.
  */
 #
-# if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
-#   include $app_root . '/' . $site_path . '/settings.local.php';
-# }
+if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
+   include $app_root . '/' . $site_path . '/settings.local.php';
+}
 $config_directories['sync'] = '../config/sync';
 
-$databases['default']['default'] = array (
-  'database' => 'projetK',
-  'username' => 'userbdd',
-  'password' => 'userbdd',
-  'prefix' => '',
-  'host' => '127.0.0.1',
-  'port' => '3306',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-  'driver' => 'mysql',
-);
 
 
 $host=explode(".",$_SERVER["SERVER_NAME"]);
 if((int)$host[0]) $settings["dep"]=$host[0];else $settings["dep"]=0;
-
+//$settings["dep"]=45;
 $settings["available_content"]=[
 	"activite",
 	"reportage",
@@ -802,6 +797,19 @@ $settings["available_content"]=[
 	"publicite",
 	"client",
 	"adherent",
+	"contact",
+	"bloc_de_mise_en_avant",
+	"newsletter",
+	"page",
+	"partenaire",
+	"message_contact",
+	"jeu_concours",
+];
+$settings["available_content_for_mea"]=[
+	"activite",
+	"agenda",
+	"article",
+	"reportage",
 ];
 $settings["available_form_for_dep"]=[
 	"node_activite_edit_form",

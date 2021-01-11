@@ -1,0 +1,46 @@
+
+kidiklik_admin.content_controller_redirect:
+  path: '/admin/pages'
+  defaults:
+    _controller: '\Drupal\kidiklik_admin\Controller\ContentController::pages'
+    _title: 'Edition du contenu des pages'
+  requirements:
+    _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
+
+
+kidiklik_admin.content_controller_action:
+  path: '/admin/contenu/{action}/{node_id}'
+  defaults:
+    _controller: '\Drupal\kidiklik_admin\Controller\ContentController::action'
+  requirements:
+    _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
+
+
+kidiklik_admin.adherent.page_controller:
+  path: '/admin/adherent/{adherent_id}'
+  defaults:
+    _controller: '\Drupal\kidiklik_admin\Controller\AdherentController::page'
+  requirements:
+    _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
+
+kidiklik_admin.jeu_concours.gagnants:
+    path: '/admin/jeux-concours/getGagnants/{nid}'
+    defaults:
+        _controller: '\Drupal\kidiklik_admin\Controller\JeuxConcoursController::getGagnants'
+    requirements:
+        _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
+
+kidiklik_admin.compteur.publicite:
+    path: '/admin/publicites/compteur'
+    defaults: 
+        _controller: '\Drupal\kidiklik_admin\Controller\CompteurPubliciteController::content'
+    requirements:
+        _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
+
+kidiklik_admin.periode_controller_content:
+  path: '/admin/publicites/periode'
+  defaults:
+    _controller: '\Drupal\kidiklik_admin\Controller\PeriodeController::content'
+    _title: 'Pub par période'
+  requirements:
+    _permission: 'access content'
