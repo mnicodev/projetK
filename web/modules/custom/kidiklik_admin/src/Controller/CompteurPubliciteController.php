@@ -21,6 +21,7 @@ class CompteurPubliciteController extends ControllerBase {
 
 	public function content() {
 		$database = \Drupal::database();
+
 		$query=$database->select("node_field_data","n");
 		$query->join("node__field_date","periode","n.nid=periode.entity_id");
 		$query->join("node__field_departement","dep","dep.entity_id=n.nid");

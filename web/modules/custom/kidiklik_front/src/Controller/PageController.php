@@ -3,6 +3,7 @@
 namespace Drupal\kidiklik_front\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class PageController.
@@ -72,6 +73,15 @@ class PageController extends ControllerBase {
    *   Return Hello string.
    */
   public function annonceur() {
+   /* $build= [
+      '#theme' => 'kidiklik_page',
+      '#output' => $this->getContent("devenir_annonceur")
+    ];
+    $output=\Drupal::service('renderer')->renderRoot($build);
+
+    $response=new Response();
+    $response->setContent($output);
+    return $response;*/
     return [
       '#type' => 'markup',
       '#markup' => $this->getContent("devenir_annonceur")

@@ -74,7 +74,7 @@
   ]
 %}
 {{ attach_library('classy/node') }}
-<article{{ attributes.addClass(classes) }}>
+<article>
 
   {{ title_prefix }}
   {% if not page %}
@@ -93,7 +93,7 @@
     </footer>
   {% endif %}
 
-  <div{{ content_attributes.addClass('node__content') }}>
+  <div>
     {{ content }}
   </div>
 

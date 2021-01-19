@@ -1,10 +1,41 @@
 var href="";
 
+function getGPS(ville) {
+	alert(ville)
+	$.ajax({
+		url: "/admin/villes/gps/"+ville,
+		success: function(result) {
+			console.log(result);
+			if(result) {
+				$(".geolocation-input-latitude").val(result.lat);
+				$(".geolocation-input-longitude").val(result.lng);
+
+			}
+			
+
+		}
+	})
+}
+
 $(function(){
 	//alert("ok");
-	$("#edit-field-ville").find("option").each(function () {
+	$("#edit-ville").change(function () {
+		
+		$.ajax({
+			url: "/admin/villes/gps/"+$(this).val(),
+			success: function(result) {
+				console.log(result);
+				if(result) {
+					$(".geolocation-input-latitude").val(result.lat);
+					$(".geolocation-input-longitude").val(result.lng);
 
-	//	if($(this).attr("selected")!="selected") $(this).prop("disabled",true)
+				}
+				
+
+			}
+		})
+
+	
 	})
 	$(".node--type-activite").find("#edit-field-date-wrapper").find(".paragraphs-dropbutton-wrapper").remove();
 
@@ -82,6 +113,28 @@ $(function(){
 
 	Drupal.behaviors.activites_agenda = {
 		attach: function (context, settings) {
+
+			$("#edit-ville").change(function () {
+		
+				$.ajax({
+					url: "/admin/villes/gps/"+$(this).val(),
+					success: function(result) {
+						console.log(result);
+						if(result) {
+							$(".geolocation-input-latitude").val(result.lat);
+							$(".geolocation-input-longitude").val(result.lng);
+		
+						}
+						
+		
+					}
+				})
+		
+			
+			})
+
+
+
 			/*
 			 * on insert le titre et résumé dans un bloc de mise en vant
 			 */
@@ -98,7 +151,7 @@ $(function(){
 					ville_id=$("#adherent-client").find(".field--name-field-ville-save input").val();
 					cp=$("#adherent-client").find(".field--name-field-code-postal input").val();
 					$.ajax({
-						url:  "/admin/getville/"+ville_id,
+						url:  "/admin/ville/getByCp"+ville_id,
 						success: function(result) {
 							console.log(result);
 							$(".form-ville").remove();
@@ -124,7 +177,7 @@ $(function(){
 
 				$("#adherent-client").find(".field--name-field-code-postal").find("input").focusout(function() {
 					$.ajax({
-						url: "/admin/getvilles/"+$(this).val(),
+						url: "/admin/villes/getByCp/"+$(this).val(),
 						success: function(result) {
 							$(".form-ville").remove();
 							output_html=document.createElement("div");
@@ -164,7 +217,7 @@ $(function(){
 				$(".field--name-field-code-postal").focusout(function() {
 					console.log($(this).find("input").val());
 					$.ajax({
-						url: "/admin/getvilles/"+$(this).find("input").val(),
+						url: "/admin/villes/getByCp/"+$(this).find("input").val(),
 						success: function(result) {
 							console.log(result);
 							$("#edit-field-ville select option").each(function() {
