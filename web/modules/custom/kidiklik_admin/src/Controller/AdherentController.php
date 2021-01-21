@@ -84,7 +84,9 @@ class AdherentController extends ControllerBase {
 	$adherent=Node::load($nid);
 	/* recherche de contenu ayant l'adhérent enregistré */
 	$nodes=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["field_adherent"=>$nid]);
-	if(count($nodes)) $msg="Attention, cet adhérent est présent dans plusieurs contenus ! Cela peut causer des soucis d'édition des contenus.";
+	if(count($nodes)) {
+		$msg="Attention, cet adhérent est présent dans plusieurs contenus !";
+	}
 	
 	
 	return [

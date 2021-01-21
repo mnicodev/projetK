@@ -84,6 +84,35 @@ function kidiklik_admin_entity_operation_alter(array &$operations, \Drupal\Core\
 
 
 /**
+ * hook inline entity form entity form alter
+ */
+function kidiklik_admin_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
+	//ksm($entity_form);
+	//$term_dep=get_term_departement();
+	if($entity_form["#bundle"]=="bloc_de_mise_en_avant") {
+		//$nl=\Drupal::entityManager()->getStorage("node")->loadByProperties(["type"=>"newsletter"])
+		$database = \Drupal::database();
+		$query=$database->select("node_field_data","n");
+		$query->join("node__field_departement","dep","dep.entity_id=n.nid");
+		$query->join("node__field_date_envoi","de","de.entity_id=n.nid");
+		$query->fields("n",["nid","title"]);
+		$query->fields("de",["field_date_envoi_value"]);
+		$query->condition("n.type","newsletter","=");
+		$query->condition("dep.field_departement_target_id",get_term_departement(),"=");
+		$query->condition("de.field_date_envoi_value",date("Y-m-d"),">=");
+		$rs=$query->execute()->fetchAll();
+		
+		$tab["_none"]="Veuillez choisir une newsletter ...";
+		foreach($rs as $key=>$item) {
+			$tab[$item->nid]=$item->title." (".$item->field_date_envoi_value.")";
+		}
+		$entity_form["field_newsletter"]["widget"]["#options"]=$tab;
+		//if(count($query->distinct()->execute()->fetchAll()))
+		ksm($entity_form["field_newsletter"]);
+	}
+}
+
+/**
  * modification de formulaire
  */
 function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form_id) {
@@ -310,6 +339,7 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 		$adherents=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"adherent","field_departement"=>$term_dep]);
 		$form["type"]="agenda";
 		/* on vient d'une fiche adhérent */
+		
 		if($adherent_id=\Drupal::request()->query->get("adherent")) {
 			$adherent=Node::load($adherent_id);
 			//ksm($form["field_adresse"]);
@@ -363,10 +393,15 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 
 		} /* fin je viens d'une fiche adhérent */
 
-
+		
 		if($form_id=="node_agenda_edit_form") {
 			$adherent_id=$form["field_adherent"]["widget"]["#default_value"];
-			$activites=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"activite","field_adherent"=>$adherent_id]);
+			$activites=NULL;
+			if(!empty($adherent_id)) {
+				$activites=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"activite","field_adherent"=>$adherent_id]);
+			}
+			
+			
 			$activites_list=[""=>"Choisissez l'activité"];
 			$form["field_activite"]=[
 				"#type"=>"select",
@@ -625,10 +660,10 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 	} /* fin client */
 
 
-	if($form_id=="node_newsletter_edit_form" || $form_id=="node_newsletter_form") {
+	if($form_id=="node_newsletter_edit_form" ) {
 		/*$form["#attached"]["library"][]="kidiklik_admin/kidiklik_admin.commands";*/
 
-
+		
 		$form["actions"]["view_content"]=[
 			"#type"=>"html_tag",
 			"#tag"=>"a",

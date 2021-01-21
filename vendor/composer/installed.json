@@ -2973,6 +2973,66 @@
         }
     },
     {
+        "name": "drupal/bootstrap",
+        "version": "3.23.0",
+        "version_normalized": "3.23.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/bootstrap.git",
+            "reference": "8.x-3.23"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/bootstrap-8.x-3.23.zip",
+            "reference": "8.x-3.23",
+            "shasum": "9849be667cc678a91ad29f77c2baea2cf16878bc"
+        },
+        "require": {
+            "drupal/core": "^8 || ^9"
+        },
+        "type": "drupal-theme",
+        "extra": {
+            "drupal": {
+                "version": "8.x-3.23",
+                "datestamp": "1592175762",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "Mark Carver (markcarver)",
+                "homepage": "https://www.drupal.org/u/markcarver",
+                "role": "Maintainer"
+            },
+            {
+                "name": "John McCormick (neardark)",
+                "homepage": "https://www.drupal.org/u/neardark",
+                "role": "Co-maintainer"
+            },
+            {
+                "name": "Fabiano Sant'Ana (wundo)",
+                "homepage": "https://www.drupal.org/u/wundo",
+                "role": "Co-maintainer"
+            }
+        ],
+        "description": "Built to use Bootstrap, a sleek, intuitive, and powerful front-end framework for faster and easier web development.",
+        "homepage": "https://www.drupal.org/project/bootstrap",
+        "support": {
+            "source": "https://git.drupalcode.org/project/bootstrap",
+            "docs": "https://drupal-bootstrap.org",
+            "issues": "https://www.drupal.org/project/issues/bootstrap",
+            "irc": "irc://irc.freenode.org/drupal-bootstrap"
+        }
+    },
+    {
         "name": "drupal/cache_control_override",
         "version": "1.0.0-alpha2",
         "version_normalized": "1.0.0.0-alpha2",
@@ -3016,6 +3076,72 @@
         "homepage": "https://www.drupal.org/project/cache_control_override",
         "support": {
             "source": "https://git.drupalcode.org/project/cache_control_override"
+        }
+    },
+    {
+        "name": "drupal/charts",
+        "version": "3.2.0",
+        "version_normalized": "3.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/charts.git",
+            "reference": "8.x-3.2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/charts-8.x-3.2.zip",
+            "reference": "8.x-3.2",
+            "shasum": "7caf427ce981962036f8335e94f41fc88f36db72"
+        },
+        "require": {
+            "drupal/core": "^8 || ^9"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "drupal": {
+                "version": "8.x-3.2",
+                "datestamp": "1588134278",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "Pierre.Vriens",
+                "homepage": "https://www.drupal.org/user/1689304"
+            },
+            {
+                "name": "andileco",
+                "homepage": "https://www.drupal.org/user/2054544"
+            },
+            {
+                "name": "brmassa",
+                "homepage": "https://www.drupal.org/user/67164"
+            },
+            {
+                "name": "kenorb",
+                "homepage": "https://www.drupal.org/user/191974"
+            },
+            {
+                "name": "quicksketch",
+                "homepage": "https://www.drupal.org/user/35821"
+            },
+            {
+                "name": "rashad612",
+                "homepage": "https://www.drupal.org/user/319686"
+            }
+        ],
+        "description": "A charting API for Drupal that provides chart elements and integration with Views.",
+        "homepage": "https://www.drupal.org/project/charts",
+        "support": {
+            "source": "https://git.drupalcode.org/project/charts"
         }
     },
     {
@@ -5040,6 +5166,144 @@
         "support": {
             "source": "http://git.drupal.org/project/geolocation.git",
             "issues": "https://www.drupal.org/project/issues/geolocation"
+        }
+    },
+    {
+        "name": "drupal/google_analytics_reports",
+        "version": "3.0.0-rc3",
+        "version_normalized": "3.0.0.0-RC3",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/google_analytics_reports.git",
+            "reference": "8.x-3.0-rc3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/google_analytics_reports-8.x-3.0-rc3.zip",
+            "reference": "8.x-3.0-rc3",
+            "shasum": "051c1e8aa031a0d16f0087943a9b73456de7b15e"
+        },
+        "require": {
+            "drupal/core": "^8 || ^9",
+            "drupal/google_analytics_reports_api": "*"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "drupal": {
+                "version": "8.x-3.0-rc3",
+                "datestamp": "1594893535",
+                "security-coverage": {
+                    "status": "not-covered",
+                    "message": "RC releases are not covered by Drupal security advisories."
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "Mohammed J. Razem",
+                "homepage": "https://www.drupal.org/user/255384"
+            },
+            {
+                "name": "Plazik",
+                "homepage": "https://www.drupal.org/user/982724"
+            },
+            {
+                "name": "RajabNatshah",
+                "homepage": "https://www.drupal.org/user/1414312"
+            },
+            {
+                "name": "grendzy",
+                "homepage": "https://www.drupal.org/user/96647"
+            },
+            {
+                "name": "jantoine",
+                "homepage": "https://www.drupal.org/user/192192"
+            },
+            {
+                "name": "jkitching",
+                "homepage": "https://www.drupal.org/user/159067"
+            },
+            {
+                "name": "jojonaloha",
+                "homepage": "https://www.drupal.org/user/1579186"
+            },
+            {
+                "name": "raspberryman",
+                "homepage": "https://www.drupal.org/user/71464"
+            }
+        ],
+        "description": "Display statistics from Google Analytics using Views.",
+        "homepage": "https://www.drupal.org/project/google_analytics_reports",
+        "support": {
+            "source": "https://git.drupalcode.org/project/google_analytics_reports"
+        }
+    },
+    {
+        "name": "drupal/google_analytics_reports_api",
+        "version": "3.0.0-rc3",
+        "version_normalized": "3.0.0.0-RC3",
+        "require": {
+            "drupal/core": "^8 || ^9",
+            "drupal/google_analytics_reports": "self.version"
+        },
+        "type": "metapackage",
+        "extra": {
+            "drupal": {
+                "version": "8.x-3.0-rc3",
+                "datestamp": "1594893535",
+                "security-coverage": {
+                    "status": "not-covered",
+                    "message": "RC releases are not covered by Drupal security advisories."
+                }
+            }
+        },
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "Mohammed J. Razem",
+                "homepage": "https://www.drupal.org/user/255384"
+            },
+            {
+                "name": "Plazik",
+                "homepage": "https://www.drupal.org/user/982724"
+            },
+            {
+                "name": "RajabNatshah",
+                "homepage": "https://www.drupal.org/user/1414312"
+            },
+            {
+                "name": "grendzy",
+                "homepage": "https://www.drupal.org/user/96647"
+            },
+            {
+                "name": "jantoine",
+                "homepage": "https://www.drupal.org/user/192192"
+            },
+            {
+                "name": "jkitching",
+                "homepage": "https://www.drupal.org/user/159067"
+            },
+            {
+                "name": "jojonaloha",
+                "homepage": "https://www.drupal.org/user/1579186"
+            },
+            {
+                "name": "raspberryman",
+                "homepage": "https://www.drupal.org/user/71464"
+            }
+        ],
+        "description": "API to access statistics from the <a href=\"https://developers.google.com/analytics/devguides/reporting/core/v3/\">Google Analytics Core Reporting API</a>.",
+        "homepage": "https://www.drupal.org/project/google_analytics_reports",
+        "support": {
+            "source": "https://git.drupalcode.org/project/google_analytics_reports"
         }
     },
     {
@@ -13620,12 +13884,12 @@
         "version_normalized": "1.9.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/webmozart/assert.git",
+            "url": "https://github.com/webmozarts/assert.git",
             "reference": "9dc4f203e36f2b486149058bade43c851dd97451"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/webmozart/assert/zipball/9dc4f203e36f2b486149058bade43c851dd97451",
+            "url": "https://api.github.com/repos/webmozarts/assert/zipball/9dc4f203e36f2b486149058bade43c851dd97451",
             "reference": "9dc4f203e36f2b486149058bade43c851dd97451",
             "shasum": ""
         },
