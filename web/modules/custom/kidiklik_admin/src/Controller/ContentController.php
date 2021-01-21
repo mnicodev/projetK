@@ -4,6 +4,7 @@ namespace Drupal\kidiklik_admin\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\AfterCommand;
 use Drupal\Core\Ajax\CssCommand;
@@ -23,7 +24,7 @@ class ContentController extends ControllerBase {
   public function pages() {
   	$dep=get_term_departement();
   	$response = new RedirectResponse("/taxonomy/term/".$dep."/edit");
-  	$response->send();
+  	//$response->send();
   	return;
    /* return [
       '#type' => 'markup',
@@ -61,6 +62,20 @@ class ContentController extends ControllerBase {
 		
 		return $response;
 	
+  }
+  
+  public function getVilles($cp) {
+		$database=\Drupal::database();
+		$query=$database->query("select * from villes where code_postal='".$cp."'");
+		$villes=$query->fetchAll();
+		$tab=[];
+		foreach($villes as $ville) {
+			$tab[]=["name"=>$ville->commune,"tid"=>$ville->id_ville];
+		}
+		//kint(json_encode($tab));
+		return new JsonResponse(($tab));
+		
+		
   }
 
 }

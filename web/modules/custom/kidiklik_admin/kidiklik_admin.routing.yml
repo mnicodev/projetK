@@ -44,3 +44,44 @@ kidiklik_admin.periode_controller_content:
     _title: 'Pub par période'
   requirements:
     _permission: 'access content'
+
+
+
+kidiklik_admin.getville:
+  path: '/admin/villes/getByCp/{cp}'
+  defaults:
+    _controller: '\Drupal\kidiklik_admin\Controller\VillesController::getByCp'
+  requirements:
+    _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
+
+kidiklik_admin.villes_controller_get:
+  path: '/admin/villes'
+  defaults:
+    _controller: '\Drupal\kidiklik_admin\Controller\VillesController::get'
+    _title: 'getVilles'
+  requirements:
+    _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
+
+kidiklik_admin.villes_controller_getGPS:
+  path: '/admin/villes/gps/{ville}'
+  defaults:
+    _controller: '\Drupal\kidiklik_admin\Controller\VillesController::getGPS'
+    _title: 'getGPS'
+  requirements:
+    _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
+
+kidiklik_admin.adherent.delete:
+  path: '/admin/adherent/{nid}/delete'
+  defaults:
+    _controller: '\Drupal\kidiklik_admin\Controller\AdherentController::delete'
+    _title: 'Suppression adhérent'
+  requirements:
+    _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'
+
+kidiklik_admin.adherent.confirm_delete:
+  path: '/admin/adherent/{nid}/confirme_delete'
+  defaults:
+    _controller: '\Drupal\kidiklik_admin\Controller\AdherentController::confirme_delete'
+    _title: 'Êtes-vous sûr(e) de vouloir supprimer cet adhérent'
+  requirements:
+    _custom_access: '\Drupal\kidiklik_access\Controller\Access::adminAccess'

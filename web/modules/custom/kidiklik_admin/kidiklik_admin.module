@@ -17,6 +17,7 @@ use Drupal\views\ViewExecutable;
 
 
 
+
 /**
  * Implements hook_help().
  */
@@ -49,7 +50,10 @@ function kidiklik_admin_theme() {
     ],
     "periode_pub" => [
 		"variables"=>["pub"=>NULL,],
-    ],
+	],
+	"adherent_confirme_delete" => [
+		"variables" => ["nid"=>NULL,"redirect"=>NULL,"message"=>NULL]
+	],
   ];
 }
 
@@ -78,6 +82,35 @@ function kidiklik_admin_preprocess_page_title(&$variables) {
 function kidiklik_admin_entity_operation_alter(array &$operations, \Drupal\Core\Entity\EntityInterface $entity) {
 }
 
+
+/**
+ * hook inline entity form entity form alter
+ */
+function kidiklik_admin_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
+	//ksm($entity_form);
+	//$term_dep=get_term_departement();
+	if($entity_form["#bundle"]=="bloc_de_mise_en_avant") {
+		//$nl=\Drupal::entityManager()->getStorage("node")->loadByProperties(["type"=>"newsletter"])
+		$database = \Drupal::database();
+		$query=$database->select("node_field_data","n");
+		$query->join("node__field_departement","dep","dep.entity_id=n.nid");
+		$query->join("node__field_date_envoi","de","de.entity_id=n.nid");
+		$query->fields("n",["nid","title"]);
+		$query->fields("de",["field_date_envoi_value"]);
+		$query->condition("n.type","newsletter","=");
+		$query->condition("dep.field_departement_target_id",get_term_departement(),"=");
+		$query->condition("de.field_date_envoi_value",date("Y-m-d"),">=");
+		$rs=$query->execute()->fetchAll();
+		
+		$tab["_none"]="Veuillez choisir une newsletter ...";
+		foreach($rs as $key=>$item) {
+			$tab[$item->nid]=$item->title." (".$item->field_date_envoi_value.")";
+		}
+		$entity_form["field_newsletter"]["widget"]["#options"]=$tab;
+		//if(count($query->distinct()->execute()->fetchAll()))
+		ksm($entity_form["field_newsletter"]);
+	}
+}
 
 /**
  * modification de formulaire
@@ -238,7 +271,7 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 			unset($form["name"]);
 			unset($form["field_nom"]);
 			unset($form["status"]);
-			unset($form["description"]);
+			//unset($form["description"]);
 		//kint($form);
 		}
 	}
@@ -306,6 +339,7 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 		$adherents=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"adherent","field_departement"=>$term_dep]);
 		$form["type"]="agenda";
 		/* on vient d'une fiche adhérent */
+		
 		if($adherent_id=\Drupal::request()->query->get("adherent")) {
 			$adherent=Node::load($adherent_id);
 			//ksm($form["field_adresse"]);
@@ -359,10 +393,15 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 
 		} /* fin je viens d'une fiche adhérent */
 
-
+		
 		if($form_id=="node_agenda_edit_form") {
 			$adherent_id=$form["field_adherent"]["widget"]["#default_value"];
-			$activites=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"activite","field_adherent"=>$adherent_id]);
+			$activites=NULL;
+			if(!empty($adherent_id)) {
+				$activites=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"activite","field_adherent"=>$adherent_id]);
+			}
+			
+			
 			$activites_list=[""=>"Choisissez l'activité"];
 			$form["field_activite"]=[
 				"#type"=>"select",
@@ -419,7 +458,7 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 		];
 
 		_get_ajax_code_postal($form);
-		_get_field_ville($form,43,"group_coordonnees");
+		_get_field_ville($form,9,"group_coordonnees");
 
 
 		$form["#attached"]["library"][]="kidiklik_admin/kidiklik_admin.commands";
@@ -543,8 +582,9 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 			}
 
 		}
+		//ksm($form);
 		_get_ajax_code_postal($form);
-		_get_field_ville($form,31,"group_coordonnees");
+		_get_field_ville($form,48,"group_coordonnees");
 
 	} /* fin form activite */
 
@@ -604,7 +644,13 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 	if($form_id=="node_client_edit_form" || $form_id=="node_client_form") {
 		$form["#attached"]["library"][]="kidiklik_admin/kidiklik_admin.commands";
 
-
+		foreach($form["field_adherent"]["widget"]["entities"] as $key=>$item) {
+			if(is_numeric($key)) {
+				unset($form["field_adherent"]["widget"]["entities"][$key]["actions"]["ief_entity_remove"]);
+				
+				
+			}
+		}
 		/* on met en place la fonctionnalité AJAX */
 
 		_get_ajax_code_postal($form);
@@ -614,10 +660,10 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 	} /* fin client */
 
 
-	if($form_id=="node_newsletter_edit_form" || $form_id=="node_newsletter_form") {
+	if($form_id=="node_newsletter_edit_form" ) {
 		/*$form["#attached"]["library"][]="kidiklik_admin/kidiklik_admin.commands";*/
 
-
+		
 		$form["actions"]["view_content"]=[
 			"#type"=>"html_tag",
 			"#tag"=>"a",
@@ -658,22 +704,46 @@ function _get_field_ville(&$form,$poids,$group) {
 		"#weight"=>$poids,
 		"#prefix"=>"<div id='edit-field-ville'>",
 		"#suffix"=>"</div>",
+		"#ajax"=>[
+			"callback"=>"_getGps",
+			"disable-refocus"=>TRUE,
+			"event"=>"change",
+			"progress"=>[
+				"type"=>"throbber",
+				"message"=>NULL,
+			],
+
+		],
 	];
 	$form["#group_children"]["ville"]=$group;
 	$cp=$form["field_code_postal"]["widget"][0]["value"]["#default_value"];
-	$query=\Drupal::entityQuery('taxonomy_term');
+	
+	/*$query=\Drupal::entityQuery('taxonomy_term');
 	$query->condition("field_code_postal",$cp);
-	$villes=Term::loadMultiple($query->execute());
+	$villes=Term::loadMultiple($query->execute());*/
+	
+	$database=\Drupal::database();
+	$query=$database->query("select * from villes where code_postal='".$cp."'");
+	$villes=$query->fetchAll();
 	$tab=array();
 
 
 	foreach($villes as $ville) {
-			$tab[$ville->id()]=$ville->getName();
+			//$tab[$ville->id()]=$ville->getName();
+			$tab[$ville->commune]=$ville->commune;
 	}
 	$form["ville"]["#options"]=$tab;
 	if($form["field_ville_save"]["widget"][0]["value"]["#default_value"])
 		$form["ville"]["#default_value"]=$form["field_ville_save"]["widget"][0]["value"]["#default_value"];
 
+}
+
+function _getGps(array &$form, FormStateInterface $form_state) {
+	//ksm($form);
+	$tab=["ville"=>"or"];
+	$response = new AjaxResponse();
+	$response->addCommand(new InvokeCommand(NULL,"getGPS", [$tab] ));
+	return $response;
 }
 
 
@@ -773,17 +843,21 @@ function kidiklik_admin_form_publicite_validate($form, FormStateInterface $form_
 function getAjaxVille2(array &$form, FormStateInterface $form_state) {
 	$cp=current($form_state->getValue("field_code_postal"));
 	/* je cherche le term possédant le code postal saisi */
-	$query=\Drupal::entityQuery('taxonomy_term');
-	$query->condition("field_code_postal",$cp);
+	/*$query=\Drupal::entityQuery('taxonomy_term');
+	$query->condition("field_code_postal",$cp);*/
 
 	/* on charge tous les termes correspondant à la ville */
-	$villes=Term::loadMultiple($query->execute());//current(\Drupal::entityTypeManager()->getStorage("taxonomy_term")->loadByProperties(["vid"=>"ville","tid"=>$ville_id]));
+	//$villes=Term::loadMultiple($query->execute());//current(\Drupal::entityTypeManager()->getStorage("taxonomy_term")->loadByProperties(["vid"=>"ville","tid"=>$ville_id]));
+	$database=\Drupal::database();
+	$query=$database->query("select * from villes where code_postal='".$cp["value"]."'");
+	$villes=$query->fetchAll();
 	$tab=array("Choisissez la ville ...");
 
 
 	foreach($villes as $ville) {
 		//$tab[]=["key"=>$ville->id(),"val"=>$ville->getName()];
-		$tab[$ville->id()]=$ville->getName();
+		//$tab[$ville->id()]=$ville->getName();
+		$tab[$ville->commune]=$ville->commune;
 	}
 
 	$form["ville"]=[
@@ -792,7 +866,7 @@ function getAjaxVille2(array &$form, FormStateInterface $form_state) {
 				"#title"=>"Ville",
 				"#options"=>$tab,
 			],
-			"#weight"=>32,
+			"#weight"=>8,
 	];
 
 	$form["coordonnee"]=[
@@ -813,19 +887,19 @@ function getAjaxVille2(array &$form, FormStateInterface $form_state) {
 
 }
 
-
+/*
 function getAjaxVille(array &$form, FormStateInterface $form_state) {
 	$cp=current($form_state->getValue("field_code_postal"));
-	/* je cherche le term possédant le code postal saisi */
+	
 	$query=\Drupal::entityQuery('taxonomy_term');
 	$query->condition("field_code_postal",$cp);
 	//$ville_id=$query->execute();
 	//return $form["field_code_postal"];
-	/* on charge tous les termes correspondant à la ville */
+	
 	$villes=Term::loadMultiple($query->execute());//current(\Drupal::entityTypeManager()->getStorage("taxonomy_term")->loadByProperties(["vid"=>"ville","tid"=>$ville_id]));
 	$tab=array();
 
-	/* on construit un tableau qui va être envoyé en json à JS */
+	
 	foreach($villes as $ville) {
 		$tab[]=["key"=>$ville->id(),"val"=>$ville->getName()];
 		//$tab[$ville->id()]=$ville->getName();
@@ -835,6 +909,7 @@ function getAjaxVille(array &$form, FormStateInterface $form_state) {
 	$response->addCommand(new InvokeCommand(NULL,"getAjaxVille", [$tab] ));
 	return $response;
 }
+*/
 
 function getAjaxCoordonnees(array &$form, FormStateInterface $form_state) {
 
@@ -853,7 +928,9 @@ function getAjaxCoordonnees(array &$form, FormStateInterface $form_state) {
 		$form["field_telephone"]["widget"][0]["value"]["#value"]=current($adherent->get("field_telephone")->getValue())["value"];
 		$form["field_email"]["widget"][0]["value"]["#value"]=current($adherent->get("field_email")->getValue());
 		$form["field_lien"]["widget"][0]["value"]["#value"]=current($adherent->get("field_lien")->getValue());
-		$form["field_ville_save"]["widget"][0]["value"]["#value"]=current($adherent->get("field_ville_save")->getValue());
+		//$form["field_ville_save"]["widget"][0]["value"]["#value"]=current($adherent->get("field_ville_save")->getValue());
+		//$form["field_activite_save"]["widget"][0]["value"]["#value"]=$form_state->getValue("field_activite_save");
+
 		if($form["type"]=="agenda") {
 			$tab[]="Veuillez choisir une activité";
 			foreach($activites as $activite) {
@@ -869,16 +946,18 @@ function getAjaxCoordonnees(array &$form, FormStateInterface $form_state) {
 				]
 			];
 
-			$poids_ville=44;
+			$poids_ville=9;
 
-		} else $poids_ville=32;
+		} else $poids_ville=48;
 
 
 
-		$ville_id=current($adherent->get("field_ville")->getValue())["target_id"];
-		if(!empty($ville_id)) {
-			$ville_term=\Drupal::entityTypeManager()->getStorage("taxonomy_term")->load($ville_id);
-			$ville=[$ville_id=>$ville_term->getName()];
+		$ville=current($adherent->get("field_ville_save")->getValue())["value"];
+		//ksm($ville);
+		//ksm($adherent->get("field_ville_save")->getValue());
+		if(!empty($ville)) {
+			//$ville_term=\Drupal::entityTypeManager()->getStorage("taxonomy_term")->load($ville_id);
+			$ville=[$ville=>$ville];
 			$form["ville"]=[
 				"widget"=>[
 					"#type"=>"select",
@@ -891,7 +970,7 @@ function getAjaxCoordonnees(array &$form, FormStateInterface $form_state) {
 			];
 		}
 
-
+		
 
 		$form["coordonnee"]=[
 			"#type"=>"div",
@@ -899,14 +978,23 @@ function getAjaxCoordonnees(array &$form, FormStateInterface $form_state) {
 			"#suffix"=>"</div>",
 		];
 		$form["coordonnee"][]=$form["field_adresse"];
+		$form["coordonnee"][]=[
+			"#type"=>"html_tag",
+			"#tag"=>"b",
+			"#attributes"=>["class"=>"alert alert-light"],
+			"#value"=>"Pour sélectionner d'autres villes, il faut saisir un code postal ou cliquer sur le code postal",
+			"#weight"=>48
+		];
 		$form["coordonnee"][]=$form["field_code_postal"];
 		$form["coordonnee"][]=$form["ville"];
 		$form["coordonnee"][]=$form["field_telephone"];
 		$form["coordonnee"][]=$form["field_email"];
 		$form["coordonnee"][]=$form["field_lien"];
 		$form["coordonnee"][]=$form["field_lieu"];
-		$form["coordonnee"][]=$form["field_activite"];
-		$form["coordonnee"][]=$form["field_ville_save"];
+		if($form["type"]=="agenda") $form["coordonnee"][]=$form["field_activite"];
+		//$form["coordonnee"][]=$form["field_ville_save"];
+		//$form["coordonnee"][]=$form["field_activite_save"];
+		
 
 
 		$renderer= \Drupal::service("renderer");

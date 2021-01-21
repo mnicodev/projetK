@@ -32,6 +32,11 @@ function kidiklik_front_theme() {
     'kidiklik_front' => [
       'render element' => 'children',
     ],
+	'kidiklik_page' => [
+		'variables' => [
+			"output"=>NULL,
+		]
+	]
   ];
 }
 

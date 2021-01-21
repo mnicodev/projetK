@@ -6,7 +6,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Drupal\kidiklik_event\Event\NodeInsertEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\HttpResponse;
-
+use Drupal\kidiklik_base\KidiklikEntity;
 
 class NodeInsertSubscriber implements EventSubscriberInterface {
 	public function onNodeInsert(NodeInsertEvent $event) {
@@ -67,12 +67,16 @@ class NodeInsertSubscriber implements EventSubscriberInterface {
 
 		}
 
-		if($type=="client" || $type=="adherent" || $type=="activite"|| $type=="agenda") {
-			$ville=\Drupal::entityTypeManager()
+		if($type=="activite"|| $type=="agenda") {
+			/*$ville=\Drupal::entityTypeManager()
 			->getStorage("taxonomy_term")
 			->load($entity->get("field_ville_save")->value);
-			$entity->__set("field_ville",$ville);
-			$entity->save();
+			$database=\Drupal::database();
+			$query=$database->query("select * from villes where id_ville='".$entity->get("field_ville_save")->value."'");
+			$ville=$query->fetchAll();
+			$entity->__set("field_commune",$ville->commune);
+			$entity->save();*/
+			KidiklikEntity::setGPS($entity);
 		}
 
 		if($type=="bloc_de_mise_en_avant") {

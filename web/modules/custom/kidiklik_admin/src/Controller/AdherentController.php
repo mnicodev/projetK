@@ -4,11 +4,11 @@ namespace Drupal\kidiklik_admin\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Ajax\AjaxResponse;
-use Drupal\Core\Ajax\AfterCommand;
-use Drupal\Core\Ajax\CssCommand;
 use Drupal\views\Views;
 use Drupal\node\Entity\Node;
+use Drupal\Core\Routing\RouteMatch; 
 
 /**
  * Class ContentController.
@@ -61,4 +61,40 @@ class AdherentController extends ControllerBase {
 	  ];
   }
 
+  /**
+   * Delete adherent
+   */
+  public function delete($nid) {
+	
+	$adherent=Node::load($nid);
+	
+	$adherent->delete();
+
+	
+	return new RedirectResponse(\Drupal::request()->query->get("destination"));
+	
+  }
+
+
+	/**
+	 * confirmation delete adherent
+	 */
+  public function confirme_delete($nid) {
+	
+	$adherent=Node::load($nid);
+	/* recherche de contenu ayant l'adhérent enregistré */
+	$nodes=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["field_adherent"=>$nid]);
+	if(count($nodes)) {
+		$msg="Attention, cet adhérent est présent dans plusieurs contenus !";
+	}
+	
+	
+	return [
+		"#theme"=>"adherent_confirme_delete",
+		"#nid"=>$nid,
+		"#message"=>$msg,
+	  ];
+	
+	
+  }
 }

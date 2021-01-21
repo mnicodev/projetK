@@ -38,3 +38,4 @@ kidiklik_front.partenaires_controller_getContent:
     _title: 'Nos partenaires'
   requirements:
     _permission: 'access content'
+
