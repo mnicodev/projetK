@@ -126,7 +126,9 @@ function kidiklik_base_views_query_alter(Drupal\views\ViewExecutable $view, Drup
 	}
 
 	/* C'est de l'admin !!!! */
-	$view_display=array("bloc_compteur_pub","test_pub","dashboard_all_content","dashboard_publicite","dashboard_reportage","dashboard_activite","dashboard_agenda","dashboard_article","pane_tc_new","page_contenu","nos_partenaires","page_partenaires","page_messages","page_newsletters","diaporama","page_activites","page_agenda","page_activites_tri","page_pub" ,"page_article","page_clients","page_adherent","page_reportages","page_maj");
+	$view_display=array("bloc_compteur_pub","test_pub","dashboard_all_content","dashboard_publicite","dashboard_reportage","dashboard_activite","dashboard_agenda","dashboard_article","pane_tc_new",
+	"page_contenu","nos_partenaires","page_partenaires","page_messages","page_newsletters","diaporama","page_activites","page_agenda","page_activites_tri","page_pub" ,
+	"page_article","page_clients","page_adherent","page_reportages","page_maj","page_jeu_concours");
 
 	if(in_array($view->current_display,$view_display)) {
 		/*$host=explode(".",\Drupal::request()->getHost());
