@@ -16,7 +16,7 @@ process:
   field_email: email
   field_lien: url
   field_telephone: telephone
-  field_dept: dept
+  field_ref_dept: dept
   field_ref_client: id_client
   field_ref_ville: ref_ville
   field_contact:

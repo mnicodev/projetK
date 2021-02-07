@@ -9,27 +9,21 @@ source:
     - id_departement
   ids: [id_departement]
 process:
-  name: code
+  name: id_departement
   field_adresse: adresse
-  field_ville:
-    plugin: migration_lookup
-    migration: kidiklik_ville
-    source: id_ville
-  field_email: email
+  field_code: code
+  field_ref_ville: ref_ville
+  field_e_mail: email
   field_societe: societe
   field_telephone: telephone
   field_nom: nom
-  field_code_departement: code
+  field_code: code
   field_prefix: prefix
   field_couleur: couleur
   status: active
   vid:
     plugin: default_value
     default_value: departement
-
-migration_dependencies:
-  optional:
-    - kidiklik_ville
 
 
 dependencies:

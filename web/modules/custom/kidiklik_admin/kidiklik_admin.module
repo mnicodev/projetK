@@ -274,6 +274,9 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 			//unset($form["description"]);
 		//kint($form);
 		}
+		//ksm($form);
+		_get_ajax_code_postal($form);
+		_get_field_ville($form,29,"group_coordonnees");
 	}
 
 	if($form_id=="taxonomy_term_rubriques_activite_form") {
@@ -588,16 +591,45 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 
 	} /* fin form activite */
 
+	$rs=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(
+        [
+          "type"=>"client",
+          //"field_type_contact"=>"client"
+        ]
+      );
+	 // kint($rs);exit;
+	  $db= \Drupal::database();
+	 /* foreach($rs as $id_rs=>&$item) {
+		  //kint($item->get("field_ref_ville"));//->get("field_ref_ville")->value);
+		if((int)$item->get("field_ref_ville")->value) {
 
+		
+			$query=$db->query("select * from villes where id_ville='".(int)$item->get("field_ref_ville")->value."'");
+			$ls=current($query->fetchAll());
+			$item->set("field_ville_save",$ls->commune);
+			$item->set("field_code_postal",$ls->code_postal);
+			$item->set("field_latitude",$ls->lat);
+			$item->set("field_longitude",$ls->lng);
+			$item->save();
+		}
+		//kint($ls);
 
+	  }*/
+//exit;
 	if($form_id=="node_adherent_edit_form" || $form_id=="node_adherent_form") {
+		
+		
+		
 		$form["#attached"]["library"][]="kidiklik_admin/kidiklik_admin.commands";
 		/* on va récupérer la liste des clients du département concerné */
 		$clients=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"client","field_departement"=>$term_dep]);
 		/* vérification si un adhérent doit être lié à un client */
 		if(\Drupal::routeMatch()->getParameters()->get("node"))
 			$nid=(int)\Drupal::routeMatch()->getParameters()->get("node")->id();
+
 		else $nid="";
+		//$rs=\Drupal::entityTypeManager()->getStorage("node")->load($nid);
+		
 		$entity_id=""; /* entité cliente */
 		if($nid) {
 			$database = \Drupal::database();

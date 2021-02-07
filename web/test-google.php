@@ -1,5 +1,5 @@
 <?php
-
+echo phpinfo();exit;
 include_once("modules/custom/kidiklik_admin/GoogleAnalyticsAPI.php");
 			$dep=45;
 			$ga= new GoogleAnalyticsAPI("service");

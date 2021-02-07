@@ -46,8 +46,9 @@ function get_departement() {
 
 	return $dep;
 }
-function get_term_departement() {
-	$dep=get_departement();
+function get_term_departement($dept=NULL) {
+	if($dept) $dep=$dept;
+	else $dep=get_departement();
 	$term_dep="";
 
 		$term_dep=(int)current(\Drupal::entityTypeManager()
