@@ -39,3 +39,19 @@ kidiklik_front.partenaires_controller_getContent:
   requirements:
     _permission: 'access content'
 
+
+kidiklik_front.search_geo_controller_city:
+  path: '/kidiklik_front/search_city'
+  defaults:
+    _controller: '\Drupal\kidiklik_front\Controller\SearchGeoController::searchCity'
+    _title: 'Rechercher une ville'
+  requirements:
+    _permission: 'access content'
+
+kidiklik_front.search_geo_controller_dep:
+  path: '/kidiklik_front/search_dep'
+  defaults:
+    _controller: '\Drupal\kidiklik_front\Controller\SearchGeoController::searchDep'
+    _title: 'Rechercher un département'
+  requirements:
+    _permission: 'access content'

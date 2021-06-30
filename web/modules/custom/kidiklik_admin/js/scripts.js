@@ -165,7 +165,7 @@ $(function(){
 							$(output_html_select).append("<option>Choisssez une ville ... </option>");
 							for(item in result) {
 
-								$(output_html_select).append("<option selected='selected' value='"+result[item].tid+"'>"+result[item].name+"</option>");
+								$(output_html_select).append("<option selected='selected' value='"+result[item].name+"'>"+result[item].name+"</option>");
 							}
 
 							$(output_html).append(output_html_label);
@@ -190,7 +190,7 @@ $(function(){
 							$(output_html_select).append("<option>Choisssez une ville ... </option>");
 							for(item in result) {
 
-								$(output_html_select).append("<option value='"+result[item].tid+"'>"+result[item].name+"</option>");
+								$(output_html_select).append("<option value='"+result[item].name+"'>"+result[item].name+"</option>");
 							}
 
 							$(output_html).append(output_html_label);
@@ -226,7 +226,7 @@ $(function(){
 							$("#edit-field-ville select").append("<option>Choisssez une ville ... </option>");
 							for(item in result) {
 
-								$("#edit-field-ville select").append("<option value='"+result[item].tid+"'>"+result[item].name+"</option>");
+								$("#edit-field-ville select").append("<option value='"+result[item].name+"'>"+result[item].name+"</option>");
 							}
 
 							$("#edit-field-ville").find("select").change(function() {

@@ -36,7 +36,19 @@ function kidiklik_front_theme() {
 		'variables' => [
 			"output"=>NULL,
 		]
-	]
+	],
+	'carte_block' => [
+      'variables' => [
+        'content' => NULL
+      ],
+      'render element' => 'children',
+    ],
+    'recherche_geo_block' => [
+      'variables' => [
+        'content' => NULL
+      ],
+      'render element' => 'children',
+    ],
   ];
 }
 
@@ -84,7 +96,9 @@ function kidiklik_front_validate_contact_form($form, FormStateInterface $form_st
 function kidiklik_front_views_query_alter(Drupal\views\ViewExecutable $view, Drupal\views\Plugin\views\query\QueryPluginBase $query) {
 	$term_dep=get_term_departement();
 	
-	if($view->current_display=="diaporama") {
+
+	if($view->current_display=="diaporama" || 
+		$view->current_display=="block_article_accueil" || $view->current_display=="carre") {
 		/* la date de début du bloc de mise en avant doit être inférieur ou égal à la date du jour */ 
 		$query->where[1]["conditions"][2]["value"]=date("Y-m-d");
 		$query->where[1]["conditions"][2]["operator"]="<=";
@@ -94,9 +108,27 @@ function kidiklik_front_views_query_alter(Drupal\views\ViewExecutable $view, Dru
 		//kint($query->where);
 		
 	}
-	
-	if($view->current_display=="recherche_activites") {
+	//ksm($query->where);
+	//ksm(get_term_departement());
+	if($view->current_display=="carre" || $view->current_display=="colonne" 
+		|| $view->current_display=="carre2") {
+		//
+		$query->where[2]["conditions"][0]["value"] = get_term_departement();
+		$query->where[2]["conditions"][0]["operator"] = "=";
+	}
+	if($view->current_display=="rubriques_activites_footer") {
+		
+		$query->where[1]["conditions"][2]["value"] = get_term_departement();
+		$query->where[1]["conditions"][2]["operator"] = "=";
+		
+	}
 
+	if($view->current_display=="rubriques_activites") {
+
+		$query->where[1]["conditions"][1]["value"] = get_term_departement();
+		$query->where[1]["conditions"][1]["operator"] = "=";
+		
+		
 	}
 
 }

@@ -5932,6 +5932,79 @@
         }
     },
     {
+        "name": "drupal/mailjet",
+        "version": "2.7.0",
+        "version_normalized": "2.7.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/Mailjet.git",
+            "reference": "8.x-2.7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/mailjet-8.x-2.7.zip",
+            "reference": "8.x-2.7",
+            "shasum": "467bd87b8829304c4eb01fa0eba7da96325ac791"
+        },
+        "require": {
+            "drupal/core": "~8.0",
+            "drupal/libraries": "*"
+        },
+        "require-dev": {
+            "drupal/commerce": "*",
+            "drupal/commerce_cart": "*",
+            "drupal/commerce_order": "*",
+            "drupal/commerce_payment": "*",
+            "drupal/commerce_product": "*",
+            "drupal/commerce_store": "*",
+            "drupal/message": "*",
+            "drupal/token": "*"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "drupal": {
+                "version": "8.x-2.7",
+                "datestamp": "1569413585",
+                "security-coverage": {
+                    "status": "covered",
+                    "message": "Covered by Drupal's security advisory policy"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "EgicquelMj",
+                "homepage": "https://www.drupal.org/user/3626335"
+            },
+            {
+                "name": "JasenSan",
+                "homepage": "https://www.drupal.org/user/3611654"
+            },
+            {
+                "name": "Mailjet Plugins",
+                "homepage": "https://www.drupal.org/user/1599668"
+            },
+            {
+                "name": "Proxiad",
+                "homepage": "https://www.drupal.org/user/3218537"
+            },
+            {
+                "name": "gnikolov_mailjet",
+                "homepage": "https://www.drupal.org/user/3532052"
+            }
+        ],
+        "description": "Send your emails by your Mailjet API.",
+        "homepage": "https://www.drupal.org/project/mailjet",
+        "support": {
+            "source": "https://git.drupalcode.org/project/mailjet"
+        }
+    },
+    {
         "name": "drupal/mailsystem",
         "version": "4.3.0",
         "version_normalized": "4.3.0.0",

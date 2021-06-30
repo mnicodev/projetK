@@ -6,3 +6,22 @@
  *
  * Place your custom PHP code in this file.
  */
+
+
+function kidiklik_preprocess_page(&$variables) {
+	$variables["dep"] = get_departement();
+	$tmp=\Drupal::entityTypeManager()->getStorage("taxonomy_term")->loadByProperties(['vid'=>'departement']);
+	$variables["liste_dep"]=[];
+	foreach($tmp as $item) {
+		//kint($item->get('field_nom')->value);
+		$dep=(int)$item->getName();
+		$dep=($dep<10&&$dep!=0?"0".$dep:"$dep");
+		$variables["liste_dep"][$dep]=$item->get('field_nom')->value." - ".$dep;
+	}
+	//kint($variables["liste_dep"]);
+}
+
+
+function kidiklik_preprocess_menu(&$variables, $hook) {
+}
+

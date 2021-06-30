@@ -108,7 +108,7 @@ function kidiklik_admin_inline_entity_form_entity_form_alter(&$entity_form, &$fo
 		}
 		$entity_form["field_newsletter"]["widget"]["#options"]=$tab;
 		//if(count($query->distinct()->execute()->fetchAll()))
-		ksm($entity_form["field_newsletter"]);
+		//ksm($entity_form["field_newsletter"]);
 	}
 }
 
@@ -301,13 +301,10 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 
 			}
 		}
-		//$form["relations"]["parent"]["#multiple"]=FALSE;
+	
 		$form["relations"]["parent"]["#options"]=$liste;
 		$form["relations"]["parent"]["#default_value"]=$tab[3];
-		$form["relations"]["parent"]["#multiple"]=false;
-
-		//kint($form);
-
+	//	$form["relations"]["parent"]["#multiple"]=false;
 
 	}
 
@@ -505,7 +502,8 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 
 
 		unset($form["field_date"]["widget"]['add_more']);
-
+		//$form["field_departement"]["widget"][0]['target_id']['#default_value']=get_departement();
+//ksm($form["field_departement"]["widget"][0]['target_id']['#default_value']);
 
 		if($adherent_id=\Drupal::request()->query->get("adherent") && $form_id=="node_activite_form")  {
 			$adherent=Node::load($adherent_id);
@@ -538,24 +536,26 @@ function kidiklik_admin_form_alter(&$form, FormStateInterface $form_state, $form
 			];
 
 		} else {/* formattage de la balise select avec affichage par catégorie */
-			$rub=$form["field_rubriques_activite"]["widget"]["#options"];
-			$tab=[];
-			$n="";
-			foreach($rub as $k=>$r) {
-				if($k!="_none") {
-					$t=taxonomy_term_load($k);
-					$p=current($t->parent->getValue()[0]);
-					if(!(int)$p) {
-						$n=current($t->name->getValue()[0]);
-					} else {
-						if(current($t->get("field_departement")->getValue())["target_id"]==$term_dep)
-							$tab[$n][$k]=current($t->name->getValue()[0]);
+			if(get_departement() !== 0) {
+				$rub=$form["field_rubriques_activite"]["widget"]["#options"];
+				$tab=[];
+				$n="";
+				foreach($rub as $k=>$r) {
+					if($k!="_none") {
+						$t=taxonomy_term_load($k);
+						$p=current($t->parent->getValue()[0]);
+						if(!(int)$p) {
+							$n=current($t->name->getValue()[0]);
+						} else {
+							if(current($t->get("field_departement")->getValue())["target_id"]==$term_dep)
+								$tab[$n][$k]=current($t->name->getValue()[0]);
+						}
 					}
 				}
-			}
-			$form["field_rubriques_activite"]["widget"]["#options"]=$tab;
+				$form["field_rubriques_activite"]["widget"]["#options"]=$tab;
 
-			$form["field_rubriques_activite"]["widget"]["#size"]=1;
+				$form["field_rubriques_activite"]["widget"]["#size"]=1;
+			}
 			$form["#redirect"]="/admin/activites";
 
 			$adherents=\Drupal::entityTypeManager()->getStorage("node")->loadByProperties(["type"=>"adherent","field_departement"=>$term_dep]);
@@ -765,6 +765,11 @@ function _get_list_content(array &$form, FormStateInterface $form_state) {
 function _bloc_mise_en_avant_form_submit(&$form, FormStateInterface $form_state) {
 
 }
+
+function kidiklik_admin_form_rubriques_activites_validate(&$form, FormStateInterface $form_state) {
+	//kint($form);exit;
+}
+
 function _bloc_mise_en_avant_form_validate(&$form, FormStateInterface $form_state) {
 
 
@@ -775,69 +780,68 @@ function kidiklik_admin_form_submit(&$form, FormStateInterface $form_state) {
 }
 
 function kidiklik_admin_form_publicite_validate($form, FormStateInterface $form_state) {
-    $node=\Drupal::routeMatch()->getParameters()->get("node");
+	if(get_departement()!==0) {
+		$node=\Drupal::routeMatch()->getParameters()->get("node");
 
-    /*$periode=\Drupal::entityTypeManager()->getStorage("paragraph")->load($node->get("field_date")->first()->getValue()["target_id"]);
+		/*$periode=\Drupal::entityTypeManager()->getStorage("paragraph")->load($node->get("field_date")->first()->getValue()["target_id"]);
 
-    //    kint($periode->get("field_date_de_debut")->value);
-    $date_deb=$periode->get("field_date_de_debut")->value;
-    $date_fin=$periode->get("field_date_de_fin")->value;*/
+		//    kint($periode->get("field_date_de_debut")->value);
+		$date_deb=$periode->get("field_date_de_debut")->value;
+		$date_fin=$periode->get("field_date_de_fin")->value;*/
 
-    $date_deb=current(current($form_state->getValue("field_date"))["subform"]['field_date_de_debut'])["value"]->format("Y-m-d");
-    $date_fin=current(current($form_state->getValue("field_date"))["subform"]['field_date_de_fin'])["value"]->format("Y-m-d");
+		$date_deb=current(current($form_state->getValue("field_date"))["subform"]['field_date_de_debut'])["value"]->format("Y-m-d");
+		$date_fin=current(current($form_state->getValue("field_date"))["subform"]['field_date_de_fin'])["value"]->format("Y-m-d");
 
 
-    /* on teste si la date de début est bien antérieur à la date de fin*/
-    $test_date=(str_replace("-","",$date_deb)>str_replace("-","",$date_fin));
+		/* on teste si la date de début est bien antérieur à la date de fin*/
+		$test_date=(str_replace("-","",$date_deb)>str_replace("-","",$date_fin));
 
-    if($test_date) $form_state->setErrorByName("compare_date","La date de début est supérieur à la date de fin");
+		if($test_date) $form_state->setErrorByName("compare_date","La date de début est supérieur à la date de fin");
 
-    /* on teste si la date de fin et de début sont bien supérieur ou égale à la date du jour */
-    $test_date=(str_replace("-","",$date_deb)<date("Ymd"));
-    if($test_date) $form_state->setErrorByName("date_avant","La date de début est antérieur à la date du jour.");
+		/* on teste si la date de fin et de début sont bien supérieur ou égale à la date du jour */
+		$test_date=(str_replace("-","",$date_deb)<date("Ymd"));
+		if($test_date) $form_state->setErrorByName("date_avant","La date de début est antérieur à la date du jour.");
 
-//    kint($test_date);exit;
-    $format=current($form_state->getValue("field_format"))["target_id"];
-    //kint($format);exit;
-    $database = \Drupal::database();
-    $query=$database->select("node_field_data","n");
-    $query->join("node__field_date","periode","n.nid=periode.entity_id");
-    $query->join("node__field_departement","dep","dep.entity_id=n.nid");
-    $query->join("node__field_format","f","f.entity_id=n.nid");
-    $query->join("paragraph__field_date_de_debut","ddd","ddd.entity_id=periode.field_date_target_id");
-    $query->join("paragraph__field_date_de_fin","ddf","ddf.entity_id=periode.field_date_target_id");
-    $query->fields("n",["nid"]);
-    $query->condition("n.type","publicite","=");
-    $query->condition("dep.field_departement_target_id",get_term_departement(),"=");
-    $query->condition("f.field_format_target_id",$format,"=");
-    if($node) $query->condition("n.nid",$node->id(),"<>");
-    $andGroup1=$query->andConditionGroup()
-        ->condition("ddd.field_date_de_debut_value",$date_deb,"<=")
-        ->condition("ddf.field_date_de_fin_value",$date_deb,">=");
-        //->condition("ddd.field_date_de_debut_value",$date_deb,">");
+	//    kint($test_date);exit;
+		$format=current($form_state->getValue("field_format"))["target_id"];
+		//kint($format);exit;
+		$database = \Drupal::database();
+		$query=$database->select("node_field_data","n");
+		$query->join("node__field_date","periode","n.nid=periode.entity_id");
+		$query->join("node__field_departement","dep","dep.entity_id=n.nid");
+		$query->join("node__field_format","f","f.entity_id=n.nid");
+		$query->join("paragraph__field_date_de_debut","ddd","ddd.entity_id=periode.field_date_target_id");
+		$query->join("paragraph__field_date_de_fin","ddf","ddf.entity_id=periode.field_date_target_id");
+		$query->fields("n",["nid"]);
+		$query->condition("n.type","publicite","=");
+		$query->condition("dep.field_departement_target_id",get_term_departement(),"=");
+		$query->condition("f.field_format_target_id",$format,"=");
+		if($node) $query->condition("n.nid",$node->id(),"<>");
+		$andGroup1=$query->andConditionGroup()
+			->condition("ddd.field_date_de_debut_value",$date_deb,"<=")
+			->condition("ddf.field_date_de_fin_value",$date_deb,">=");
+			//->condition("ddd.field_date_de_debut_value",$date_deb,">");
 
-    $andGroup2=$query->andConditionGroup()
-        ->condition("ddf.field_date_de_fin_value",$date_fin,">=");
-        //->condition("ddd.field_date_de_debut_value",$date_fin,"<")
-        //->condition("ddd.field_date_de_debut_value",$date_deb,"<=");
-        
-    $andGroup3=$query->andConditionGroup()
-        ->condition("ddd.field_date_de_debut_value",$date_deb,"<=")
-        ->condition("ddf.field_date_de_fin_value",$date_fin,">=");
+		$andGroup2=$query->andConditionGroup()
+			->condition("ddf.field_date_de_fin_value",$date_fin,">=");
+			//->condition("ddd.field_date_de_debut_value",$date_fin,"<")
+			//->condition("ddd.field_date_de_debut_value",$date_deb,"<=");
+			
+		$andGroup3=$query->andConditionGroup()
+			->condition("ddd.field_date_de_debut_value",$date_deb,"<=")
+			->condition("ddf.field_date_de_fin_value",$date_fin,">=");
 
-    $orGroup=$query->orConditionGroup()
-        ->condition($andGroup1)
-        ->condition($andGroup2)
-        ->condition($andGroup3);
+		$orGroup=$query->orConditionGroup()
+			->condition($andGroup1)
+			->condition($andGroup2)
+			->condition($andGroup3);
 
-    $query->condition($orGroup);
-    //kint($query->distinct()->__toString());exit;
-    if(count($query->distinct()->execute()->fetchAll()))
-        $form_state->setErrorByName("periode_zone","Une publicité est déjà présente à cette période dans ce format.");
+		$query->condition($orGroup);
+		//kint($query->distinct()->__toString());exit;
+		if(count($query->distinct()->execute()->fetchAll()))
+			$form_state->setErrorByName("periode_zone","Une publicité est déjà présente à cette période dans ce format.");
 
-    //$query->condition($orGroup);
-    //kint($query->distinct()->execute()->fetchAll());
-    //exit;
+	}
 }
 
 function getAjaxVille2(array &$form, FormStateInterface $form_state) {

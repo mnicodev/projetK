@@ -27,7 +27,7 @@ class PageController extends ControllerBase {
 		  			->load(current($term_dep->get("field_".$page)->getValue())["target_id"]);
 		  	
 		  	if(is_object($node)) {
-		  		$view=node_view($node,'full');
+		  		$view=node_view($node,'default');
 		  		$output=drupal_render($view);
 		  	} else $output="La page est pour le moment incompléte";
 		  	

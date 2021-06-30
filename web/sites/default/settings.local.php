@@ -9,6 +9,9 @@ $databases['default']['default'] = array (
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
+  'init_commands' => [
+	  'sql_mode' => "SET sql_mode=''",
+  ],
 );
 // Include Kint class.
 //include_once(DRUPAL_ROOT . '/modules/contrib/devel/kint/kint/Kint.class.php');

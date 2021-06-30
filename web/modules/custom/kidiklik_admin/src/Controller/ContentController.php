@@ -25,7 +25,7 @@ class ContentController extends ControllerBase {
   	$dep=get_term_departement();
   	$response = new RedirectResponse("/taxonomy/term/".$dep."/edit");
   	//$response->send();
-  	return;
+  	return $response;
    /* return [
       '#type' => 'markup',
       '#markup' => $this->t('Implement method: redirect')

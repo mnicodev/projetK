@@ -1,7 +1,43 @@
-framework:
+global-components:
   css:
     theme:
       css/style.css: {}
+  js:  
+    js/scripts.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    
+select2:
+  css:
+    theme:
+      include/select2/css/select2.min.css: {}
+  js:
+    include/select2/js/select2.min.js: {}
+
+bootstrap:
+  version: 1.x
+  css:
+    theme:
+      include/bootstrap/css/bootstrap2.min.css: {}
+  js:
+    include/bootstrap/js/bootstrap.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    
+# Font awesome
+fontawesome:
+  version: 1.x
+  css:
+    theme:
+      include/fontawesome/css/fontawesome-all.css: {}
 
 # Uncomment for LESS source JavaScript files.
 #  js:
