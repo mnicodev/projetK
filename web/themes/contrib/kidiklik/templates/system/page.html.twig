@@ -109,18 +109,16 @@
 			  {% endif %}
 
 			  
-			  {% if page.dep != "0" %}
-				<div class="col-sm-2 col-lg-1 col-2 accueil_dep" role="heading">
+			  {% if dep != "0" %}
+				<div class="col-sm-2 col-lg-2 col-2 accueil_dep" role="heading">
 					<a href="/"><img src="/assets/img/pictos/{{ dep }}.png" />
 					<span>Accueil</span></a>
 				</div>
-				<div class="col-sm-8 col-lg-11 col-8 logo-dep">
+				<div class="col-sm-8 col-lg-10 col-8 logo-dep">
 					{# Logo kidiklik departement : le piaf #}
+					<img alt="Piaf" class="d-lg-inline d-none" data-entity-type="file" data-entity-uuid="deec89ec-64b9-4986-844f-12c402cddab9" src="/assets/img/image_header.jpg" />
+					<img alt="kidiklik" class="d-lg-none d-inline" data-entity-type="file" data-entity-uuid="c71dcf87-59ec-4fce-91e5-9992c662fdec" src="/assets/img/titre_kidi_dep.jpg" />
 					
-					<div class="row">
-						<img alt="Piaf" class="d-lg-inline d-none col-lg-4" data-entity-type="file" data-entity-uuid="deec89ec-64b9-4986-844f-12c402cddab9" src="/assets/img/piaf_dep.jpg" />
-						<img alt="kidiklik" class="col-sm-12 col-lg-8" data-entity-type="file" data-entity-uuid="c71dcf87-59ec-4fce-91e5-9992c662fdec" src="/assets/img/titre_kidi_dep.jpg" />
-					</div>
 					<div class="titre d-none d-lg-block">Le meilleur des sorties pour enfants</div>
 				</div>
 				<div class="col-sm-2 col-2 d-lg-none navbar-light ">
@@ -134,19 +132,19 @@
 		  <div class="row  d-block d-lg-none logo-dep">
 			<div class="titre">Le meilleur des sorties pour enfants</div>
 		  </div>
-		  {% if page.dep != "0" %}
+		  {% if dep != "0" %}
 		  <div class="row" id="menu">
 			  <div class="col-lg-12">
 				  <nav class="navbar navbar-expand-lg  bg-white sticky-top justify-content-between navbar-light">
 
 
 					<div class="navbar-collapse collapse" id="navbarCollapse" style="">
-					  <ul class="navbar-nav mr-auto">
-						<li class="nav-item active">
+					  <ul class="navbar-nav ">
+						<li class="nav-item user">
 						  <a class="nav-link" href="#"><i></i>Connexion</a>
 						</li>
-						<li class="nav-item">
-						  <a class="nav-link" href="#"><i></i>Favoris</a>
+						<li class="nav-item coeur">
+						  <a class="nav-link" href="#"><i ></i>Favoris</a>
 						</li>
 						<li class="nav-item">
 							<select id="change_dep">
@@ -155,16 +153,19 @@
 								{% endfor %}
 							</select>
 						</li>
+						<li class="nav-item">
+							<form class="form-inline mt-2 mt-md-0">
+							  <label class="sr-only" for="inlineFormInputGroup">Votre addresse email</label>
+								<input type="text" class="" id="inlineFormInputGroup" placeholder="Votre addresse email">
+							</form>
+						</li>
+						<li class="nav-item">
+							<form class="form-inline mt-2 mt-md-0">
+								<input type="text" class="" id="inlineFormInputGroup" placeholder="Que recherchez-vous ?">
+							</form>
+						</li>
 					  </ul>
-					  <form class="form-inline mt-2 mt-md-0">
-						  <div class="col-auto">
-							  <label class="sr-only" for="inlineFormInputGroup">Username</label>
-						
-								<input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
-						
-							</div>
-						
-					  </form>
+					  
 					</div>
 				  </nav>
 			  </div>
@@ -213,7 +214,7 @@
 			<div id="entete_national" class="row mb-5">
 				<div class="col-sm-1 col-lg-1 accueil" style="">
 					<a href="/">
-					Accueilrr
+					Accueil
 					</a>
 				</div>
 				
@@ -241,6 +242,12 @@
         {% endif %}
 
         {# Help #}
+        {% if dep != 0 and is_front == 1 %}
+        <h1>
+        En {{ name_dep }},<br>
+        trouvez toutes les sorties à partager avec vos enfants
+        </h1>
+        {% endif %}
         {% if page.help %}
           {% block help %}
             {{ page.help }}

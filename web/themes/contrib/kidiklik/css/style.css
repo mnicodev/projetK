@@ -2,9 +2,6 @@
  * If using a CSS pre-processor, tell it to overwrite this file. If not, place
  * your custom CSS modifications here.
  */
-body {
-  overflow-y: hidden; }
-
 #map path.actif {
   fill: #388EB1;
   stroke: #FFFFFF;
@@ -18,6 +15,10 @@ body {
 #map path.actif:hover {
   fill: #E2001A;
   stroke: red; }
+
+.path-frontpage h1 {
+  color: #db2a24;
+  margin-top: 20px; }
 
 h1 {
   font-size: 1.8rem; }
@@ -50,9 +51,18 @@ h1 {
     margin-left: 35px !important;
     font-size: 35px !important; } }
 .logo-dep .titre {
-  padding-left: 80px;
-  font-size: 34px;
-  text-align: center; }
+  padding-left: 35px;
+  font-size: 38px; }
+  @media (max-width: 1200px) {
+    .logo-dep .titre {
+      font-size: 33px; } }
+  @media (max-width: 992px) {
+    .logo-dep .titre {
+      text-align: center; } }
+.logo-dep img {
+  width: 100%; }
+  .logo-dep img:first-child {
+    max-width: 640px; }
 
 @media (max-width: 992px) {
   #entete_national .logo-national {
@@ -140,12 +150,12 @@ h1 {
   line-height: 18px; }
 
 #block-block-article-accueil .bloc .card-img-top {
-  height: 160px; }
+  height: 200px; }
 
 #block-block-article-accueil .bloc .card .card-body {
   background: #e3001b;
   color: #fff;
-  height: 200px; }
+  height: 160px; }
 
 #block-block-article-accueil .bloc .card .card-body a {
   color: #fff; }
@@ -360,7 +370,7 @@ article {
       .diaporama .views_slideshow_cycle_slide .views-row .views-field-title {
         flex: 1;
         display: block;
-        background: red;
+        background: #db2a24;
         padding: 20px;
         color: #fff; }
         .diaporama .views_slideshow_cycle_teaser_section .views-row .views-field-title a,
@@ -375,6 +385,44 @@ article {
 @media (min-width: 992px) {
   #menu .navbar {
     position: relative !important; } }
+#menu .select2-selection--single {
+  border-radius: 0px;
+  border: none;
+  background: url(/assets/img/picto_france.jpg) no-repeat top center;
+  padding-top: 20px; }
+  #menu .select2-selection--single .select2-selection__arrow {
+    top: 20px; }
+#menu .select2-container {
+  width: 180px !important; }
+#menu .navbar {
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 13px; }
+#menu #navbarCollapse ul {
+  display: flex;
+  width: 100%; }
+  #menu #navbarCollapse ul li {
+    flex: auto;
+    padding-right: 10px;
+    text-align: center; }
+    #menu #navbarCollapse ul li.coeur {
+      background: url(/assets/img/picto_coeur.jpg) no-repeat top center; }
+      #menu #navbarCollapse ul li.coeur a {
+        margin-top: 15px; }
+    #menu #navbarCollapse ul li.user {
+      background: url(/assets/img/picto_user.jpg) no-repeat top center;
+      text-align: center; }
+      #menu #navbarCollapse ul li.user a {
+        margin-top: 15px; }
+    #menu #navbarCollapse ul li input {
+      margin-top: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%; }
+
+.select2-container--open .select2-dropdown--below {
+  border-radius: 0;
+  border: 1px solid gray; }
 
 @media (max-width: 992px) {
   .icon-menu {
@@ -386,5 +434,11 @@ article {
       height: 40px;
       display: block;
       background-size: contain; } }
+
+#block-bloc-liste-article-accueil-national .row {
+  margin-bottom: 20px; }
+  #block-bloc-liste-article-accueil-national .row .img {
+    height: 150px;
+    overflow: hidden; }
 
 /*# sourceMappingURL=style.css.map */

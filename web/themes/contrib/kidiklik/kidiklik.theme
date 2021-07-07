@@ -10,15 +10,20 @@
 
 function kidiklik_preprocess_page(&$variables) {
 	$variables["dep"] = get_departement();
+	 
+	$variables["name_dep"] =\Drupal::entityTypeManager()->getStorage("taxonomy_term")->load(get_term_departement())->get('field_nom')->value;
 	$tmp=\Drupal::entityTypeManager()->getStorage("taxonomy_term")->loadByProperties(['vid'=>'departement']);
 	$variables["liste_dep"]=[];
+	$variables["liste_dep"][]="Changer de département";
 	foreach($tmp as $item) {
 		//kint($item->get('field_nom')->value);
 		$dep=(int)$item->getName();
-		$dep=($dep<10&&$dep!=0?"0".$dep:"$dep");
-		$variables["liste_dep"][$dep]=$item->get('field_nom')->value." - ".$dep;
+		if($dep!=0) {
+			$dep=($dep<10?"0".$dep:"$dep");
+			$variables["liste_dep"][$dep]=$item->get('field_nom')->value." - ".$dep;
+		}
 	}
-	//kint($variables["liste_dep"]);
+	//kint($variables["name_dep"]);
 }
 
 

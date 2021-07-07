@@ -4,7 +4,7 @@
  */
  
  body {
-	overflow-y: hidden;
+
  }
 #map path.actif {
     fill: #388EB1;
@@ -21,7 +21,12 @@
       fill: #E2001A;
       stroke: red;
 }
-
+.path-frontpage {
+	h1 {
+		color: #db2a24;
+		margin-top: 20px;
+	}
+}
 h1 {
 	font-size: 1.8rem;
 }
@@ -35,6 +40,8 @@ h1 {
 #entete_national p {
 	margin-bottom: 0;
 }
+
+
 
 #entete_national .logo-national {
 	background: url(/assets/img/piaf.jpg) no-repeat left center;
@@ -61,10 +68,23 @@ h1 {
 }
 .logo-dep {
 	.titre {
-		padding-left: 80px;
-		font-size: 34px;
-		text-align: center;
+		padding-left: 35px;
+		font-size: 38px;
+		@media (max-width: 1200px) {
+			font-size: 33px;
+		}
+		@media (max-width: 992px) {
+			text-align: center;
+		}
 	}
+
+		img {
+			width: 100%;
+			&:first-child {
+				max-width: 640px;
+			
+			}
+		}
 }	
 @media (max-width: 992px) {
 	#entete_national .logo-national {
@@ -83,6 +103,8 @@ h1 {
 			&:last-child {
 				padding-right: 15px;
 			}
+			
+			
 		}
 	}
 	.logo-dep {
@@ -170,12 +192,12 @@ h1 {
 	line-height: 18px;
 }
 #block-block-article-accueil .bloc  .card-img-top {
-	height: 160px;
+	height: 200px;
 }
 #block-block-article-accueil .bloc .card .card-body {
 	background: #e3001b;
 	color: #fff;
-	height: 200px;
+	height: 160px;
 }
 #block-block-article-accueil .bloc .card .card-body a {
 	color: #fff;
@@ -311,6 +333,9 @@ footer .menu li.last {
 	}
 	.ville, .a-partir-de, .date {
 		padding-right: 10px;
+		span {
+			
+		}
 	}
 	.fa:before {
 		padding-right: 5px;
@@ -455,7 +480,7 @@ article {
 			.views-field-title {
 				flex: 1;
 				display: block;
-				background: red;
+				background: #db2a24;
 				padding: 20px;
 				color: #fff;
 				a {
@@ -479,7 +504,62 @@ article {
 			position: relative!important;
 		}
 	}
+	.select2-selection--single {
+		border-radius: 0px;
+		border: none;
+		background: url(/assets/img/picto_france.jpg) no-repeat top center;
+		padding-top: 20px;
+		.select2-selection__arrow {
+			top: 20px;
+		}
+	}
 	
+	.select2-container {
+		width: 180px!important;
+	}
+	.navbar {
+		padding-left: 0;
+		padding-right: 0;
+		font-size: 13px;
+	}
+	
+	#navbarCollapse {
+		ul {
+			display: flex;
+			width: 100%;
+			li {
+				flex: auto;
+				padding-right: 10px;
+				text-align: center;
+				&.coeur {
+					background: url(/assets/img/picto_coeur.jpg) no-repeat top center;
+					
+					a {
+						margin-top: 15px;
+					}
+				}
+				&.user {
+					background: url(/assets/img/picto_user.jpg) no-repeat top center;
+					text-align: center;
+					a {
+						margin-top: 15px;
+					}
+				}
+				input {
+					margin-top: 20px;
+					margin-left: auto;
+					margin-right: auto;
+					width: 100%;
+				}
+			}
+		}
+
+	}
+	
+}
+.select2-container--open .select2-dropdown--below {
+	border-radius: 0;
+	border: 1px solid gray;
 }
 .icon-menu {
 	@media (max-width: 992px) {
@@ -497,3 +577,15 @@ article {
 	}
 	
 }
+
+#block-bloc-liste-article-accueil-national {
+	.row {
+		.img {
+			height: 150px;
+			overflow: hidden;
+		}
+		margin-bottom: 20px;
+	}
+}
+
+
